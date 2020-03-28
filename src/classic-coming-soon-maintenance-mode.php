@@ -30,6 +30,27 @@ require_once __DIR__ . '/vendor/autoload.php';
 class MaintenanceMode {
 
 	/**
+	 * Class Constructor.
+	 */
+	public function __construct() {
+		add_action( 'plugins_loaded', array( $this, 'init' ) );
+		add_action( 'plugins_loaded', array( $this, 'load_textdomain' ) );
+	}
+
+
+	/**
+	 * Initialize plugin when all the plugins have been loaded.
+	 *
+	 * @since 2.0.0
+	 */
+	public function init() {
+		// Initialize front and admin
+		new Front();
+		new Admin();
+	}
+
+
+	/**
 	 * Loads textdomain for the plugin.
 	 *
 	 * @since 2.0.0
@@ -44,7 +65,7 @@ class MaintenanceMode {
 	 */
 	public function activate() {
 		// Add to `wp_options` table.
-		update_option( Config::DB_OPTION, Config::DEFAULT_OPTIONS );
+		update_option( Config::DB_OPTION, Config::$default_options );
 	}
 
 

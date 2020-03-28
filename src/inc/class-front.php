@@ -2,17 +2,17 @@
 /**
  * Frontend class for the plugin.
  *
- * @package AkshitSethi\Plugins\WidgetsBundle
+ * @package AkshitSethi\Plugins\MaintenanceMode
  */
 
-namespace AkshitSethi\Plugins\WidgetsBundle;
+namespace AkshitSethi\Plugins\MaintenanceMode;
 
-use AkshitSethi\Plugins\WidgetsBundle\Config;
+use AkshitSethi\Plugins\MaintenanceMode\Config;
 
 /**
  * Frontend for the plugin.
  *
- * @package    AkshitSethi\Plugins\WidgetsBundle
+ * @package    AkshitSethi\Plugins\MaintenanceMode
  * @since      2.0.0
  */
 class Front {
@@ -21,15 +21,7 @@ class Front {
 	 * Class constructor.
 	 */
 	public function __construct() {
-		add_action( 'wp_enqueue_scripts', array( $this, 'scripts' ) );
-	}
-
-
-	/**
-	 * Scripts for the frontend.
-	 */
-	public function scripts() {
-		wp_enqueue_style( Config::SHORT_SLUG . '-bundle', Config::$plugin_url . 'assets/css/front.css', false, Config::VERSION );
+		
 	}
 
 }
