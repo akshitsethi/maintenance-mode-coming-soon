@@ -12,118 +12,57 @@
  * License URI: 	http://www.gnu.org/licenses/gpl-3.0.txt
  */
 
- if ( ! defined( 'WPINC' ) ) {
-	die;
-}
+namespace AkshitSethi\Plugins\MaintenanceMode;
 
-/* Constants we will be using throughout the plugin. */
-define( 'SIGNALS_CSMM_URL', plugins_url( '', __FILE__ ) );
-define( 'SIGNALS_CSMM_PATH', plugin_dir_path( __FILE__ ) );
+// Stop execution if the file is called directly
+defined( 'ABSPATH' ) || exit;
+
+// Composer autoloder file.
+require_once __DIR__ . '/vendor/autoload.php';
 
 /**
- * For the plugin activation & de-activation.
- * We are doing nothing over here.
+ * Plugin class where all the action happens.
+ *
+ * @category 	Plugins
+ * @package 	AkshitSethi\Plugins\MaintenanceMode
+ * @since 		1.0.0
  */
-function csmm_plugin_activation() {
+class MaintenanceMode {
 
-	// Checking if the options exist in the database
-	$signals_csmm_options = get_option( 'signals_csmm_options' );
+	/**
+	 * Loads textdomain for the plugin.
+	 *
+	 * @since 2.0.0
+	 */
+	public function load_textdomain() {
+		load_plugin_textdomain( Config::PLUGIN_SLUG, false, Config::$plugin_path . 'i18n/' );
+	}
 
-	// Default options for the plugin on activation
-	$default_options = array(
-		'status'				=> '2',
-		'title' 				=> 'Maintenance Mode',
-		'header_text' 			=> 'Maintenance Mode',
-		'secondary_text' 		=> 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla pharetra eu felis quis lobortis. Proin vitae rutrum nisl, ut ullamcorper quam. Praesent faucibus ligula ac nisl varius dictum. Maecenas iaculis posuere orci, sed consectetur augue.',
-		'antispam_text' 		=> 'And yes, we hate spam too!',
-		'custom_login_url' 		=> '',
-		'show_logged_in' 		=> '2',
-		'exclude_se'			=> '1',
-		'mailchimp_api'			=> '',
-		'mailchimp_list' 		=> '',
-		'logo'					=> '',
-		'favicon'				=> '',
 
-		'bg_cover' 				=> '',
-		'content_overlay' 		=> '2',
-		'content_width'			=> '440',
-		'bg_color' 				=> 'ffffff',
-		'content_position'		=> 'center',
-		'content_alignment'		=> 'left',
+	/**
+	 * Attached to the activation hook.
+	 */
+	public function activate() {
+		// Add to `wp_options` table.
+		update_option( Config::DB_OPTION, Config::DEFAULT_OPTIONS );
+	}
 
-		'header_font' 			=> 'Karla',
-		'secondary_font' 		=> 'Karla',
-		'header_font_size' 		=> '28',
-		'secondary_font_size' 	=> '14',
-		'header_font_color' 	=> '090909',
-		'secondary_font_color' 	=> '090909',
 
-		'antispam_font_size' 	=> '13',
-		'antispam_font_color' 	=> 'bbbbbb',
-
-		'input_text' 			=> 'Enter your email address..',
-		'button_text' 			=> 'Subscribe',
-
-		'ignore_form_styles' 	=> '2',
-
-		'input_font_size'		=> '13',
-		'button_font_size'		=> '12',
-		'input_font_color'		=> '090909',
-		'button_font_color'		=> 'ffffff',
-
-		'input_bg'				=> '',
-		'button_bg'				=> '0f0f0f',
-		'input_bg_hover'		=> '',
-		'button_bg_hover'		=> '0a0a0a',
-
-		'input_border'			=> 'eeeeee',
-		'button_border'			=> '0f0f0f',
-		'input_border_hover'	=> 'bbbbbb',
-		'button_border_hover'	=> '0a0a0a',
-
-		'disable_settings' 		=> '2',
-		'custom_html'			=> '',
-		'custom_css'			=> ''
-	);
-
-	// If the options are not there in the database, then create the default options for the plugin
-	if ( ! $signals_csmm_options ) {
-		update_option( 'signals_csmm_options', $default_options );
-	} else {
-		// If present in the database, merge with the default ones
-		// This is to provide compatibility with earlier versions. Although this doesn't solves the purpose completely
-		$default_options = array_merge( $default_options, $signals_csmm_options );
-		update_option( 'signals_csmm_options', $default_options );
+	/**
+	 * Attached to the de-activation hook.
+	 */
+	public function deactivate() {
+		// Remove from `wp_options` table.
+		delete_option( Config::DB_OPTION );
 	}
 
 }
-register_activation_hook( __FILE__, 'csmm_plugin_activation' );
 
-
-
-/* Hook for the plugin deactivation. */
-function csmm_plugin_deactivation() {
-
-	// Silence is golden
-	// We might use this in future versions
-
-}
-register_deactivation_hook( __FILE__, 'csmm_plugin_deactivation' );
-
-
+// Initialize plugin
+$maintenance_mode = new MaintenanceMode();
 
 /**
- * Including files necessary for the management panel of the plugin.
- * Basically, support panel and option to insert custom .css is provided.
+ * Hooks for plugin activation & deactivation.
  */
-if ( is_admin() ) {
-	require SIGNALS_CSMM_PATH . 'framework/admin/init.php';
-}
-
-
-
-/**
- * Let's start the plugin now.
- * All the widgets are included and registered using the right hook.
- */
-require SIGNALS_CSMM_PATH . 'framework/public/init.php';
+register_activation_hook( __FILE__, array( $maintenance_mode, 'activate' ) );
+register_deactivation_hook( __FILE__, array( $maintenance_mode, 'deactivate' ) );
