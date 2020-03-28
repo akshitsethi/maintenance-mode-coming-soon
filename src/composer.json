@@ -12,6 +12,8 @@
     "drewm/mailchimp-api": "^2.5"
   },
   "autoload": {
-    "psr-4": {}
+    "psr-4": {
+      "AkshitSethi\\Plugins\\MaintenanceMode\\": "inc"
+    }
   }
 }
