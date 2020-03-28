@@ -1,0 +1,17 @@
+{
+  "name": "akshitsethi/classic-coming-soon-maintenance-mode",
+  "description": "Classic coming soon & maintenance mode plugin for WordPress that actually works.",
+  "keywords": [
+    "wordpress",
+    "plugin",
+    "widgets"
+  ],
+  "type": "wordpress-plugin",
+  "require": {
+    "php": ">=5.6.0",
+    "drewm/mailchimp-api": "^2.5"
+  },
+  "autoload": {
+    "psr-4": {}
+  }
+}
