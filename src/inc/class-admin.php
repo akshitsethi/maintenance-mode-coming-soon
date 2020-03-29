@@ -55,16 +55,16 @@ class Admin {
 		wp_enqueue_style( Config::SHORT_SLUG . '-admin', Config::$plugin_url . 'assets/admin/css/admin.css', false, Config::VERSION );
 
 		// Localize and enqueue script
-		wp_register_script( Config::SHORT_SLUG . '-admin', Config::$plugin_url . 'assets/admin/js/admin.js', array( 'jquery' ), Config::VERSION, true );
+		wp_enqueue_script( Config::SHORT_SLUG . '-webfont', Config::$plugin_url . 'assets/admin/js/webfont.js', Config::VERSION, true );
+		wp_enqueue_script( Config::SHORT_SLUG . '-colorpicker', Config::$plugin_url . 'assets/admin/js/jscolor.js', Config::VERSION, true );
+		wp_enqueue_script( Config::SHORT_SLUG . '-admin', Config::$plugin_url . 'assets/admin/js/admin.js', array( 'jquery' ), Config::VERSION, true );
 
 		$localize = array(
 			'prefix'       => Config::PREFIX,
 			'save_text'    => esc_html__( 'Save Changes', 'classic-coming-soon-maintenance-mode' ),
 			'support_text' => esc_html__( 'Ask for Support', 'classic-coming-soon-maintenance-mode' ),
 		);
-
 		wp_localize_script( Config::SHORT_SLUG . '-admin', Config::PREFIX . 'admin_l10n', $localize );
-		wp_enqueue_script( Config::SHORT_SLUG . '-admin' );
 	}
 
 

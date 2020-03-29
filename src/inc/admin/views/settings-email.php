@@ -19,7 +19,7 @@ use AkshitSethi\Plugins\MaintenanceMode\Config;
 				<label for="<?php echo Config::PREFIX . 'api'; ?>" class="as-strong"><?php esc_html_e( 'MailChimp API', 'classic-coming-soon-maintenance-mode' ); ?></label>
 				<input type="text" name="<?php echo Config::PREFIX . 'api'; ?>" id="<?php echo Config::PREFIX . 'api'; ?>" value="<?php esc_attr_e( $options['mailchimp_api'] ); ?>" placeholder="<?php esc_attr_e( 'MailChimp API', 'classic-coming-soon-maintenance-mode' ); ?>" class="as-form-control">
 
-				<p class="as-form-help-block"><?php esc_html_e( 'Provide your MailChimp API over here.', 'classic-coming-soon-maintenance-mode' ); ?> <a href="http://kb.mailchimp.com/accounts/management/about-api-keys" target="_blank"><?php esc_html_e( 'Click here', 'classic-coming-soon-maintenance-mode' ); ?></a> <?php esc_html_e( 'to know how to get this information. In case you don\'t want to enable subscription option, just leave this field blank.', 'classic-coming-soon-maintenance-mode' ); ?></p>
+				<p class="as-form-help-block"><?php esc_html_e( 'Provide your MailChimp API over here.', 'classic-coming-soon-maintenance-mode' ); ?> <a href="https://mailchimp.com/help/about-api-keys/" target="_blank"><?php esc_html_e( 'Click here', 'classic-coming-soon-maintenance-mode' ); ?></a> <?php esc_html_e( 'to know how to get this information. In case you don\'t want to enable subscription option, just leave this field blank.', 'classic-coming-soon-maintenance-mode' ); ?></p>
 			</div>
 
 			<div class="as-form-group">

@@ -97,7 +97,7 @@ use AkshitSethi\Plugins\MaintenanceMode\Config;
 
 				<div class="as-form-group">
 					<label for="<?php echo Config::PREFIX . 'color'; ?>" class="as-strong"><?php esc_html_e( 'Background Color', 'classic-coming-soon-maintenance-mode' ); ?></label>
-					<input type="text" name="<?php echo Config::PREFIX . 'color'; ?>" id="<?php echo Config::PREFIX . 'color'; ?>" value="<?php esc_attr_e( $options['bg_color'] ); ?>" placeholder="<?php esc_html_e( 'Background color for the page', 'classic-coming-soon-maintenance-mode' ); ?>" class="as-form-control color {required:false}">
+					<input type="text" name="<?php echo Config::PREFIX . 'color'; ?>" id="<?php echo Config::PREFIX . 'color'; ?>" value="<?php esc_attr_e( $options['bg_color'] ); ?>" placeholder="<?php esc_html_e( 'Background color for the page', 'classic-coming-soon-maintenance-mode' ); ?>" class="as-form-control jscolor {required:false}">
 
 					<p class="as-form-help-block"><?php esc_html_e( 'Select background color for the page. If the background cover image is set, this option will be ignored.', 'classic-coming-soon-maintenance-mode' ); ?></p>
 				</div>
@@ -143,7 +143,7 @@ use AkshitSethi\Plugins\MaintenanceMode\Config;
 						<?php
 
 							// Listing fonts from the array
-							foreach ( $google_fonts as $font ) {
+							foreach ( Config::GOOGLE_FONTS as $font ) {
 								echo '<option value="' . $font . '"' . selected( $font, $options['header_font'] ) . '>' . $font . '</option>' . "\n";
 							}
 
@@ -169,7 +169,7 @@ use AkshitSethi\Plugins\MaintenanceMode\Config;
 						<?php
 
 							// Listing fonts from the array
-							foreach ( $google_fonts as $font ) {
+							foreach ( Config::GOOGLE_FONTS as $font ) {
 								echo '<option value="' . $font . '"' . selected( $font, $options['secondary_font'] ) . '>' . $font . '</option>' . "\n";
 							}
 
@@ -220,14 +220,14 @@ use AkshitSethi\Plugins\MaintenanceMode\Config;
 			<div class="as-double-group as-clearfix">
 				<div class="as-form-group">
 					<label for="<?php echo Config::PREFIX . 'header_color'; ?>" class="as-strong"><?php esc_html_e( 'Header Text Color', 'classic-coming-soon-maintenance-mode' ); ?></label>
-					<input type="text" name="<?php echo Config::PREFIX . 'header_color'; ?>" id="<?php echo Config::PREFIX . 'header_color'; ?>" value="<?php esc_attr_e( $options['header_font_color'] ); ?>" placeholder="<?php esc_html_e( 'Font color for the Header text', 'classic-coming-soon-maintenance-mode' ); ?>" class="as-form-control color {required:false}">
+					<input type="text" name="<?php echo Config::PREFIX . 'header_color'; ?>" id="<?php echo Config::PREFIX . 'header_color'; ?>" value="<?php esc_attr_e( $options['header_font_color'] ); ?>" placeholder="<?php esc_html_e( 'Font color for the Header text', 'classic-coming-soon-maintenance-mode' ); ?>" class="as-form-control jscolor {required:false}">
 
 					<p class="as-form-help-block"><?php esc_html_e( 'Select font color for the header text.', 'classic-coming-soon-maintenance-mode' ); ?></p>
 				</div>
 
 				<div class="as-form-group">
 					<label for="<?php echo Config::PREFIX . 'secondary_color'; ?>" class="as-strong"><?php esc_html_e( 'Secondary Text Color', 'classic-coming-soon-maintenance-mode' ); ?></label>
-					<input type="text" name="<?php echo Config::PREFIX . 'secondary_color'; ?>" id="<?php echo Config::PREFIX . 'secondary_color'; ?>" value="<?php esc_attr_e( $options['secondary_font_color'] ); ?>" placeholder="<?php esc_html_e( 'Font color for the Secondary text', 'classic-coming-soon-maintenance-mode' ); ?>" class="as-form-control color {required:false}">
+					<input type="text" name="<?php echo Config::PREFIX . 'secondary_color'; ?>" id="<?php echo Config::PREFIX . 'secondary_color'; ?>" value="<?php esc_attr_e( $options['secondary_font_color'] ); ?>" placeholder="<?php esc_html_e( 'Font color for the Secondary text', 'classic-coming-soon-maintenance-mode' ); ?>" class="as-form-control jscolor {required:false}">
 
 					<p class="as-form-help-block"><?php esc_html_e( 'Select font color for the secondary text.', 'classic-coming-soon-maintenance-mode' ); ?></p>
 				</div>
@@ -253,7 +253,7 @@ use AkshitSethi\Plugins\MaintenanceMode\Config;
 
 				<div class="as-form-group">
 					<label for="<?php echo Config::PREFIX . 'antispam_color'; ?>" class="as-strong"><?php esc_html_e( 'Antispam Text Color', 'classic-coming-soon-maintenance-mode' ); ?></label>
-					<input type="text" name="<?php echo Config::PREFIX . 'antispam_color'; ?>" id="<?php echo Config::PREFIX . 'antispam_color'; ?>" value="<?php esc_attr_e( $options['antispam_font_color'] ); ?>" placeholder="<?php esc_html_e( 'Font color for the Antispam text', 'classic-coming-soon-maintenance-mode' ); ?>" class="as-form-control color {required:false}">
+					<input type="text" name="<?php echo Config::PREFIX . 'antispam_color'; ?>" id="<?php echo Config::PREFIX . 'antispam_color'; ?>" value="<?php esc_attr_e( $options['antispam_font_color'] ); ?>" placeholder="<?php esc_html_e( 'Font color for the Antispam text', 'classic-coming-soon-maintenance-mode' ); ?>" class="as-form-control jscolor {required:false}">
 
 					<p class="as-form-help-block"><?php esc_html_e( 'Select font color for the antispam text.', 'classic-coming-soon-maintenance-mode' ); ?></p>
 				</div>
