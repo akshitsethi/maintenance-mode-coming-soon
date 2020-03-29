@@ -114,8 +114,52 @@ class Admin {
 		);
 
 		// Filter and sanitize options
-		print_r($_POST);
-		exit;
+		$options = array(
+			'status'								=> isset( $_POST[Config::PREFIX . 'status'] ) ? true : false,
+			'title' 								=> sanitize_text_field( $_POST[Config::PREFIX . 'title'] ),
+			'header_text' 					=> sanitize_text_field( $_POST[Config::PREFIX . 'header'] ),
+			'secondary_text' 				=> sanitize_text_field( $_POST[Config::PREFIX . 'secondary'] ),
+			'antispam_text' 				=> sanitize_text_field( $_POST[Config::PREFIX . 'antispam'] ),
+			'custom_login_url' 			=> sanitize_text_field( $_POST[Config::PREFIX . 'custom_login'] ),
+			'show_logged_in' 				=> isset( $_POST[Config::PREFIX . 'showlogged'] ) ? true : false,
+			'exclude_se'						=> isset( $_POST[Config::PREFIX . 'excludese'] ) ? true : false,
+			'mailchimp_api'					=> sanitize_text_field( $_POST[Config::PREFIX . 'api'] ),
+			'mailchimp_list' 				=> isset( $_POST[Config::PREFIX . 'list'] ) ? sanitize_text_field( $_POST[Config::PREFIX . 'list'] ) : false,
+			'logo'									=> sanitize_text_field( $_POST[Config::PREFIX . 'logo'] ),
+			'favicon'								=> sanitize_text_field( $_POST[Config::PREFIX . 'favicon'] ),
+			'bg_cover' 							=> sanitize_text_field( $_POST[Config::PREFIX . 'bg'] ),
+			'content_overlay' 			=> isset( $_POST[Config::PREFIX . 'overlay'] ) ? true : false,
+			'content_width'					=> absint( $_POST[Config::PREFIX . 'width'] ),
+			'bg_color' 							=> sanitize_text_field( $_POST[Config::PREFIX . 'color'] ),
+			'content_position'			=> sanitize_text_field( $_POST[Config::PREFIX . 'position'] ),
+			'content_alignment'			=> sanitize_text_field( $_POST[Config::PREFIX . 'alignment'] ),
+			'header_font' 					=> sanitize_text_field( $_POST[Config::PREFIX . 'header_font'] ),
+			'secondary_font' 				=> sanitize_text_field( $_POST[Config::PREFIX . 'secondary_font'] ),
+			'header_font_size' 			=> sanitize_text_field( $_POST[Config::PREFIX . 'header_size'] ),
+			'secondary_font_size' 	=> sanitize_text_field( $_POST[Config::PREFIX . 'secondary_size'] ),
+			'header_font_color' 		=> sanitize_text_field( $_POST[Config::PREFIX . 'header_color'] ),
+			'secondary_font_color' 	=> sanitize_text_field( $_POST[Config::PREFIX . 'secondary_color'] ),
+			'antispam_font_size' 		=> sanitize_text_field( $_POST[Config::PREFIX . 'antispam_size'] ),
+			'antispam_font_color' 	=> sanitize_text_field( $_POST[Config::PREFIX . 'antispam_color'] ),
+			'input_text' 						=> sanitize_text_field( $_POST[Config::PREFIX . 'input_text'] ),
+			'button_text' 					=> sanitize_text_field( $_POST[Config::PREFIX . 'button_text'] ),
+			'ignore_form_styles' 		=> isset( $_POST[Config::PREFIX . 'ignore_styles'] ) ? true : false,
+			'input_font_size'				=> sanitize_text_field( $_POST[Config::PREFIX . 'input_size'] ),
+			'button_font_size'			=> sanitize_text_field( $_POST[Config::PREFIX . 'button_size'] ),
+			'input_font_color'			=> sanitize_text_field( $_POST[Config::PREFIX . 'input_color'] ),
+			'button_font_color'			=> sanitize_text_field( $_POST[Config::PREFIX . 'button_color'] ),
+			'input_bg'							=> sanitize_text_field( $_POST[Config::PREFIX . 'input_bg'] ),
+			'button_bg'							=> sanitize_text_field( $_POST[Config::PREFIX . 'button_bg'] ),
+			'input_bg_hover'				=> sanitize_text_field( $_POST[Config::PREFIX . 'input_bg_hover'] ),
+			'button_bg_hover'				=> sanitize_text_field( $_POST[Config::PREFIX . 'button_bg_hover'] ),
+			'input_border'					=> sanitize_text_field( $_POST[Config::PREFIX . 'input_border'] ),
+			'button_border'					=> sanitize_text_field( $_POST[Config::PREFIX . 'button_border'] ),
+			'input_border_hover'		=> sanitize_text_field( $_POST[Config::PREFIX . 'input_border_hover'] ),
+			'button_border_hover'		=> sanitize_text_field( $_POST[Config::PREFIX . 'button_border_hover'] ),
+			'disable_settings' 			=> isset( $_POST[Config::PREFIX . 'disabled'] ) ? true : false,
+			'custom_html'						=> wp_kses_post( $_POST[Config::PREFIX . 'html'] ),
+			'custom_css'						=> wp_strip_all_tags( $_POST[Config::PREFIX . 'css'] )
+		);
 
 		// Update options
 		update_option( Config::DB_OPTION, $options );
