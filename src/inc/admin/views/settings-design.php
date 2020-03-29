@@ -48,7 +48,7 @@ use AkshitSethi\Plugins\MaintenanceMode\Config;
 						<?php endif; ?>
 
 						<input type="hidden" name="<?php echo Config::PREFIX . 'favicon'; ?>" id="<?php echo Config::PREFIX . 'favicon'; ?>" value="<?php esc_attr_e( $options['favicon'] ); ?>">
-						<button type="button" name="<?php echo Config::PREFIX . 'favicon_upload'; ?>" id="<?php echo Config::PREFIX . 'favicon'; ?>" class="as-btn as-upload" style="margin-top: 4px"><?php esc_html_e( 'Select', 'classic-coming-soon-maintenance-mode' ); ?></button>
+						<button type="button" name="<?php echo Config::PREFIX . 'favicon_upload'; ?>" id="<?php echo Config::PREFIX . 'favicon_upload'; ?>" class="as-btn as-upload" style="margin-top: 4px"><?php esc_html_e( 'Select', 'classic-coming-soon-maintenance-mode' ); ?></button>
 
 						<span class="as-upload-append">
 							<?php if ( ! empty( $options['favicon'] ) ) : ?>

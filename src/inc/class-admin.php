@@ -114,7 +114,8 @@ class Admin {
 		);
 
 		// Filter and sanitize options
-		
+		print_r($_POST);
+		exit;
 
 		// Update options
 		update_option( Config::DB_OPTION, $options );
