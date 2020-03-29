@@ -25,12 +25,9 @@ use DrewM\MailChimp\MailChimp;
 
 			<div class="as-form-group">
 				<label for="<?php echo Config::PREFIX . 'list'; ?>" class="as-strong"><?php esc_html_e( 'MailChimp List', 'classic-coming-soon-maintenance-mode' ); ?></label>
-
 				<?php
 
-					/**
-					 * @todo Integrate MailChimp API v3 code for fetching lists over here.
-					 */
+					// Fetch lists from Mailchimp if the API key is provided
 					if ( ! empty( $options['mailchimp_api'] ) ) {
 						$mailchimp 	= new MailChimp( $options['mailchimp_api'] );
 						$lists 			= $mailchimp->get('lists');

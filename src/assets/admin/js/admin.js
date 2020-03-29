@@ -185,14 +185,14 @@ toastr.options = {
     $(document).on('click', '#' + ccsmm_admin_l10n.prefix + 'submit', function (e) {
       e.preventDefault();
 
-      // ID
-      var id 		= $(this).attr('data-tab').replace('#', '');
+      // Main form identifier
+      var formID = $('#' + ccsmm_admin_l10n.prefix + 'form');
 
       // Form data
-      var data 	= new FormData($('#' + id + ' form')[0]);
+      var data 	= new FormData(formID[0]);
 
       // Append action
-      data.append('action', ccsmm_admin_l10n.prefix + id);
+      data.append('action', ccsmm_admin_l10n.prefix + 'options');
 
       // AJAX
       $.ajax( {
@@ -202,7 +202,7 @@ toastr.options = {
         processData: false,
         contentType: false,
         beforeSend: function() {
-          $('#' + id).block({
+          formID.block({
             message: '<div class="as-strong" style="background: #ecf0f1; padding: 10px 6px; color: #000;">Processing..</div>',
             css: {
               border: 'none',
@@ -217,18 +217,20 @@ toastr.options = {
         }
       }).done(function(data) {
         // Unblock
-        $('#' + id).unblock();
+        formID.unblock();
 
-        // Success
-        if (data.code == 'success') {
-          toastr.success('<strong>Hey!</strong> ' + data.response);
+        console.log(data);
 
-          // Remove input class
-          $('input, textarea, select').removeClass('changed-input');
-        } else {
-          // Error
-          toastr.error('<strong>Oops!</strong> ' + data.response);
-        }
+        // // Success
+        // if (data.code == 'success') {
+        //   toastr.success('<strong>Hey!</strong> ' + data.response);
+
+        //   // Remove input class
+        //   $('input, textarea, select').removeClass('changed-input');
+        // } else {
+        //   // Error
+        //   toastr.error('<strong>Oops!</strong> ' + data.response);
+        // }
       });
     });
 
@@ -267,7 +269,7 @@ toastr.options = {
       $('.as-tile:first').fadeIn();
 
       // Add options (data-tab)
-      $('#' + ccsmm_admin_l10n.prefix + 'submit').attr('data-tab', '#options');
+      $('#' + ccsmm_admin_l10n.prefix + 'submit').attr('data-tab', '#basic');
     }
 
 
