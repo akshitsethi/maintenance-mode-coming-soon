@@ -6,6 +6,7 @@
  */
 
 use AkshitSethi\Plugins\MaintenanceMode\Config;
+use DrewM\MailChimp\MailChimp;
 
 ?>
 
@@ -30,34 +31,30 @@ use AkshitSethi\Plugins\MaintenanceMode\Config;
 					/**
 					 * @todo Integrate MailChimp API v3 code for fetching lists over here.
 					 */
+					if ( ! empty( $options['mailchimp_api'] ) ) {
+						$mailchimp 	= new MailChimp( $options['mailchimp_api'] );
+						$lists 			= $mailchimp->get('lists');
 
-					// // Checking if the API key is present in the database
-					// if ( ! empty( $options['mailchimp_api'] ) ) {
-					// 	// Grabbing lists using the MailChimp API
-					// 	$signals_api 	= new MailChimp( $options['mailchimp_api'] );
-					// 	$signals_lists 	= $signals_api->call( 'lists/list',
-					// 		array (
-		      //           		'apikey' => $options['mailchimp_api']
-		      //           	)
-					// 	);
+						// API call went fine?
+						if ( $mailchimp->success() ) {
+							if ( count( $lists['lists'] ) > 0 ) {
+								echo '<select name="' . Config::PREFIX . 'list" id="' . Config::PREFIX . 'list">';
 
-					// 	if ( ! $signals_lists ) {
-					// 		echo '<p class="as-form-help-block">' . esc_html__( 'There was an error communicating with the MailChimp server. Please make sure that the API Key used is correct and try again.', 'classic-coming-soon-maintenance-mode' ) . '</p>';
-					// 	} else if ( $signals_lists['total'] == 0 ) {
-					// 		echo '<p class="as-form-help-block">' . esc_html__( 'It seems that there is no list created for this account. Why not create one on the MailChimp website and then try here.', 'classic-coming-soon-maintenance-mode' ) . '</p>';
-					// 	} else {
-					// 		echo '<select name="' . Config::PREFIX . 'list" id="' . Config::PREFIX . 'list">';
+								foreach ( $lists['lists'] as $list ) {
+									echo '<option value="' . $list['id'] . '"' . selected( $list['id'], $options['mailchimp_list'] ) . '>' . $list['name'].'</option>';
+								}
 
-					// 		foreach ( $signals_lists['data'] as $signals_single_list ) {
-					// 			echo '<option value="' . $signals_single_list['id'] . '"' . selected( $signals_single_list['id'], $options['mailchimp_list'] ) . '>' . $signals_single_list['name'].'</option>';
-					// 		}
-
-					// 		echo '</select>';
-					// 		echo '<p class="as-form-help-block">' . esc_html__( 'Select your MailChimp list in which you would like to store the subscribers data.', 'classic-coming-soon-maintenance-mode' ) . '</p>';
-					// 	}
-					// } else {
-					// 	echo '<p class="as-form-help-block">' . esc_html__( 'Provide your MailChimp API key in the above box and click on `Save Changes` option. Your lists will appear over here.', 'classic-coming-soon-maintenance-mode' ) . '</p>';
-					// }
+								echo '</select>';
+								echo '<p class="as-form-help-block">' . esc_html__( 'Select your MailChimp list in which you would like to store the subscribers data.', 'classic-coming-soon-maintenance-mode' ) . '</p>';
+							} else {
+								echo '<p class="as-form-help-block">' . esc_html__( 'It seems that there is no list created for this account. Why not create one on the MailChimp website and then try here.', 'classic-coming-soon-maintenance-mode' ) . '</p>';
+							}
+						} else {
+							echo '<p class="as-form-help-block">' . $mailchimp->getLastError() . '</p>';
+						}
+					} else {
+						echo '<p class="as-form-help-block">' . esc_html__( 'Provide your MailChimp API key in the above box and click on `Save Changes` option. Your lists will appear over here.', 'classic-coming-soon-maintenance-mode' ) . '</p>';
+					}
 
 				?>
 			</div>
