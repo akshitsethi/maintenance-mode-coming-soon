@@ -21,6 +21,15 @@ class Config {
 	const VERSION     	= '1.0.0';
 	const DB_OPTION   	= 'as_' . self::SHORT_SLUG;
 	const PREFIX      	= self::SHORT_SLUG . '_';
+	const DEFAULT_FONTS = array(
+		'Arial',
+		'Helvetica',
+		'Georgia',
+		'Times New Roman',
+		'Tahoma',
+		'Verdana',
+		'Geneva'
+	);
 	const GOOGLE_FONTS 	= array(
 		'ABeeZee',
 		'Abel',

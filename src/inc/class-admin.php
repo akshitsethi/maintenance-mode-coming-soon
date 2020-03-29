@@ -55,14 +55,19 @@ class Admin {
 		wp_enqueue_style( Config::SHORT_SLUG . '-admin', Config::$plugin_url . 'assets/admin/css/admin.css', false, Config::VERSION );
 
 		// Localize and enqueue script
+		wp_enqueue_media();
 		wp_enqueue_script( Config::SHORT_SLUG . '-webfont', Config::$plugin_url . 'assets/admin/js/webfont.js', Config::VERSION, true );
 		wp_enqueue_script( Config::SHORT_SLUG . '-colorpicker', Config::$plugin_url . 'assets/admin/js/jscolor.js', Config::VERSION, true );
 		wp_enqueue_script( Config::SHORT_SLUG . '-admin', Config::$plugin_url . 'assets/admin/js/admin.js', array( 'jquery' ), Config::VERSION, true );
 
 		$localize = array(
-			'prefix'       => Config::PREFIX,
-			'save_text'    => esc_html__( 'Save Changes', 'classic-coming-soon-maintenance-mode' ),
-			'support_text' => esc_html__( 'Ask for Support', 'classic-coming-soon-maintenance-mode' ),
+			'prefix'       	=> Config::PREFIX,
+			'save_text'    	=> esc_html__( 'Save Changes', 'classic-coming-soon-maintenance-mode' ),
+			'support_text' 	=> esc_html__( 'Ask for Support', 'classic-coming-soon-maintenance-mode' ),
+			'select_text'  	=> esc_html__( 'Select Image', 'classic-coming-soon-maintenance-mode' ),
+			'upload_text'  	=> esc_html__( 'Select or upload via WP native uploader', 'classic-coming-soon-maintenance-mode' ),
+			'remove_text'  	=> esc_html__( 'Remove', 'classic-coming-soon-maintenance-mode' ),
+			'default_fonts' => Config::DEFAULT_FONTS
 		);
 		wp_localize_script( Config::SHORT_SLUG . '-admin', Config::PREFIX . 'admin_l10n', $localize );
 	}
