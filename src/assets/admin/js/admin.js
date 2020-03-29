@@ -62,6 +62,7 @@ toastr.options = {
 (function($) {
   'use strict';
 
+  // When switching between support and about
   function hacks($tab) {
     // Submit button
     var $as_button = $('#' + ccsmm_admin_l10n.prefix + 'submit');
@@ -81,6 +82,22 @@ toastr.options = {
     }
   }
 
+  // Google fonts reload and change fonts
+  function reloadFont( $fontValue ) {
+    WebFont.load( {
+        google: {
+          families: [$fontValue]
+        }
+    } );
+  }
+  
+  function changeFont( $font ) {
+    var $fontValue	= $font.val();
+  
+    reloadFont( $fontValue );
+    $font.parent().find( 'h3' ).css( 'font-family', $fontValue );
+  }
+
   // On DOM ready
   $(document).ready(function () {
     // IOS switches
@@ -89,6 +106,18 @@ toastr.options = {
     elements.forEach(function(html) {
       var switchery = new Switchery(html);
     });
+
+
+    // Google fonts
+    $('.as-google-fonts').each(function () {
+			var $font = $(this);
+			changeFont($font);
+		});
+
+		$(document).on('change', '.as-google-fonts', function () {
+			var $font = $(this);
+			changeFont($font);
+		});
 
 
     // Sticky header

@@ -20,7 +20,7 @@ use AkshitSethi\Plugins\MaintenanceMode\Config;
 					<label for="<?php echo Config::PREFIX . 'status'; ?>" class="as-strong"><?php esc_html_e( 'Enable Maintenance Mode?', 'classic-coming-soon-maintenance-mode' ); ?></label>
 					<input type="checkbox" class="as-form-ios" name="<?php echo Config::PREFIX . 'status'; ?>" value="1"<?php checked( true, absint( $options['status'] ) ); ?>>
 
-					<p class="as-form-help-block"><?php esc_html_e( 'Set the plugin status. Do you want to enable <strong>Maintenance Mode</strong> for your website?', 'classic-coming-soon-maintenance-mode' ); ?></p>
+					<p class="as-form-help-block"><?php esc_html_e( 'Set the plugin status. Do you want to enable Maintenance Mode for your website?', 'classic-coming-soon-maintenance-mode' ); ?></p>
 				</div>
 
 				<div class="as-form-group">
