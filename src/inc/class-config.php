@@ -710,6 +710,9 @@ class Config {
 	public function __construct() {
 		self::$plugin_url  = plugin_dir_url( dirname( __FILE__ ) );
 		self::$plugin_path = plugin_dir_path( dirname( __FILE__ ) );
+
+		// Default options
+		$this->default_options();
 	}
 
 
