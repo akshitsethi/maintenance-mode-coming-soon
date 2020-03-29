@@ -90,11 +90,11 @@ toastr.options = {
       }
     });
   }
-  
+
   function changeFont($font) {
     var $fontValue = $font.val();
-  
-    if (ccsmm_admin_l10n.default_fonts.indexOf($fontValue) == -1) {
+
+    if (ccsmm_admin_l10n.default_fonts.indexOf($fontValue) === -1) {
       reloadFont($fontValue);
     }
 
@@ -102,7 +102,7 @@ toastr.options = {
   }
 
   // Media upload function
-  function getUploader($text, $target) {
+  function getUploader($target) {
     var customUploader;
 
     // If the uploader object has already been created, reopen the dialog
@@ -113,9 +113,9 @@ toastr.options = {
 
     // Extend the wp.media object
     customUploader = wp.media({
-      title: $text,
+      title: ccsmm_admin_l10n.select_text,
       button: {
-        text: $text
+        text: ccsmm_admin_l10n.select_text
       },
       multiple: false
     });
@@ -126,8 +126,10 @@ toastr.options = {
 
       $target.parent().find('input').val(attachment.url);
       $target.parent().find('.as-preview-area').html('<img src="' + attachment.url + '">');
-      $target.parent().find('.as-upload-append').html('&nbsp;<a href="javascript: void(0);" class="as-remove-image">' + ccsmm_admin_l10n.remove_text + '</a>');
+      $target.parent().find('.as-upload-append').html('&nbsp;<a href="javascript:;" class="as-remove-image">' + ccsmm_admin_l10n.remove_text + '</a>');
     });
+
+    customUploader.open();
   }
 
 
@@ -166,7 +168,7 @@ toastr.options = {
     // Media uploader
     $(document).on('click', '.as-upload', function (e) {
       e.preventDefault();
-      getUploader(ccsmm_admin_l10n.select_text, $(this));
+      getUploader($(this));
     });
 
     // Removing photo from the canvas and emptying the text field
