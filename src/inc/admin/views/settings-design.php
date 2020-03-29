@@ -31,7 +31,7 @@ use AkshitSethi\Plugins\MaintenanceMode\Config;
 
 						<span class="as-upload-append">
 							<?php if ( ! empty( $options['logo'] ) ) : ?>
-								&nbsp;<a href="javascript: void(0);" class="as-remove-image"><?php esc_html_e( 'Remove', 'classic-coming-soon-maintenance-mode' ); ?></a>
+								&nbsp;<a href="javascript:;" class="as-remove-image"><?php esc_html_e( 'Remove', 'classic-coming-soon-maintenance-mode' ); ?></a>
 							<?php endif; ?>
 						</span>
 					</div>
@@ -41,7 +41,7 @@ use AkshitSethi\Plugins\MaintenanceMode\Config;
 					<div class="as-upload-element">
 						<label class="as-strong"><?php esc_html_e( 'Favicon', 'classic-coming-soon-maintenance-mode' ); ?></label>
 
-						<?php if ( ! empty( $options['favicon'] ) ) : // If the image url is present, show the image. Else, show the default upload text ?>
+						<?php if ( ! empty( $options['favicon'] ) ) : ?>
 							<span class="as-preview-area"><img src="<?php echo esc_attr( $options['favicon'] ); ?>" /></span>
 						<?php else : ?>
 							<span class="as-preview-area"><?php esc_html_e( 'Select or upload via WP native uploader', 'classic-coming-soon-maintenance-mode' ); ?></span>
@@ -52,7 +52,7 @@ use AkshitSethi\Plugins\MaintenanceMode\Config;
 
 						<span class="as-upload-append">
 							<?php if ( ! empty( $options['favicon'] ) ) : ?>
-								&nbsp;<a href="javascript: void(0);" class="as-remove-image"><?php esc_html_e( 'Remove', 'classic-coming-soon-maintenance-mode' ); ?></a>
+								&nbsp;<a href="javascript:;" class="as-remove-image"><?php esc_html_e( 'Remove', 'classic-coming-soon-maintenance-mode' ); ?></a>
 							<?php endif; ?>
 						</span>
 					</div>
@@ -62,7 +62,7 @@ use AkshitSethi\Plugins\MaintenanceMode\Config;
 					<div class="as-upload-element">
 						<label class="as-strong"><?php esc_html_e( 'Background Cover Image', 'classic-coming-soon-maintenance-mode' ); ?></label>
 
-						<?php if ( ! empty( $options['bg_cover'] ) ) : // If the image url is present, show the image. Else, show the default upload text ?>
+						<?php if ( ! empty( $options['bg_cover'] ) ) : ?>
 							<span class="as-preview-area"><img src="<?php echo esc_attr( $options['bg_cover'] ); ?>" /></span>
 						<?php else : ?>
 							<span class="as-preview-area"><?php esc_html_e( 'Select or upload via WP native uploader', 'classic-coming-soon-maintenance-mode' ); ?></span>
@@ -73,7 +73,7 @@ use AkshitSethi\Plugins\MaintenanceMode\Config;
 
 						<span class="as-upload-append">
 							<?php if ( ! empty( $options['bg_cover'] ) ) : ?>
-								&nbsp;<a href="javascript: void(0);" class="as-remove-image"><?php esc_html_e( 'Remove', 'classic-coming-soon-maintenance-mode' ); ?></a>
+								&nbsp;<a href="javascript:;" class="as-remove-image"><?php esc_html_e( 'Remove', 'classic-coming-soon-maintenance-mode' ); ?></a>
 							<?php endif; ?>
 						</span>
 					</div>
@@ -132,15 +132,14 @@ use AkshitSethi\Plugins\MaintenanceMode\Config;
 					<label for="<?php echo Config::PREFIX . 'header_font'; ?>" class="as-strong"><?php esc_html_e( 'Header Font', 'classic-coming-soon-maintenance-mode' ); ?></label>
 
 					<select name="<?php echo Config::PREFIX . 'header_font'; ?>" id="<?php echo Config::PREFIX . 'header_font'; ?>" class="as-google-fonts">
-						<option value="Arial"<?php selected( 'Arial', $options['header_font'] ); ?>><?php esc_html_e( 'Arial', 'classic-coming-soon-maintenance-mode' ); ?></option>
-						<option value="Helvetica"<?php selected( 'Helvetica', $options['header_font'] ); ?>><?php esc_html_e( 'Helvetica', 'classic-coming-soon-maintenance-mode' ); ?></option>
-						<option value="Georgia"<?php selected( 'Georgia', $options['header_font'] ); ?>><?php esc_html_e( 'Georgia', 'classic-coming-soon-maintenance-mode' ); ?></option>
-						<option value="Times New Roman"<?php selected( 'Times New Roman', $options['header_font'] ); ?>><?php esc_html_e( 'Times New Roman', 'classic-coming-soon-maintenance-mode' ); ?></option>
-						<option value="Tahoma"<?php selected( 'Tahoma', $options['header_font'] ); ?>><?php esc_html_e( 'Tahoma', 'classic-coming-soon-maintenance-mode' ); ?></option>
-						<option value="Verdana"<?php selected( 'Verdana', $options['header_font'] ); ?>><?php esc_html_e( 'Verdana', 'classic-coming-soon-maintenance-mode' ); ?></option>
-						<option value="Geneva"<?php selected( 'Geneva', $options['header_font'] ); ?>><?php esc_html_e( 'Geneva', 'classic-coming-soon-maintenance-mode' ); ?></option>
-						<option disabled>-- via google --</option>
 						<?php
+
+							// Default fonts
+							foreach ( Config::DEFAULT_FONTS as $font ) {
+								echo '<option value="' . $font . '"' . selected( $font, $options['header_font'] ) . '>' . $font . '</option>' . "\n";
+							}
+
+							echo '<option disabled>-- ' . esc_html__( 'Google Fonts', 'classic-coming-soon-maintenance-mode' ) . ' --</option>' . "\n";
 
 							// Listing fonts from the array
 							foreach ( Config::GOOGLE_FONTS as $font ) {
@@ -158,17 +157,16 @@ use AkshitSethi\Plugins\MaintenanceMode\Config;
 					<label for="<?php echo Config::PREFIX . 'secondary_font'; ?>" class="as-strong"><?php esc_html_e( 'Secondary Font', 'classic-coming-soon-maintenance-mode' ); ?></label>
 
 					<select name="<?php echo Config::PREFIX . 'secondary_font'; ?>" id="<?php echo Config::PREFIX . 'secondary_font'; ?>" class="as-google-fonts">
-						<option value="Arial"<?php selected( 'Arial', $options['secondary_font'] ); ?>><?php esc_html_e( 'Arial', 'classic-coming-soon-maintenance-mode' ); ?></option>
-						<option value="Helvetica"<?php selected( 'Helvetica', $options['secondary_font'] ); ?>><?php esc_html_e( 'Helvetica', 'classic-coming-soon-maintenance-mode' ); ?></option>
-						<option value="Georgia"<?php selected( 'Georgia', $options['secondary_font'] ); ?>><?php esc_html_e( 'Georgia', 'classic-coming-soon-maintenance-mode' ); ?></option>
-						<option value="Times New Roman"<?php selected( 'Times New Roman', $options['secondary_font'] ); ?>><?php esc_html_e( 'Times New Roman', 'classic-coming-soon-maintenance-mode' ); ?></option>
-						<option value="Tahoma"<?php selected( 'Tahoma', $options['secondary_font'] ); ?>><?php esc_html_e( 'Tahoma', 'classic-coming-soon-maintenance-mode' ); ?></option>
-						<option value="Verdana"<?php selected( 'Verdana', $options['secondary_font'] ); ?>><?php esc_html_e( 'Verdana', 'classic-coming-soon-maintenance-mode' ); ?></option>
-						<option value="Geneva"<?php selected( 'Geneva', $options['secondary_font'] ); ?>><?php esc_html_e( 'Geneva', 'classic-coming-soon-maintenance-mode' ); ?></option>
-						<option disabled>-- via google --</option>
 						<?php
 
-							// Listing fonts from the array
+							// Default fonts
+							foreach ( Config::DEFAULT_FONTS as $font ) {
+								echo '<option value="' . $font . '"' . selected( $font, $options['secondary_font'] ) . '>' . $font . '</option>' . "\n";
+							}
+
+							echo '<option disabled>-- ' . esc_html__( 'Google Fonts', 'classic-coming-soon-maintenance-mode' ) . ' --</option>' . "\n";
+
+							// Google fonts
 							foreach ( Config::GOOGLE_FONTS as $font ) {
 								echo '<option value="' . $font . '"' . selected( $font, $options['secondary_font'] ) . '>' . $font . '</option>' . "\n";
 							}
