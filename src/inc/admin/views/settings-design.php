@@ -27,13 +27,15 @@ use AkshitSethi\Plugins\MaintenanceMode\Config;
 						<?php endif; ?>
 
 						<input type="hidden" name="<?php echo Config::PREFIX . 'logo'; ?>" id="<?php echo Config::PREFIX . 'logo'; ?>" value="<?php esc_attr_e( $options['logo'] ); ?>">
-						<button type="button" name="<?php echo Config::PREFIX . 'logo_upload'; ?>" id="<?php echo Config::PREFIX . 'logo_upload'; ?>" class="as-btn as-upload" style="margin-top: 4px"><?php esc_html_e( 'Select', 'classic-coming-soon-maintenance-mode' ); ?></button>
-
-						<span class="as-upload-append">
-							<?php if ( ! empty( $options['logo'] ) ) : ?>
-								&nbsp;<a href="javascript:;" class="as-remove-image"><?php esc_html_e( 'Remove', 'classic-coming-soon-maintenance-mode' ); ?></a>
-							<?php endif; ?>
-						</span>
+						
+						<div class="as-flex">
+							<button type="button" name="<?php echo Config::PREFIX . 'logo_upload'; ?>" id="<?php echo Config::PREFIX . 'logo_upload'; ?>" class="as-btn as-upload"><?php esc_html_e( 'Select', 'classic-coming-soon-maintenance-mode' ); ?></button>
+							<span class="as-upload-append">
+								<?php if ( ! empty( $options['logo'] ) ) : ?>
+									&nbsp;<a href="javascript:;" class="as-remove-image"><?php esc_html_e( 'Remove', 'classic-coming-soon-maintenance-mode' ); ?></a>
+								<?php endif; ?>
+							</span>
+						</div>
 					</div>
 				</div>
 
@@ -48,13 +50,15 @@ use AkshitSethi\Plugins\MaintenanceMode\Config;
 						<?php endif; ?>
 
 						<input type="hidden" name="<?php echo Config::PREFIX . 'favicon'; ?>" id="<?php echo Config::PREFIX . 'favicon'; ?>" value="<?php esc_attr_e( $options['favicon'] ); ?>">
-						<button type="button" name="<?php echo Config::PREFIX . 'favicon_upload'; ?>" id="<?php echo Config::PREFIX . 'favicon_upload'; ?>" class="as-btn as-upload" style="margin-top: 4px"><?php esc_html_e( 'Select', 'classic-coming-soon-maintenance-mode' ); ?></button>
-
-						<span class="as-upload-append">
-							<?php if ( ! empty( $options['favicon'] ) ) : ?>
-								&nbsp;<a href="javascript:;" class="as-remove-image"><?php esc_html_e( 'Remove', 'classic-coming-soon-maintenance-mode' ); ?></a>
-							<?php endif; ?>
-						</span>
+						
+						<div class="as-flex">
+							<button type="button" name="<?php echo Config::PREFIX . 'favicon_upload'; ?>" id="<?php echo Config::PREFIX . 'favicon_upload'; ?>" class="as-btn as-upload"><?php esc_html_e( 'Select', 'classic-coming-soon-maintenance-mode' ); ?></button>
+							<span class="as-upload-append">
+								<?php if ( ! empty( $options['favicon'] ) ) : ?>
+									&nbsp;<a href="javascript:;" class="as-remove-image"><?php esc_html_e( 'Remove', 'classic-coming-soon-maintenance-mode' ); ?></a>
+								<?php endif; ?>
+							</span>
+						</div>
 					</div>
 				</div>
 
@@ -67,15 +71,17 @@ use AkshitSethi\Plugins\MaintenanceMode\Config;
 						<?php else : ?>
 							<span class="as-preview-area"><?php esc_html_e( 'Select or upload via WP native uploader', 'classic-coming-soon-maintenance-mode' ); ?></span>
 						<?php endif; ?>
-
+						
 						<input type="hidden" name="<?php echo Config::PREFIX . 'bg'; ?>" id="<?php echo Config::PREFIX . 'bg'; ?>" value="<?php esc_attr_e( $options['bg_cover'] ); ?>">
-						<button type="button" name="<?php echo Config::PREFIX . 'bg_upload'; ?>" id="<?php echo Config::PREFIX . 'bg_upload'; ?>" class="as-btn as-upload" style="margin-top: 4px"><?php esc_html_e( 'Select', 'classic-coming-soon-maintenance-mode' ); ?></button>
-
-						<span class="as-upload-append">
-							<?php if ( ! empty( $options['bg_cover'] ) ) : ?>
-								&nbsp;<a href="javascript:;" class="as-remove-image"><?php esc_html_e( 'Remove', 'classic-coming-soon-maintenance-mode' ); ?></a>
-							<?php endif; ?>
-						</span>
+						
+						<div class="as-flex">
+							<button type="button" name="<?php echo Config::PREFIX . 'bg_upload'; ?>" id="<?php echo Config::PREFIX . 'bg_upload'; ?>" class="as-btn as-upload"><?php esc_html_e( 'Select', 'classic-coming-soon-maintenance-mode' ); ?></button>
+							<span class="as-upload-append">
+								<?php if ( ! empty( $options['bg_cover'] ) ) : ?>
+									&nbsp;<a href="javascript:;" class="as-remove-image"><?php esc_html_e( 'Remove', 'classic-coming-soon-maintenance-mode' ); ?></a>
+								<?php endif; ?>
+							</span>
+						</div>
 					</div>
 				</div>
 			</div>
