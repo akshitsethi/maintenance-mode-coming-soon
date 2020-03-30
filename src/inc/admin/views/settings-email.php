@@ -29,25 +29,31 @@ use DrewM\MailChimp\MailChimp;
 
 					// Fetch lists from Mailchimp if the API key is provided
 					if ( ! empty( $options['mailchimp_api'] ) ) {
-						$mailchimp 	= new MailChimp( $options['mailchimp_api'] );
-						$lists 			= $mailchimp->get('lists');
+						try {
+							$mailchimp 	= new MailChimp( $options['mailchimp_api'] );
 
-						// API call went fine?
-						if ( $mailchimp->success() ) {
-							if ( count( $lists['lists'] ) > 0 ) {
-								echo '<select name="' . Config::PREFIX . 'list" id="' . Config::PREFIX . 'list">';
+							// Fetch lists
+							$lists 			= $mailchimp->get('lists');
 
-								foreach ( $lists['lists'] as $list ) {
-									echo '<option value="' . $list['id'] . '"' . selected( $list['id'], $options['mailchimp_list'] ) . '>' . $list['name'].'</option>';
+							// API call went fine?
+							if ( $mailchimp->success() ) {
+								if ( count( $lists['lists'] ) > 0 ) {
+									echo '<select name="' . Config::PREFIX . 'list" id="' . Config::PREFIX . 'list">';
+
+									foreach ( $lists['lists'] as $list ) {
+										echo '<option value="' . $list['id'] . '"' . selected( $list['id'], $options['mailchimp_list'] ) . '>' . $list['name'].'</option>';
+									}
+
+									echo '</select>';
+									echo '<p class="as-form-help-block">' . esc_html__( 'Select your MailChimp list in which you would like to store the subscribers data.', 'classic-coming-soon-maintenance-mode' ) . '</p>';
+								} else {
+									echo '<p class="as-form-help-block">' . esc_html__( 'It seems that there is no list created for this account. Why not create one on the MailChimp website and then try here.', 'classic-coming-soon-maintenance-mode' ) . '</p>';
 								}
-
-								echo '</select>';
-								echo '<p class="as-form-help-block">' . esc_html__( 'Select your MailChimp list in which you would like to store the subscribers data.', 'classic-coming-soon-maintenance-mode' ) . '</p>';
 							} else {
-								echo '<p class="as-form-help-block">' . esc_html__( 'It seems that there is no list created for this account. Why not create one on the MailChimp website and then try here.', 'classic-coming-soon-maintenance-mode' ) . '</p>';
+								echo '<p class="as-form-help-block">' . $mailchimp->getLastError() . '</p>';
 							}
-						} else {
-							echo '<p class="as-form-help-block">' . $mailchimp->getLastError() . '</p>';
+						} catch( Exception $e ) {
+							echo '<p class="as-form-help-block">' . $e->getMessage() . '<p>';
 						}
 					} else {
 						echo '<p class="as-form-help-block">' . esc_html__( 'Provide your MailChimp API key in the above box and click on `Save Changes` option. Your lists will appear over here.', 'classic-coming-soon-maintenance-mode' ) . '</p>';
