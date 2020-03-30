@@ -64,8 +64,18 @@ class MaintenanceMode {
 	 * Attached to the activation hook.
 	 */
 	public function activate() {
-		// Add to `wp_options` table.
-		update_option( Config::DB_OPTION, Config::$default_options );
+		// Check for existing options in the database
+		$options = get_option( Config::DB_OPTION );
+
+		// Present? Overwrite the default options
+		if ( $options ) {
+			$options = array_merge( Config::$default_options, $options );
+		} else {
+			$options = Config::$default_options;
+		}
+
+		// Update `wp_options` table
+		update_option( Config::DB_OPTION, $options );
 	}
 
 
@@ -73,8 +83,9 @@ class MaintenanceMode {
 	 * Attached to the de-activation hook.
 	 */
 	public function deactivate() {
-		// Remove from `wp_options` table.
-		delete_option( Config::DB_OPTION );
+		/**
+		 * @todo Decide whether to delete the transient on deactivation or not.
+		 */
 	}
 
 }
