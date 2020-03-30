@@ -42,6 +42,10 @@ use DrewM\MailChimp\MailChimp;
 								}
 
 								echo '</select>';
+
+								// Show the refresh button
+								$this->refresh_button();
+
 								echo '<p class="as-form-help-block">' . esc_html__( 'Select your MailChimp list in which you would like to store the subscribers data.', 'classic-coming-soon-maintenance-mode' ) . '</p>';
 							} else {
 								try {
@@ -67,6 +71,10 @@ use DrewM\MailChimp\MailChimp;
 											}
 	
 											echo '</select>';
+
+											// Show the refresh button
+											$this->refresh_button();
+
 											echo '<p class="as-form-help-block">' . esc_html__( 'Select your MailChimp list in which you would like to store the subscribers data.', 'classic-coming-soon-maintenance-mode' ) . '</p>';
 
 											// Set transient for future calls

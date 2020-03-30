@@ -304,6 +304,7 @@ toastr.options = {
           }
 
           html += '</select>';
+          html += '&nbsp; <button type="button" id="' + ccsmm_admin_l10n.prefix + 'refresh' + '" class="as-btn as-small">' + ccsmm_admin_l10n.refresh_text + '</button>';
           html += '<p class="as-form-help-block">' + ccsmm_admin_l10n.list_text + '</p>';
 
           // Add the select box to the page
@@ -312,6 +313,76 @@ toastr.options = {
 
         // Hide the checkbox and show the default message if API key is empty
         if (!formData.get(ccsmm_admin_l10n.prefix + 'api')) {
+          var listDiv = $('#' + ccsmm_admin_l10n.prefix + 'list');
+
+          if (listDiv.length > 0) {
+            listDiv.hide();
+          }
+
+          // Show or replace the default message
+          $('.as-ajax-response').html('<p class="as-form-help-block">' + ccsmm_admin_l10n.no_api_text + '</p>');
+        }
+      });
+    });
+
+
+    // Refresh email list
+    $(document).on('click', '#' + ccsmm_admin_l10n.prefix + 'refresh', function (e) {
+      e.preventDefault();
+
+      // Parent identifier
+      var parentDiv = $('.as-ajax-response');
+
+      // AJAX
+      $.ajax( {
+        type: 'POST',
+        url: ajaxurl,
+        data: {
+          action: ccsmm_admin_l10n.prefix + 'refresh',
+          _nonce: ccsmm_admin_l10n.nonce
+        },
+        beforeSend: function() {
+          parentDiv.block({
+            message: '<div class="as-strong" style="background: #ecf0f1; padding: 10px 6px; color: #000;">Processing..</div>',
+            css: {
+              border: 'none',
+              backgroundColor: 'none'
+            },
+            overlayCSS: {
+              backgroundColor: '#eeeeee',
+              opacity: '0.5',
+              cursor: 'wait'
+            }
+          });
+        }
+      }).done(function(data) {
+        // Unblock
+        parentDiv.unblock();
+
+        // Notification
+        toastr[data.code](data.response);
+
+        // For email tab
+        if (data.data) {
+          var html;
+
+          html = '<select name="' + ccsmm_admin_l10n.prefix + 'list" id="' + ccsmm_admin_l10n.prefix + 'list">';
+
+          // Loop over the list
+          for (var key in data.data) {
+            html += '<option value="' + key + '">' + data.data[key] + '</option>';
+          }
+
+          html += '</select>';
+          html += '&nbsp; <button type="button" id="' + ccsmm_admin_l10n.prefix + 'refresh' + '" class="as-btn as-small">' + ccsmm_admin_l10n.refresh_text + '</button>';
+          html += '<p class="as-form-help-block">' + ccsmm_admin_l10n.list_text + '</p>';
+
+          // Add the select box to the page
+          $('.as-ajax-response').html(html);
+        }
+
+        // Hide the checkbox and show the default message if API key is empty
+        if (!$('#' + ccsmm_admin_l10n.prefix + 'api').val()) {
           var listDiv = $('#' + ccsmm_admin_l10n.prefix + 'list');
 
           if (listDiv.length > 0) {
