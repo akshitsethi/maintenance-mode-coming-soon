@@ -219,6 +219,7 @@ toastr.options = {
 
       // Append action
       data.append('action', ccsmm_admin_l10n.prefix + 'options');
+      data.append('_nonce', ccsmm_admin_l10n.nonce);
 
       // AJAX
       $.ajax( {

@@ -67,7 +67,8 @@ class Admin {
 			'select_text'  	=> esc_html__( 'Select Image', 'classic-coming-soon-maintenance-mode' ),
 			'upload_text'  	=> esc_html__( 'Select or upload via WP native uploader', 'classic-coming-soon-maintenance-mode' ),
 			'remove_text'  	=> esc_html__( 'Remove', 'classic-coming-soon-maintenance-mode' ),
-			'default_fonts' => Config::DEFAULT_FONTS
+			'default_fonts' => Config::DEFAULT_FONTS,
+			'nonce' 				=> wp_create_nonce( Config::PREFIX . 'nonce' )
 		);
 		wp_localize_script( Config::SHORT_SLUG . '-admin', Config::PREFIX . 'admin_l10n', $localize );
 	}
@@ -107,11 +108,17 @@ class Admin {
 	 * Processes plugin options via an AJAX call.
 	 */
 	public function save_options() {
-		// Storing response in an array
+		// Default response
 		$response = array(
 			'code'     => 'success',
 			'response' => esc_html__( 'Options have been updated successfully.', 'classic-coming-soon-maintenance-mode' ),
 		);
+
+		// Check for _nonce
+		if ( empty( $_POST['_nonce'] ) || ! wp_verify_nonce( $_POST['_nonce'], Config::PREFIX . 'nonce' ) ) {
+			$response['code'] 		= 'error';
+			$response['response'] = esc_html__( 'Request does not seem to be a valid one. Try again by refreshing the page.', 'classic-coming-soon-maintenance-mode' );
+		}
 
 		// Filter and sanitize options
 		$options = array(
@@ -233,10 +240,10 @@ class Admin {
 	 */
 	public function settings() {
 		// Plugin options
-		$options = get_option( Config::DB_OPTION );
+		$options 			= get_option( Config::DB_OPTION );
 
 		// Admin email
-		$admin_email = sanitize_email( get_option( 'admin_email', '' ) );
+		$admin_email 	= sanitize_email( get_option( 'admin_email', '' ) );
 
 		// Settings page
 		require_once Config::$plugin_path . 'inc/admin/views/settings.php';
