@@ -184,12 +184,15 @@ class Admin {
 			'custom_css'						=> wp_strip_all_tags( $_POST[Config::PREFIX . 'css'] )
 		);
 
-		// Update options
-		update_option( Config::DB_OPTION, $options );
-
 		// Query the MailChimp API and pass the fetched lists to JS if the request returns 200
 		if ( ! empty( $options['mailchimp_api'] ) ) {
-			if ( empty( $options['mailchimp_list'] ) ) {
+			// Try to fetch from the transient
+			$cached_data = get_transient( Config::PREFIX . 'email_lists' );
+
+			// Transient present?
+			if ( $cached_data ) {
+				$response['data'] = $cached_data;
+			} else {
 				try {
 					$mailchimp 	= new MailChimp( $options['mailchimp_api'] );
 
@@ -200,8 +203,12 @@ class Admin {
 					if ( $mailchimp->success() ) {
 						if ( count( $lists['lists'] ) > 0 ) {
 							foreach ( $lists['lists'] as $list ) {
-								$response['data'][$list['id']] = $list['name'];
+								$response['data'][sanitize_text_field( $list['id'] )] = sanitize_text_field( $list['name'] );
 							}
+
+							// Set transient for future calls
+							// Expiry after one month
+							set_transient( Config::PREFIX . 'email_lists', $response['data'], 60 * 60 * 24 * 30 );
 						} else {
 							$response['code'] 		= 'warning';
 							$response['response'] = esc_html__( 'It seems that there is no list created for this account. Why not create one on the MailChimp website and then try here.', 'classic-coming-soon-maintenance-mode' );
@@ -215,7 +222,13 @@ class Admin {
 					$response['response'] = $e->getMessage();
 				}
 			}
+		} else {
+			// Delete transient (just to be sure)
+			delete_transient( Config::PREFIX . 'email_lists' );
 		}
+
+		// Update options
+		update_option( Config::DB_OPTION, $options );
 
 		// Headers for JSON format
 		header( 'Content-Type: application/json' );
