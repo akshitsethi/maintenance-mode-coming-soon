@@ -251,17 +251,17 @@ toastr.options = {
       var formID = $('#' + ccsmm_admin_l10n.prefix + 'form');
 
       // Form data
-      var data 	= new FormData(formID[0]);
+      var formData 	= new FormData(formID[0]);
 
       // Append action
-      data.append('action', ccsmm_admin_l10n.prefix + 'options');
-      data.append('_nonce', ccsmm_admin_l10n.nonce);
+      formData.append('action', ccsmm_admin_l10n.prefix + 'options');
+      formData.append('_nonce', ccsmm_admin_l10n.nonce);
 
       // AJAX
       $.ajax( {
         type: 'POST',
         url: ajaxurl,
-        data: data,
+        data: formData,
         processData: false,
         contentType: false,
         beforeSend: function() {
@@ -282,15 +282,40 @@ toastr.options = {
         // Unblock
         formID.unblock();
 
-        // Success
-        if (data.code == 'success') {
-          toastr.success(data.response);
+        // Notification
+        toastr[data.code](data.response);
 
-          // Remove input class
-          $('input, textarea, select').removeClass('changed-input');
-        } else {
-          // Error
-          toastr.error(data.response);
+        // Remove input class
+        $('input, textarea, select').removeClass('changed-input');
+
+        // For email tab
+        if (data.data) {
+          var html;
+
+          html = '<select name="' + ccsmm_admin_l10n.prefix + 'list" id="' + ccsmm_admin_l10n.prefix + 'list">';
+
+          // Loop over the list
+          for (var key in data.data) {
+            html += '<option value="' + key + '">' + data.data[key] + '</option>';
+          }
+
+          html += '</select>';
+          html += '<p class="as-form-help-block">' + ccsmm_admin_l10n.list_text + '</p>';
+
+          // Add the select box to the page
+          $('.as-ajax-response').html(html);
+        }
+
+        // Hide the checkbox and show the default message if API key is empty
+        if (!formData.get(ccsmm_admin_l10n.prefix + 'api')) {
+          var listDiv = $('#' + ccsmm_admin_l10n.prefix + 'list');
+
+          if (listDiv.length > 0) {
+            listDiv.hide();
+          }
+
+          // Show or replace the default message
+          $('.as-ajax-response').html('<p class="as-form-help-block">' + ccsmm_admin_l10n.no_api_text + '</p>');
         }
       });
     });
