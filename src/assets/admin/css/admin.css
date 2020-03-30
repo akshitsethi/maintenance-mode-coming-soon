@@ -527,6 +527,9 @@ textarea.as-form-input-lg {
 	box-shadow: none;
 	transition: all 0.12s linear 0s !important;
 }
+.as-btn.as-small {
+	padding: 7px 12px;
+}
 .as-btn:hover,
 .as-btn:focus,
 .as-btn:active {

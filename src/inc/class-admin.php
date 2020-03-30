@@ -26,6 +26,7 @@ class Admin {
 		add_action( 'admin_menu', array( $this, 'add_menu' ) );
 		add_action( 'wp_ajax_' . Config::PREFIX . 'support', array( $this, 'support_ticket' ) );
 		add_action( 'wp_ajax_' . Config::PREFIX . 'options', array( $this, 'save_options' ) );
+		add_action( 'wp_ajax_' . Config::PREFIX . 'refresh', array( $this, 'refresh_list' ) );
 
 		add_filter( 'plugin_row_meta', array( $this, 'meta_links' ), 10, 2 );
 	}
@@ -72,6 +73,7 @@ class Admin {
 			'remove_text'  		=> esc_html__( 'Remove', 'classic-coming-soon-maintenance-mode' ),
 			'no_api_text' 		=> esc_html__( 'Provide your MailChimp API key in the above box and click on `Save Changes` option. Your lists will appear over here.', 'classic-coming-soon-maintenance-mode' ),
 			'list_text' 			=> esc_html__( 'Select your MailChimp list in which you would like to store the subscribers data.', 'classic-coming-soon-maintenance-mode' ),
+			'refresh_text' 		=> esc_html__( 'Refresh List', 'classic-coming-soon-maintenance-mode' ),
 			'default_fonts' 	=> Config::DEFAULT_FONTS,
 			'nonce' 					=> wp_create_nonce( Config::PREFIX . 'nonce' )
 		);
@@ -295,6 +297,87 @@ class Admin {
 
 		// Settings page
 		require_once Config::$plugin_path . 'inc/admin/views/settings.php';
+	}
+
+
+	/**
+	 * Button for refreshing the email lists.
+	 *
+	 * @since 1.0.0
+	 */
+	private function refresh_button() {
+		echo '&nbsp; <button type="button" id="' . Config::PREFIX . 'refresh' . '" class="as-btn as-small">' . esc_html__( 'Refresh List', 'classic-coming-soon-maintenance-mode' ) . '</button>';
+	}
+
+
+	/**
+	 * Refresh email list for the admin.
+	 *
+	 * @since 1.0.0
+	 */
+	public function refresh_list() {
+		// Default response
+		$response = array(
+			'code'     => 'success',
+			'response' => esc_html__( 'Email list has been refreshed.', 'classic-coming-soon-maintenance-mode' )
+		);
+
+		// Check for _nonce
+		if ( empty( $_POST['_nonce'] ) || ! wp_verify_nonce( $_POST['_nonce'], Config::PREFIX . 'nonce' ) ) {
+			$response['code'] 		= 'error';
+			$response['response'] = esc_html__( 'Request does not seem to be a valid one. Try again by refreshing the page.', 'classic-coming-soon-maintenance-mode' );
+		}
+
+		// Get options
+		$options = get_option( Config::DB_OPTION );
+
+		// Options exist?
+		if ( $options ) {
+			// Query the MailChimp API and pass the fetched lists to JS if the request returns 200
+			if ( ! empty( $options['mailchimp_api'] ) ) {
+				try {
+					$mailchimp 	= new MailChimp( $options['mailchimp_api'] );
+
+					// Fetch lists
+					$lists 			= $mailchimp->get('lists');
+
+					// API call went fine?
+					if ( $mailchimp->success() ) {
+						if ( count( $lists['lists'] ) > 0 ) {
+							foreach ( $lists['lists'] as $list ) {
+								$response['data'][sanitize_text_field( $list['id'] )] = sanitize_text_field( $list['name'] );
+							}
+
+							// Set transient for future calls
+							// Expiry after one month
+							set_transient( Config::PREFIX . 'email_lists', $response['data'], 60 * 60 * 24 * 30 );
+						} else {
+							$response['code'] 		= 'warning';
+							$response['response'] = esc_html__( 'It seems that there is no list created for this account. Why not create one on the MailChimp website and then try here.', 'classic-coming-soon-maintenance-mode' );
+						}
+					} else {
+						$response['code'] 		= 'error';
+						$response['response'] = $mailchimp->getLastError();
+					}
+				} catch( Exception $e ) {
+					$response['code'] 		= 'error';
+					$response['response'] = $e->getMessage();
+				}
+			} else {
+				// Delete transient (just to be sure)
+				delete_transient( Config::PREFIX . 'email_lists' );
+			}
+		} else {
+			$response['code'] 		= 'error';
+			$response['response'] = esc_html__( 'Unable to grab options from the database. Try reactivating the plugin.', 'classic-coming-soon-maintenance-mode' );
+		}
+
+		// Headers for JSON format
+		header( 'Content-Type: application/json' );
+		echo json_encode( $response );
+
+		// Exit for AJAX functions
+		exit;
 	}
 
 }
