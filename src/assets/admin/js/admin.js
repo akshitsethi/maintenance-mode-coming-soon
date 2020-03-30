@@ -143,6 +143,31 @@ toastr.options = {
     customUploader.open();
   }
 
+  // HTML and CSS editor
+	function getEditor($editorID, $textareaID, $mode) {
+		if ($('#' + $editorID).length > 0) {
+      var editor, textarea;
+
+      editor 	  = ace.edit($editorID, {
+        mode: 'ace/mode/' + $mode,
+        selectionStyle: 'text'
+      });
+
+      textarea 	= $('#' + $textareaID).hide();
+
+			editor.session.setValue(textarea.val());
+      editor.setTheme('ace/theme/xcode');
+
+			editor.session.on('change', function () {
+				textarea.val(editor.session.getValue());
+			});
+
+			editor.session.setUseWrapMode(true);
+			editor.renderer.setShowPrintMargin(null);
+			editor.session.setUseSoftTabs(null);
+    }
+  }
+
 
   // On DOM ready
   $(document).ready(function () {
@@ -182,6 +207,11 @@ toastr.options = {
         }
       }
     } );
+
+
+    // Editor
+    getEditor(ccsmm_admin_l10n.prefix + 'html_editor', ccsmm_admin_l10n.prefix + 'html', 'html');
+		getEditor(ccsmm_admin_l10n.prefix + 'css_editor', ccsmm_admin_l10n.prefix + 'css', 'css');
 
 
     // Sticky header

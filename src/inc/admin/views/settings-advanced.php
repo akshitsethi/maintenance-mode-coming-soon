@@ -25,7 +25,7 @@ use AkshitSethi\Plugins\MaintenanceMode\Config;
 
 					<div class="as-form-group">
 						<label for="<?php echo Config::PREFIX . 'html'; ?>" class="as-strong"><?php esc_html_e( 'Custom HTML', 'classic-coming-soon-maintenance-mode' ); ?></label>
-						<div id="<?php echo Config::PREFIX . 'html_editor'; ?>"></div>
+						<div id="<?php echo Config::PREFIX . 'html_editor'; ?>" class="as-code-editor"></div>
 						<textarea name="<?php echo Config::PREFIX . 'html'; ?>" id="<?php echo Config::PREFIX . 'html'; ?>" rows="8" placeholder="<?php esc_html_e( 'Custom HTML for the plugin', 'classic-coming-soon-maintenance-mode' ); ?>"><?php echo stripslashes( $options['custom_html'] ); ?></textarea>
 
 						<p class="as-form-help-block"><?php echo esc_html__( 'Custom HTML for the plugin goes over here. Please note that ', 'classic-coming-soon-maintenance-mode' ) . '<i style="color: #f96773">' . esc_html__( '[html], [head], [title], [meta], [body], and similar tags', 'classic-coming-soon-maintenance-mode' ) . '</i>' . esc_html__( ' are not required. Only provide content HTML for the page.', 'classic-coming-soon-maintenance-mode' ); ?></p>
@@ -34,7 +34,7 @@ use AkshitSethi\Plugins\MaintenanceMode\Config;
 
 					<div class="as-form-group">
 						<label for="<?php echo Config::PREFIX . 'css'; ?>" class="as-strong"><?php esc_html_e( 'Custom CSS', 'classic-coming-soon-maintenance-mode' ); ?></label>
-						<div id="<?php echo Config::PREFIX . 'css_editor'; ?>"></div>
+						<div id="<?php echo Config::PREFIX . 'css_editor'; ?>" class="as-code-editor"></div>
 						<textarea name="<?php echo Config::PREFIX . 'css'; ?>" id="<?php echo Config::PREFIX . 'css'; ?>" class="Signals_csmm_Block" rows="8" placeholder="<?php esc_html_e( 'Custom CSS for the plugin', 'classic-coming-soon-maintenance-mode' ); ?>"><?php echo stripslashes( $options['custom_css'] ); ?></textarea>
 
 						<p class="as-form-help-block"><?php esc_html_e( 'Custom CSS for the plugin goes over here.', 'classic-coming-soon-maintenance-mode' ); ?></p>
