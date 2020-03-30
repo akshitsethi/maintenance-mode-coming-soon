@@ -80,6 +80,45 @@ use AkshitSethi\Plugins\MaintenanceMode\Config;
 							<p class="as-form-help-block"><?php esc_html_e( 'Do you want to exclude search engines from viewing maintenance page? This will enable search engines to view your regular website and not the Maintenance Mode page even if the plugin is enabled.', 'classic-coming-soon-maintenance-mode' ); ?></p>
 						</div>
 					</div>
+
+					<label for="<?php echo Config::PREFIX . 'arrange'; ?>" class="as-strong"><?php esc_html_e( 'Arrange Elements', 'classic-coming-soon-maintenance-mode' ); ?></label>
+					<p class="as-form-help-block"><?php esc_html_e( 'Select the order in which you would like to display the sections on the maintenance page. To change the order, simply drag the items and arrange as per your preference.', 'classic-coming-soon-maintenance-mode' ); ?></p>
+
+					<div class="as-elements">
+						<ul id="arrange-items">
+							<?php
+
+								if ( ! empty( $options['arrange'] ) ) {
+									$arrange = explode( ',', $options['arrange'] );
+
+									// list items
+									foreach ( $arrange as $item ) {
+										if ( 'html' == $item ) {
+											echo '<li data-id="' . $item . '">' . __( 'Custom HTML', 'classic-coming-soon-maintenance-mode' ) . '</li>';
+										} else {
+											echo '<li data-id="' . $item . '">' . ucfirst( $item ) . '</li>';
+										}
+									}
+								} else {
+
+							?>
+									<li data-id="logo"><?php esc_html_e( 'Logo', 'classic-coming-soon-maintenance-mode' ); ?></li>
+									<li data-id="header"><?php esc_html_e( 'Header Text', 'classic-coming-soon-maintenance-mode' ); ?></li>
+									<li data-id="secondary"><?php esc_html_e( 'Secondary Text', 'classic-coming-soon-maintenance-mode' ); ?></li>
+									<li data-id="form"><?php esc_html_e( 'Form', 'classic-coming-soon-maintenance-mode' ); ?></li>
+									<li data-id="html"><?php esc_html_e( 'Custom HTML', 'classic-coming-soon-maintenance-mode' ); ?></li>
+							<?php } ?>
+						</ul>
+
+						<input type="hidden" name="<?php echo Config::PREFIX . 'arrange'; ?>" id="<?php echo Config::PREFIX . 'arrange'; ?>" value="<?php echo esc_attr_e( $options['arrange'] ); ?>">
+					</div><!-- .as-elements -->
+
+					<div class="as-form-group">
+						<label for="<?php echo Config::PREFIX . 'analytics'; ?>" class="as-strong"><?php esc_html_e( 'Analytics Code', 'classic-coming-soon-maintenance-mode' ); ?></label>
+						<textarea name="<?php echo Config::PREFIX . 'analytics'; ?>" id="<?php echo Config::PREFIX . 'analytics'; ?>" rows="5" placeholder="<?php esc_attr_e( 'Analytics code for the maintenance page', 'classic-coming-soon-maintenance-mode' ); ?>"><?php echo esc_textarea( stripslashes( $options['analytics'] ) ); ?></textarea>
+
+						<p class="as-form-help-block"><?php esc_html_e( 'Provide analytics code for the maintenance page. It\'s nice to have tracking installed.', 'classic-coming-soon-maintenance-mode' ); ?></p>
+					</div>
 				</div>
 			</div>
 		</div><!-- #basic -->
