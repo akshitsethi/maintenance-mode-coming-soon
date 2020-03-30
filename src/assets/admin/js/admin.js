@@ -296,7 +296,11 @@ toastr.options = {
 
           // Loop over the list
           for (var key in data.data) {
-            html += '<option value="' + key + '">' + data.data[key] + '</option>';
+            if (formData.get(ccsmm_admin_l10n.prefix + 'list') === key) {
+              html += '<option value="' + key + '" selected="selected">' + data.data[key] + '</option>';
+            } else {
+              html += '<option value="' + key + '">' + data.data[key] + '</option>';
+            }
           }
 
           html += '</select>';
