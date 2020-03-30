@@ -7,7 +7,9 @@
 
 namespace AkshitSethi\Plugins\MaintenanceMode;
 
+use Exception;
 use AkshitSethi\Plugins\MaintenanceMode\Config;
+use DrewM\MailChimp\MailChimp;
 
 /**
  * Admin options for the plugin.
@@ -62,14 +64,16 @@ class Admin {
 		wp_enqueue_script( Config::SHORT_SLUG . '-admin', Config::$plugin_url . 'assets/admin/js/admin.js', array( 'jquery' ), Config::VERSION, true );
 
 		$localize = array(
-			'prefix'       	=> Config::PREFIX,
-			'save_text'    	=> esc_html__( 'Save Changes', 'classic-coming-soon-maintenance-mode' ),
-			'support_text' 	=> esc_html__( 'Ask for Support', 'classic-coming-soon-maintenance-mode' ),
-			'select_text'  	=> esc_html__( 'Select Image', 'classic-coming-soon-maintenance-mode' ),
-			'upload_text'  	=> esc_html__( 'Select or upload via WP native uploader', 'classic-coming-soon-maintenance-mode' ),
-			'remove_text'  	=> esc_html__( 'Remove', 'classic-coming-soon-maintenance-mode' ),
-			'default_fonts' => Config::DEFAULT_FONTS,
-			'nonce' 				=> wp_create_nonce( Config::PREFIX . 'nonce' )
+			'prefix'       		=> Config::PREFIX,
+			'save_text'    		=> esc_html__( 'Save Changes', 'classic-coming-soon-maintenance-mode' ),
+			'support_text' 		=> esc_html__( 'Ask for Support', 'classic-coming-soon-maintenance-mode' ),
+			'select_text'  		=> esc_html__( 'Select Image', 'classic-coming-soon-maintenance-mode' ),
+			'upload_text'  		=> esc_html__( 'Select or upload via WP native uploader', 'classic-coming-soon-maintenance-mode' ),
+			'remove_text'  		=> esc_html__( 'Remove', 'classic-coming-soon-maintenance-mode' ),
+			'no_api_text' 		=> esc_html__( 'Provide your MailChimp API key in the above box and click on `Save Changes` option. Your lists will appear over here.', 'classic-coming-soon-maintenance-mode' ),
+			'list_text' 			=> esc_html__( 'Select your MailChimp list in which you would like to store the subscribers data.', 'classic-coming-soon-maintenance-mode' ),
+			'default_fonts' 	=> Config::DEFAULT_FONTS,
+			'nonce' 					=> wp_create_nonce( Config::PREFIX . 'nonce' )
 		);
 		wp_localize_script( Config::SHORT_SLUG . '-admin', Config::PREFIX . 'admin_l10n', $localize );
 	}
@@ -112,7 +116,7 @@ class Admin {
 		// Default response
 		$response = array(
 			'code'     => 'success',
-			'response' => esc_html__( 'Options have been updated successfully.', 'classic-coming-soon-maintenance-mode' ),
+			'response' => esc_html__( 'Options have been updated successfully.', 'classic-coming-soon-maintenance-mode' )
 		);
 
 		// Check for _nonce
@@ -182,6 +186,36 @@ class Admin {
 
 		// Update options
 		update_option( Config::DB_OPTION, $options );
+
+		// Query the MailChimp API and pass the fetched lists to JS if the request returns 200
+		if ( ! empty( $options['mailchimp_api'] ) ) {
+			if ( empty( $options['mailchimp_list'] ) ) {
+				try {
+					$mailchimp 	= new MailChimp( $options['mailchimp_api'] );
+
+					// Fetch lists
+					$lists 			= $mailchimp->get('lists');
+
+					// API call went fine?
+					if ( $mailchimp->success() ) {
+						if ( count( $lists['lists'] ) > 0 ) {
+							foreach ( $lists['lists'] as $list ) {
+								$response['data'][$list['id']] = $list['name'];
+							}
+						} else {
+							$response['code'] 		= 'warning';
+							$response['response'] = esc_html__( 'It seems that there is no list created for this account. Why not create one on the MailChimp website and then try here.', 'classic-coming-soon-maintenance-mode' );
+						}
+					} else {
+						$response['code'] 		= 'error';
+						$response['response'] = $mailchimp->getLastError();
+					}
+				} catch( Exception $e ) {
+					$response['code'] 		= 'error';
+					$response['response'] = $e->getMessage();
+				}
+			}
+		}
 
 		// Headers for JSON format
 		header( 'Content-Type: application/json' );
