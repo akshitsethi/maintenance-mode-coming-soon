@@ -111,7 +111,10 @@ toastr.options = {
 
   // Media upload function
   function getUploader($target) {
-    var customUploader;
+    var customUploader, parentTarget;
+
+    // Specify the target's parent
+    parentTarget = $target.parent().parent();
 
     // If the uploader object has already been created, reopen the dialog
     if (customUploader) {
@@ -132,9 +135,9 @@ toastr.options = {
     customUploader.on('select', function () {
       var attachment = customUploader.state().get('selection').first().toJSON();
 
-      $target.parent().find('input').val(attachment.url);
-      $target.parent().find('.as-preview-area').html('<img src="' + attachment.url + '">');
-      $target.parent().find('.as-upload-append').html('&nbsp;<a href="javascript:;" class="as-remove-image">' + ccsmm_admin_l10n.remove_text + '</a>');
+      parentTarget.find('input').val(attachment.url);
+      parentTarget.find('.as-preview-area').html('<img src="' + attachment.url + '">');
+      parentTarget.find('.as-upload-append').html('&nbsp;<a href="javascript:;" class="as-remove-image">' + ccsmm_admin_l10n.remove_text + '</a>');
     });
 
     customUploader.open();
@@ -201,8 +204,11 @@ toastr.options = {
     $(document).on('click', '.as-remove-image', function (e) {
       e.preventDefault();
 
-      $(this).parent().parent().find('input').val('');
-      $(this).parent().parent().find('.as-preview-area').html(ccsmm_admin_l10n.upload_text);
+      // Specify the target's parent
+      var parentTarget = $(this).parent().parent().parent();
+
+      parentTarget.find('input').val('');
+      parentTarget.find('.as-preview-area').html(ccsmm_admin_l10n.upload_text);
       $(this).hide();
     });
 
