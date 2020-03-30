@@ -71,9 +71,9 @@ use AkshitSethi\Plugins\MaintenanceMode\Config;
 						<?php else : ?>
 							<span class="as-preview-area"><?php esc_html_e( 'Select or upload via WP native uploader', 'classic-coming-soon-maintenance-mode' ); ?></span>
 						<?php endif; ?>
-						
+
 						<input type="hidden" name="<?php echo Config::PREFIX . 'bg'; ?>" id="<?php echo Config::PREFIX . 'bg'; ?>" value="<?php esc_attr_e( $options['bg_cover'] ); ?>">
-						
+
 						<div class="as-flex">
 							<button type="button" name="<?php echo Config::PREFIX . 'bg_upload'; ?>" id="<?php echo Config::PREFIX . 'bg_upload'; ?>" class="as-btn as-upload"><?php esc_html_e( 'Select', 'classic-coming-soon-maintenance-mode' ); ?></button>
 							<span class="as-upload-append">

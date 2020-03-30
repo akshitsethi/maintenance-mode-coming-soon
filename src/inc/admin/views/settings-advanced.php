@@ -29,7 +29,7 @@ use AkshitSethi\Plugins\MaintenanceMode\Config;
 						<textarea name="<?php echo Config::PREFIX . 'html'; ?>" id="<?php echo Config::PREFIX . 'html'; ?>" rows="8" placeholder="<?php esc_html_e( 'Custom HTML for the plugin', 'classic-coming-soon-maintenance-mode' ); ?>"><?php echo stripslashes( $options['custom_html'] ); ?></textarea>
 
 						<p class="as-form-help-block"><?php echo esc_html__( 'Custom HTML for the plugin goes over here. Please note that ', 'classic-coming-soon-maintenance-mode' ) . '<i style="color: #f96773">' . esc_html__( '[html], [head], [title], [meta], [body], and similar tags', 'classic-coming-soon-maintenance-mode' ) . '</i>' . esc_html__( ' are not required. Only provide content HTML for the page.', 'classic-coming-soon-maintenance-mode' ); ?></p>
-						<p class="as-form-help-block"><?php esc_html_e( 'To insert subscription form anywhere in the html, simply use the placeholder <strong>{{form}}</strong> and you are done.', 'classic-coming-soon-maintenance-mode' ); ?></p>
+						<p class="as-form-help-block"><?php esc_html_e( 'To insert subscription form anywhere in the html, simply use the placeholder {{form}} and you are done.', 'classic-coming-soon-maintenance-mode' ); ?></p>
 					</div>
 
 					<div class="as-form-group">

@@ -461,6 +461,15 @@ textarea.as-form-input-lg {
 	align-items: center;
 	justify-content: center;
 }
+.as-pseudo-selector {
+	font-size: 0.625rem;
+	border: 1px solid #0b0b0b;
+	color: #0b0b0b;
+	padding: 0.250rem;
+	font-weight: 400;
+	border-radius: 4px;
+	margin-left: 0.250rem;
+}
 
 /* --- Alerts & Buttons --- */
 .as-notice {
