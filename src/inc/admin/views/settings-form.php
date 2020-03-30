@@ -108,14 +108,14 @@ use AkshitSethi\Plugins\MaintenanceMode\Config;
 
 			<div class="as-double-group as-clearfix">
 				<div class="as-form-group">
-					<label for="<?php echo Config::PREFIX . 'input_bg_hover'; ?>" class="as-strong"><?php esc_html_e( 'Input Background Color', 'classic-coming-soon-maintenance-mode' ); ?> <span class="as-red-color"><?php esc_html_e( 'FOCUS', 'classic-coming-soon-maintenance-mode' ); ?></span></label>
+					<label for="<?php echo Config::PREFIX . 'input_bg_hover'; ?>" class="as-strong"><?php esc_html_e( 'Input Background Color', 'classic-coming-soon-maintenance-mode' ); ?> <span class="as-pseudo-selector"><?php esc_html_e( 'FOCUS', 'classic-coming-soon-maintenance-mode' ); ?></span></label>
 					<input type="text" name="<?php echo Config::PREFIX . 'input_bg_hover'; ?>" id="<?php echo Config::PREFIX . 'input_bg_hover'; ?>" value="<?php esc_attr_e( $options['input_bg_hover'] ); ?>" placeholder="<?php esc_html_e( 'Background color for the Input field when it gets clicked', 'classic-coming-soon-maintenance-mode' ); ?>" class="as-form-control jscolor {required:false}">
 
 					<p class="as-form-help-block"><?php esc_html_e( 'Select background color for the input text field when it gets clicked.', 'classic-coming-soon-maintenance-mode' ); ?></p>
 				</div>
 
 				<div class="as-form-group">
-					<label for="<?php echo Config::PREFIX . 'button_bg_hover'; ?>" class="as-strong"><?php esc_html_e( 'Button Background Color', 'classic-coming-soon-maintenance-mode' ); ?> <span class="as-red-color"><?php esc_html_e( 'HOVER', 'classic-coming-soon-maintenance-mode' ); ?></span></label>
+					<label for="<?php echo Config::PREFIX . 'button_bg_hover'; ?>" class="as-strong"><?php esc_html_e( 'Button Background Color', 'classic-coming-soon-maintenance-mode' ); ?> <span class="as-pseudo-selector"><?php esc_html_e( 'HOVER', 'classic-coming-soon-maintenance-mode' ); ?></span></label>
 					<input type="text" name="<?php echo Config::PREFIX . 'button_bg_hover'; ?>" id="<?php echo Config::PREFIX . 'button_bg_hover'; ?>" value="<?php esc_attr_e( $options['button_bg_hover'] ); ?>" placeholder="<?php esc_html_e( 'Background color for the Button on hover', 'classic-coming-soon-maintenance-mode' ); ?>" class="as-form-control jscolor {required:false}">
 
 					<p class="as-form-help-block"><?php esc_html_e( 'Select background color for the button on mouse hover.', 'classic-coming-soon-maintenance-mode' ); ?></p>
@@ -140,14 +140,14 @@ use AkshitSethi\Plugins\MaintenanceMode\Config;
 
 			<div class="as-double-group as-clearfix">
 				<div class="as-form-group">
-					<label for="<?php echo Config::PREFIX . 'input_border_hover'; ?>" class="as-strong"><?php esc_html_e( 'Input Border Color', 'classic-coming-soon-maintenance-mode' ); ?> <span class="as-red-color"><?php esc_html_e( 'FOCUS', 'classic-coming-soon-maintenance-mode' ); ?></span></label>
+					<label for="<?php echo Config::PREFIX . 'input_border_hover'; ?>" class="as-strong"><?php esc_html_e( 'Input Border Color', 'classic-coming-soon-maintenance-mode' ); ?> <span class="as-pseudo-selector"><?php esc_html_e( 'FOCUS', 'classic-coming-soon-maintenance-mode' ); ?></span></label>
 					<input type="text" name="<?php echo Config::PREFIX . 'input_border_hover'; ?>" id="<?php echo Config::PREFIX . 'input_border_hover'; ?>" value="<?php esc_attr_e( $options['input_border_hover'] ); ?>" placeholder="<?php esc_html_e( 'Border color for the Input field when it gets clicked', 'classic-coming-soon-maintenance-mode' ); ?>" class="as-form-control jscolor {required:false}">
 
 					<p class="as-form-help-block"><?php esc_html_e( 'Select border color for the input field when it gets clicked.', 'classic-coming-soon-maintenance-mode' ); ?></p>
 				</div>
 
 				<div class="as-form-group">
-					<label for="<?php echo Config::PREFIX . 'button_border_hover'; ?>" class="as-strong"><?php esc_html_e( 'Button Border Color', 'classic-coming-soon-maintenance-mode' ); ?> <span class="as-red-color"><?php esc_html_e( 'HOVER', 'classic-coming-soon-maintenance-mode' ); ?></span></label>
+					<label for="<?php echo Config::PREFIX . 'button_border_hover'; ?>" class="as-strong"><?php esc_html_e( 'Button Border Color', 'classic-coming-soon-maintenance-mode' ); ?> <span class="as-pseudo-selector"><?php esc_html_e( 'HOVER', 'classic-coming-soon-maintenance-mode' ); ?></span></label>
 					<input type="text" name="<?php echo Config::PREFIX . 'button_border_hover'; ?>" id="<?php echo Config::PREFIX . 'button_border_hover'; ?>" value="<?php esc_attr_e( $options['button_border_hover'] ); ?>" placeholder="<?php esc_html_e( 'Border color for the Button on hover', 'classic-coming-soon-maintenance-mode' ); ?>" class="as-form-control jscolor {required:false}">
 
 					<p class="as-form-help-block"><?php esc_html_e( 'Select border color for the button on mouse hover.', 'classic-coming-soon-maintenance-mode' ); ?></p>
