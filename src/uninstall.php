@@ -14,5 +14,6 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
   exit;
 }
 
-// Remove plugin options from the database
+// Remove options and transients
 delete_option( Config::DB_OPTION );
+delete_transient( Config::PREFIX . 'email_lists' );
