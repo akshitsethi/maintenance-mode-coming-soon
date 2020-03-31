@@ -41,7 +41,6 @@ use AkshitSethi\Plugins\MaintenanceMode\Config;
 			<div class="as-double-group as-clearfix">
 				<div class="as-form-group">
 					<label for="<?php echo Config::PREFIX . 'input_size'; ?>" class="as-strong"><?php esc_html_e( 'Input Text Size', 'classic-coming-soon-maintenance-mode' ); ?></label>
-
 					<select name="<?php echo Config::PREFIX . 'input_size'; ?>" id="<?php echo Config::PREFIX . 'input_size'; ?>">
 						<?php
 
@@ -58,7 +57,6 @@ use AkshitSethi\Plugins\MaintenanceMode\Config;
 
 				<div class="as-form-group">
 					<label for="<?php echo Config::PREFIX . 'button_size'; ?>" class="as-strong"><?php esc_html_e( 'Button Text Size', 'classic-coming-soon-maintenance-mode' ); ?></label>
-
 					<select name="<?php echo Config::PREFIX . 'button_size'; ?>" id="<?php echo Config::PREFIX . 'button_size'; ?>">
 						<?php
 
@@ -119,6 +117,40 @@ use AkshitSethi\Plugins\MaintenanceMode\Config;
 					<input type="text" name="<?php echo Config::PREFIX . 'button_bg_hover'; ?>" id="<?php echo Config::PREFIX . 'button_bg_hover'; ?>" value="<?php esc_attr_e( $options['button_bg_hover'] ); ?>" placeholder="<?php esc_html_e( 'Background color for the Button on hover', 'classic-coming-soon-maintenance-mode' ); ?>" class="as-form-control jscolor {required:false}">
 
 					<p class="as-form-help-block"><?php esc_html_e( 'Select background color for the button on mouse hover.', 'classic-coming-soon-maintenance-mode' ); ?></p>
+				</div>
+			</div>
+
+			<div class="as-double-group as-clearfix">
+				<div class="as-form-group">
+					<label for="<?php echo Config::PREFIX . 'input_border_width'; ?>" class="as-strong"><?php esc_html_e( 'Input Border Width', 'classic-coming-soon-maintenance-mode' ); ?></label>
+					<select name="<?php echo Config::PREFIX . 'input_border_width'; ?>" id="<?php echo Config::PREFIX . 'input_border_width'; ?>">
+						<?php
+
+							// Loading font sizes with the help of a loop
+							for ( $i = 1; $i < 21; $i++ ) {
+								echo '<option value="' . $i . '"' . selected( $options['input_border_width'], $i ) . '>' . $i . esc_html__( 'px', 'classic-coming-soon-maintenance-mode' ) . '</option>';
+							}
+
+						?>
+					</select>
+
+					<p class="as-form-help-block"><?php esc_html_e( 'Border size for the input field.', 'classic-coming-soon-maintenance-mode' ); ?></p>
+				</div>
+
+				<div class="as-form-group">
+					<label for="<?php echo Config::PREFIX . 'button_border_width'; ?>" class="as-strong"><?php esc_html_e( 'Button Border Width', 'classic-coming-soon-maintenance-mode' ); ?></label>
+					<select name="<?php echo Config::PREFIX . 'button_border_width'; ?>" id="<?php echo Config::PREFIX . 'button_border_width'; ?>">
+						<?php
+
+							// Loading font sizes with the help of a loop
+							for ( $i = 1; $i < 21; $i++ ) {
+								echo '<option value="' . $i . '"' . selected( $options['button_border_width'], $i ) . '>' . $i . esc_html__( 'px', 'classic-coming-soon-maintenance-mode' ) . '</option>';
+							}
+
+						?>
+					</select>
+
+					<p class="as-form-help-block"><?php esc_html_e( 'Border size for the button.', 'classic-coming-soon-maintenance-mode' ); ?></p>
 				</div>
 			</div>
 
