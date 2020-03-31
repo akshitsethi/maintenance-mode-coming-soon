@@ -52,19 +52,19 @@ use DrewM\MailChimp\MailChimp;
 
 					// Logo
 					if ( ! empty( $options['logo'] ) ) {
-						$arrange['logo'] = '<div class="logo-container">' . "\r\n";
-						$arrange['logo'] .= '<img src="' . $options['logo'] . '" class="logo" />' . "\r\n";
+						$arrange['logo'] = '<div class="as-logo-container">' . "\r\n";
+						$arrange['logo'] .= '<img src="' . esc_url( $options['logo'] ) . '" class="as-logo" />' . "\r\n";
 						$arrange['logo'] .= '</div>' . "\r\n";
 					}
 
 					// Header text
 					if ( ! empty( $options['header_text'] ) ) {
-						$arrange['header'] = '<h1 class="header-text">' . stripslashes( nl2br( $options['header_text'] ) ) . '</h1>' . "\r\n";
+						$arrange['header'] = '<h1 class="as-header-text">' . stripslashes( nl2br( $options['header_text'] ) ) . '</h1>' . "\r\n";
 					}
 
 					// Secondary text
 					if ( ! empty( $options['secondary_text'] ) ) {
-						$arrange['secondary'] = '<p class="secondary-text">' . stripslashes( nl2br( $options['secondary_text'] ) ) . '</p>' . "\r\n";
+						$arrange['secondary'] = '<p class="as-secondary-text">' . stripslashes( nl2br( $options['secondary_text'] ) ) . '</p>' . "\r\n";
 					}
 
 					// Form
@@ -75,18 +75,18 @@ use DrewM\MailChimp\MailChimp;
 
 							if ( empty( $email ) ) {
 								$code 		= 'error';
-								$response = $this->get_option( sanitize_text_field( $options['message_noemail'] ), esc_html__( 'Please provide your email address.', 'classic-coming-soon-maintenance-mode' ) );
+								$response = $this->get_option( esc_html( stripslashes( $options['message_noemail'] ) ), esc_html__( 'Please provide your email address.', 'classic-coming-soon-maintenance-mode' ) );
 							} else {
 								$email = filter_var( strtolower( trim( $email ) ), FILTER_SANITIZE_EMAIL );
 
 								// Check value for filter_var
 								if ( ! $email ) {
 									$code 		= 'error';
-									$response = $this->get_option( sanitize_text_field( $options['message_wrong'] ), esc_html__( 'Please provide a valid email address.', 'classic-coming-soon-maintenance-mode' ) );
+									$response = $this->get_option( esc_html( stripslashes( $options['message_wrong'] ) ), esc_html__( 'Please provide a valid email address.', 'classic-coming-soon-maintenance-mode' ) );
 								} else {
-									$mailchimp = new MailChimp( sanitize_text_field( $options['mailchimp_api'] ) );
+									$mailchimp = new MailChimp( esc_html( $options['mailchimp_api'] ) );
 									$connect   = $mailchimp->post(
-										'lists/' . sanitize_text_field( $options['mailchimp_list'] ) . '/members',
+										'lists/' . esc_html( $options['mailchimp_list'] ) . '/members',
 										array(
 											'email_address' => $email,
 											'status'        => 'subscribed',
@@ -98,16 +98,13 @@ use DrewM\MailChimp\MailChimp;
 										$code 		= 'success';
 
 										// Show the success message
-										$response = $this->get_option( sanitize_text_field( $options['message_done'] ), esc_html__( 'Thank you! We\'ll be in touch!', 'classic-coming-soon-maintenance-mode' ) );
+										$response = $this->get_option( esc_html( stripslashes( $options['message_done'] ) ), esc_html__( 'Thank you! We\'ll be in touch!', 'classic-coming-soon-maintenance-mode' ) );
 									} else {
-										$response['code'] = 'error';
-										$response['text'] = $mailchimp->getLastError();
+										$code 		= 'error';
+										$response = $mailchimp->getLastError();
 									}
 								}
 							}
-						} else {
-							$code 		= 'error';
-							$response = $this->get_option( sanitize_text_field( $options['message_error'] ), esc_html__( 'This looks like an invalid request. Please try again.', 'classic-coming-soon-maintenance-mode' ) );
 						}
 
 						// Subscription form
@@ -120,12 +117,12 @@ use DrewM\MailChimp\MailChimp;
 
 						$arrange['form'] .= '<form role="form" method="post">
 							<input type="text" name="' . Config::PREFIX . 'email" placeholder="' . esc_attr( $this->get_option( sanitize_text_field( $options['input_text'] ), esc_html__( 'Enter your email address..', 'classic-coming-soon-maintenance-mode' ) ) ) . '">
-							<input type="' . Config::PREFIX . 'submit" name="' . Config::PREFIX . 'submit" value="' . esc_attr( $this->get_option( sanitize_text_field( $options['button_text'] ), esc_html__( 'Subscribe', 'classic-coming-soon-maintenance-mode' ) ) ) . '">
+							<input type="submit" name="' . Config::PREFIX . 'submit" value="' . esc_attr( $this->get_option( sanitize_text_field( $options['button_text'] ), esc_html__( 'Subscribe', 'classic-coming-soon-maintenance-mode' ) ) ) . '">
 						</form>';
 
 						// Antispam text
 						if ( ! empty( $options['antispam_text'] ) ) {
-							$arrange['form'] .= '<p class="anti-spam">' . stripslashes( sanitize_text_field( $options['antispam_text'] ) ) . '</p>';
+							$arrange['form'] .= '<p class="as-anti-spam">' . stripslashes( sanitize_text_field( $options['antispam_text'] ) ) . '</p>';
 						}
 
 						$arrange['form'] .= '</div><!-- .as-subscription -->';
@@ -136,7 +133,7 @@ use DrewM\MailChimp\MailChimp;
 
 					// Echo out sections
 					if ( isset( $options['arrange'] ) && ! empty( $options['arrange'] ) ) {
-						$sections = explode( ',', sanitize_text_field( $options['arrange'] ) );
+						$sections = explode( ',', esc_html( $options['arrange'] ) );
 					} else {
 						$sections = Config::$default_options['arrange'];
 					}
@@ -156,7 +153,7 @@ use DrewM\MailChimp\MailChimp;
 
 	// Analytics code
 	if ( isset( $options['analytics'] ) && ! empty( $options['analytics'] ) ) {
-		echo stripslashes( $options['analytics'] ) . "\r\n";
+		echo '<script>' . stripslashes( $options['analytics'] ) . '</script>' . "\r\n";
 	}
 
 ?>

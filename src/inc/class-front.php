@@ -43,6 +43,9 @@ class Front {
 		// Server address of the current page
 		$server_url = $protocol . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 
+		// Custom login URL (if provided)
+		$options['custom_login_url'] = empty( $options['custom_login_url'] ) ? null : esc_url( $options['custom_login_url'] );
+
 		// Not for the backend
 		if ( ! is_admin() ) {
 			if ( $options['status'] ) {
@@ -217,7 +220,7 @@ class Front {
 
 		// Header: font, size, and color
 		if ( ! empty( $options['header_font'] ) || ! empty( $options['header_font_size'] ) || ! empty( $options['header_font_color'] ) ) {
-			$output .= '.header-text{';
+			$output .= '.as-header-text{';
 
 			// header font
 			if ( ! empty( $options['header_font'] ) ) {
@@ -240,7 +243,7 @@ class Front {
 
 		// Secondary: font, size, and color
 		if ( ! empty( $options['secondary_font'] ) || ! empty( $options['secondary_font_size'] ) || ! empty( $options['secondary_font_color'] ) ) {
-			$output .= '.secondary-text{';
+			$output .= '.as-secondary-text{';
 
 			// secondary font
 			if ( ! empty( $options['secondary_font'] ) ) {
@@ -264,7 +267,7 @@ class Front {
 		// Antispam: font, size, and color
 		// We apply secondary font family to antispam as well
 		if ( ! empty( $options['secondary_font'] ) || ! empty( $options['antispam_font_size'] ) || ! empty( $options['antispam_font_color'] ) ) {
-			$output .= '.anti-spam{';
+			$output .= '.as-anti-spam{';
 
 			// secondary font
 			if ( ! empty( $options['secondary_font'] ) ) {
@@ -287,10 +290,10 @@ class Front {
 
 		// Content: width, position, and alignment
 		if ( ! empty( $options['content_overlay'] ) || ! empty( $options['content_width'] ) || ! empty( $options['content_position'] ) || ! empty( $options['content_alignment'] ) ) {
-			$output .= '.content{';
+			$output .= '.as-content{';
 
 			// content overlay for background images
-			if ( '1' == $options['content_overlay'] ) {
+			if ( $options['content_overlay'] ) {
 				$output .= 'background-image:url("' . Config::$plugin_url . 'assets/images/overlay.png");padding:30px;border-radius:10px;box-shadow:0 0 10px 0 rgba(0, 0, 0, 0.33);';
 			}
 
@@ -330,7 +333,7 @@ class Front {
 
 			// Content alignment for the input field
 			if ( ! empty( $options['content_alignment'] ) ) {
-				$output .= '.content input{';
+				$output .= '.as-content input{';
 					if ( 'right' == $options['content_alignment'] ) {
 						$output .= 'text-align:right;';
 					} elseif ( 'center' == $options['content_alignment'] ) {
@@ -345,10 +348,10 @@ class Front {
 
 
 		// If the default form & button styles need to be ignored
-		if ( '1' == $options['ignore_form_styles'] ) {
+		if ( $options['ignore_form_styles'] ) {
 			// Input: size, color, background, border
 			if ( ! empty( $options['input_font_size'] ) || ! empty( $options['input_font_color'] ) || ! empty( $options['input_bg'] ) || ! empty( $options['input_border'] ) ) {
-				$output .= '.content input[type="text"]{';
+				$output .= '.as-content input[type="text"]{';
 
 				// input font size
 				if ( ! empty( $options['input_font_size'] ) ) {
@@ -375,7 +378,7 @@ class Front {
 
 			// Input: background:focus, border:focus
 			if ( ! empty( $options['input_bg_hover'] ) || ! empty( $options['input_border_hover'] ) ) {
-				$output .= '.content input[type="text"]:focus{';
+				$output .= '.as-content input[type="text"]:focus{';
 
 				// input background:focus
 				if ( ! empty( $options['input_bg_hover'] ) ) {
@@ -392,7 +395,7 @@ class Front {
 
 			// Button: size, color, background, border
 			if ( ! empty( $options['button_font_size'] ) || ! empty( $options['button_font_color'] ) || ! empty( $options['button_bg'] ) || ! empty( $options['button_border'] ) ) {
-				$output .= '.content input[type="submit"]{';
+				$output .= '.as-content input[type="submit"]{';
 
 				// button font size
 				if ( ! empty( $options['button_font_size'] ) ) {
@@ -419,8 +422,8 @@ class Front {
 
 			// Button: background:focus, border:focus
 			if ( ! empty( $options['button_bg_hover'] ) || ! empty( $options['button_border_hover'] ) ) {
-				$output .= '.content input[type="submit"]:hover,';
-				$output .= '.content input[type="submit"]:focus{';
+				$output .= '.as-content input[type="submit"]:hover,';
+				$output .= '.as-content input[type="submit"]:focus{';
 
 				// input background:focus
 				if ( ! empty( $options['button_bg_hover'] ) ) {
@@ -437,7 +440,7 @@ class Front {
 
 			// Message: success
 			if ( ! empty( $options['success_background'] ) || ! empty( $options['success_color'] ) ) {
-				$output .= '.signals-alert-success{';
+				$output .= '.as-alert-success{';
 
 				// success background
 				if ( ! empty( $options['success_background'] ) ) {
@@ -454,7 +457,7 @@ class Front {
 
 			// Message: error
 			if ( ! empty( $options['error_background'] ) || ! empty( $options['error_color'] ) ) {
-				$output .= '.signals-alert-danger{';
+				$output .= '.as-alert-danger{';
 
 				// error background
 				if ( ! empty( $options['error_background'] ) ) {
