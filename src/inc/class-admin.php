@@ -139,7 +139,7 @@ class Admin {
 			'show_logged_in' 				=> isset( $_POST[Config::PREFIX . 'showlogged'] ) ? true : false,
 			'exclude_se'						=> isset( $_POST[Config::PREFIX . 'excludese'] ) ? true : false,
 			'arrange' 							=> sanitize_text_field( $_POST[Config::PREFIX . 'arrange'] ),
-			'analytics' 						=> wp_strip_all_tags( $_POST[Config::PREFIX . 'analytics'] ),
+			'analytics' 						=> strip_tags( $_POST[Config::PREFIX . 'analytics'] ),
 
 			// Email
 			'mailchimp_api'					=> sanitize_text_field( $_POST[Config::PREFIX . 'api'] ),
@@ -189,7 +189,7 @@ class Admin {
 			'error_color' 					=> sanitize_hex_color_no_hash( $_POST[Config::PREFIX . 'error_color'] ),
 
 			// Advanced
-			'disable_settings' 			=> isset( $_POST[Config::PREFIX . 'disabled'] ) ? true : false,
+			'disable_settings' 			=> isset( $_POST[Config::PREFIX . 'disable'] ) ? true : false,
 			'custom_html'						=> wp_kses_post( $_POST[Config::PREFIX . 'html'] ),
 			'custom_css'						=> wp_strip_all_tags( $_POST[Config::PREFIX . 'css'] )
 		);

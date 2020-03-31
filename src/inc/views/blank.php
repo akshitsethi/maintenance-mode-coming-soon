@@ -5,6 +5,9 @@
  * @since 1.0.0
  */
 
+use AkshitSethi\Plugins\MaintenanceMode\Config;
+use DrewM\MailChimp\MailChimp;
+
 ?><!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 <head>
@@ -48,18 +51,18 @@
 
 				if ( empty( $email ) ) {
 					$code 		= 'error';
-					$response = $this->get_option( sanitize_text_field( $options['message_noemail'] ), esc_html__( 'Please provide your email address.', 'classic-coming-soon-maintenance-mode' ) );
+					$response = $this->get_option( esc_html( $options['message_noemail'] ), esc_html__( 'Please provide your email address.', 'classic-coming-soon-maintenance-mode' ) );
 				} else {
 					$email = filter_var( strtolower( trim( $email ) ), FILTER_SANITIZE_EMAIL );
 
 					// Check value for filter_var
 					if ( ! $email ) {
 						$code 		= 'error';
-						$response = $this->get_option( sanitize_text_field( $options['message_wrong'] ), esc_html__( 'Please provide a valid email address.', 'classic-coming-soon-maintenance-mode' ) );
+						$response = $this->get_option( esc_html( stripslashes( $options['message_wrong'] ) ), esc_html__( 'Please provide a valid email address.', 'classic-coming-soon-maintenance-mode' ) );
 					} else {
-						$mailchimp = new MailChimp( sanitize_text_field( $options['mailchimp_api'] ) );
+						$mailchimp = new MailChimp( esc_html( $options['mailchimp_api'] ) );
 						$connect   = $mailchimp->post(
-							'lists/' . sanitize_text_field( $options['mailchimp_list'] ) . '/members',
+							'lists/' . esc_html( $options['mailchimp_list'] ) . '/members',
 							array(
 								'email_address' => $email,
 								'status'        => 'subscribed',
@@ -71,37 +74,34 @@
 							$code 		= 'success';
 
 							// Show the success message
-							$response = $this->get_option( sanitize_text_field( $options['message_done'] ), esc_html__( 'Thank you! We\'ll be in touch!', 'classic-coming-soon-maintenance-mode' ) );
+							$response = $this->get_option( esc_html( stripslashes( $options['message_done'] ) ), esc_html__( 'Thank you! We\'ll be in touch!', 'classic-coming-soon-maintenance-mode' ) );
 						} else {
-							$response['code'] = 'error';
-							$response['text'] = $mailchimp->getLastError();
+							$code     = 'error';
+							$response = $mailchimp->getLastError();
 						}
 					}
 				}
-			} else {
-				$code 		= 'error';
-				$response = $this->get_option( sanitize_text_field( $options['message_error'] ), esc_html__( 'This looks like an invalid request. Please try again.', 'classic-coming-soon-maintenance-mode' ) );
 			}
 
 			// Subscription form
 			// Displaying errors as well if they are set
-			$subcription_form = '<div class="as-subscription">';
+			$subscription_form = '<div class="as-subscription">';
 
 			if ( isset( $code ) && isset( $response ) ) {
-				$subcription_form .= '<div class="as-alert as-alert-' . $code . '">' . $response . '</div>';
+				$subscription_form .= '<div class="as-alert as-alert-' . $code . '">' . $response . '</div>';
 			}
 
-			$subcription_form .= '<form role="form" method="post">
-				<input type="text" name="' . Config::PREFIX . 'email" placeholder="' . esc_attr( $this->get_option( sanitize_text_field( $options['input_text'] ), esc_html__( 'Enter your email address..', 'classic-coming-soon-maintenance-mode' ) ) ) . '">
-				<input type="' . Config::PREFIX . 'submit" name="' . Config::PREFIX . 'submit" value="' . esc_attr( $this->get_option( sanitize_text_field( $options['button_text'] ), esc_html__( 'Subscribe', 'classic-coming-soon-maintenance-mode' ) ) ) . '">
+			$subscription_form .= '<form role="form" method="post">
+        <input type="text" name="' . Config::PREFIX . 'email" placeholder="' . esc_attr( $this->get_option( esc_html( $options['input_text'] ), esc_html__( 'Enter your email address..', 'classic-coming-soon-maintenance-mode' ) ) ) . '">
+        <input type="submit" name="' . Config::PREFIX . 'submit" value="' . esc_attr( $this->get_option( esc_html( $options['button_text'] ), esc_html__( 'Subscribe', 'classic-coming-soon-maintenance-mode' ) ) ) . '">
 			</form>';
 
 			// Antispam text
 			if ( ! empty( $options['antispam_text'] ) ) {
-				$subcription_form .= '<p class="anti-spam">' . stripslashes( sanitize_text_field( $options['antispam_text'] ) ) . '</p>';
+				$subscription_form .= '<p class="anti-spam">' . esc_html( stripslashes( $options['antispam_text'] ) ) . '</p>';
 			}
 
-			$subcription_form .= '</div><!-- .as-subscription -->';
+			$subscription_form .= '</div><!-- .as-subscription -->';
 
 			// Replace {{form}} placeholder
 			$custom_html = str_replace( '{{form}}', $subscription_form, $custom_html );
@@ -113,7 +113,7 @@
 
 	// Analytics code
 	if ( isset( $options['analytics'] ) && ! empty( $options['analytics'] ) ) {
-		echo stripslashes( $options['analytics'] ) . "\r\n";
+		echo '<script>' . stripslashes( $options['analytics'] ) . '</script>' . "\r\n";
 	}
 
 ?>

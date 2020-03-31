@@ -194,8 +194,8 @@ input {
   text-align: right
 }
 .as-container {
-  padding-right: 1rem;
-  padding-left: 1rem;
+  padding-right: 1.250rem;
+  padding-left: 1.250rem;
   margin-right: auto;
   margin-left: auto
 }
@@ -221,7 +221,7 @@ input {
  */
 body {
   font-family: 'Karla', Arial, sans-serif;
-  font-size: 18px;
+  font-size: 16px;
   line-height: 1.5;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -246,10 +246,10 @@ input[type="text"],
 input[type="submit"] {
   font-family: 'Karla', Arial, sans-serif;
   background: transparent;
-  border: 1px solid #eeeeee;
+  border: 2px solid #eeeeee;
   padding: 0.500rem 0.750rem;
   width: 100%;
-  font-size: 1rem;
+  font-size: 1.125rem;
   line-height: 1.8;
   -webkit-transition: all ease-in-out 0.2s;
   -moz-transition: all ease-in-out 0.2s;
@@ -266,7 +266,8 @@ input[type="submit"] {
   background: #0f0f0f;
   border-color: #0f0f0f;
   color: #ffffff;
-  font-size: 0.875rem;
+  font-size: 1rem;
+  font-weight: 700;
   padding: 0.500rem 1.250rem;
   margin-top: 10px;
   width: auto;
@@ -290,39 +291,39 @@ a:active,
 a:focus {
   outline: thin dotted;
 }
-.maintenance-mode {
+.as-ccsmm {
   margin: 5rem auto;
 }
-.content {
+.as-content {
   position: relative;
   z-index: 10;
 }
-.logo-container {
+.as-logo-container {
   line-height: 0;
 }
-.logo {
+.as-logo {
   display: inline-block;
   margin: 1rem 0;
 }
-.header-text {
+.as-header-text {
   font-size: 28px;
   line-height: 1.4;
   margin: 1rem 0;
 }
-.secondary-text {
+.as-secondary-text {
   font-size: 14px;
   margin: 1rem 0;
 }
-.subscription {
+.as-subscription {
   margin: 1rem 0;
 }
-.anti-spam {
-  font-size: 11px;
+.as-anti-spam {
+  font-size: 0.875rem;
   margin-top: 0.750rem;
   color: #bbbbbb;
 }
 @media (max-width: 767px) {
-  .maintenance-mode {
+  .as-ccsmm {
     margin: 1.250rem auto;
   }
 }
@@ -333,13 +334,13 @@ a:focus {
  */
 .as-alert {
   color: #ffffff;
-  font-size: 0.875rem;
+  font-size: 1rem;
   padding: 5px 19px 5px 10px;
   margin-bottom: 10px;
 }
 .as-alert-success {
   background-color: #90c695;
 }
-.as-alert-danger {
+.as-alert-error {
   background-color: #e08283;
 }
