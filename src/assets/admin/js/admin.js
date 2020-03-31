@@ -138,6 +138,9 @@ toastr.options = {
       parentTarget.find('input').val(attachment.url);
       parentTarget.find('.as-preview-area').html('<img src="' + attachment.url + '">');
       parentTarget.find('.as-upload-append').html('&nbsp;<a href="javascript:;" class="as-remove-image">' + ccsmm_admin_l10n.remove_text + '</a>');
+
+      // Prompts to save changes
+      parentTarget.find('input').addClass('changed-input');
     });
 
     customUploader.open();
@@ -240,6 +243,9 @@ toastr.options = {
       parentTarget.find('input').val('');
       parentTarget.find('.as-preview-area').html(ccsmm_admin_l10n.upload_text);
       $(this).hide();
+
+      // Prompts to save changes
+      parentTarget.find('input').addClass('changed-input');
     });
 
 
