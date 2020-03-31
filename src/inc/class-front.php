@@ -350,7 +350,7 @@ class Front {
 		// If the default form & button styles need to be ignored
 		if ( $options['ignore_form_styles'] ) {
 			// Input: size, color, background, border
-			if ( ! empty( $options['input_font_size'] ) || ! empty( $options['input_font_color'] ) || ! empty( $options['input_bg'] ) || ! empty( $options['input_border'] ) ) {
+			if ( ! empty( $options['input_font_size'] ) || ! empty( $options['input_font_color'] ) || ! empty( $options['input_bg'] ) || ! empty( $options['input_border'] ) || ! empty( $options['input_border_width'] ) ) {
 				$output .= '.as-content input[type="text"]{';
 
 				// input font size
@@ -373,6 +373,11 @@ class Front {
 					$output .= 'border:1px solid #' . esc_html( $options['input_border'] ) . ';';
 				}
 
+				// input border width
+				if ( ! empty( $options['input_border_width'] ) ) {
+					$output .= 'border-width:' . esc_html( $options['input_border_width'] ) . 'px;';
+				}
+
 				$output .= '}' . "\r\n";
 			}
 
@@ -387,14 +392,14 @@ class Front {
 
 				// input border:focus
 				if ( ! empty( $options['input_border_hover'] ) ) {
-					$output .= 'border:1px solid #' . esc_html( $options['input_border_hover'] ) . ';';
+					$output .= 'border-color:#' . esc_html( $options['input_border_hover'] ) . ';';
 				}
 
 				$output .= '}' . "\r\n";
 			}
 
 			// Button: size, color, background, border
-			if ( ! empty( $options['button_font_size'] ) || ! empty( $options['button_font_color'] ) || ! empty( $options['button_bg'] ) || ! empty( $options['button_border'] ) ) {
+			if ( ! empty( $options['button_font_size'] ) || ! empty( $options['button_font_color'] ) || ! empty( $options['button_bg'] ) || ! empty( $options['button_border'] ) || ! empty( $options['button_border_width'] ) ) {
 				$output .= '.as-content input[type="submit"]{';
 
 				// button font size
@@ -417,6 +422,11 @@ class Front {
 					$output .= 'border:1px solid #' . esc_html( $options['button_border'] ) . ';';
 				}
 
+				// button border width
+				if ( ! empty( $options['button_border_width'] ) ) {
+					$output .= 'border-width:' . esc_html( $options['button_border_width'] ) . 'px;';
+				}
+
 				$output .= '}' . "\r\n";
 			}
 
@@ -432,7 +442,7 @@ class Front {
 
 				// input border:focus
 				if ( ! empty( $options['button_border_hover'] ) ) {
-					$output .= 'border:1px solid #' . esc_html( $options['button_border_hover'] ) . ';';
+					$output .= 'border-color:#' . esc_html( $options['button_border_hover'] ) . ';';
 				}
 
 				$output .= '}' . "\r\n";
