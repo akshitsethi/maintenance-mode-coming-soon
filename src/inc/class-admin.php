@@ -132,8 +132,8 @@ class Admin {
 			// Basic
 			'status'								=> isset( $_POST[Config::PREFIX . 'status'] ) ? true : false,
 			'title' 								=> sanitize_text_field( $_POST[Config::PREFIX . 'title'] ),
-			'header_text' 					=> sanitize_text_field( $_POST[Config::PREFIX . 'header'] ),
-			'secondary_text' 				=> sanitize_text_field( $_POST[Config::PREFIX . 'secondary'] ),
+			'header_text' 					=> sanitize_textarea_field( $_POST[Config::PREFIX . 'header'] ),
+			'secondary_text' 				=> sanitize_textarea_field( $_POST[Config::PREFIX . 'secondary'] ),
 			'antispam_text' 				=> sanitize_text_field( $_POST[Config::PREFIX . 'antispam'] ),
 			'custom_login_url' 			=> sanitize_text_field( $_POST[Config::PREFIX . 'custom_login'] ),
 			'show_logged_in' 				=> isset( $_POST[Config::PREFIX . 'showlogged'] ) ? true : false,
