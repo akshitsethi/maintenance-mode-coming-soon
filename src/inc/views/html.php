@@ -26,14 +26,14 @@ use DrewM\MailChimp\MailChimp;
 <script src="<?php echo Config::$plugin_url; ?>assets/admin/js/webfont.js"></script>
 <script type="text/javascript">
 	var data = {
-		header_font: <?php echo $options['header_font']; ?>,
-		secondary_font: <?php echo $options['secondary_font']; ?>
+		headerFont: '<?php echo $options['header_font']; ?>',
+		secondaryFont: '<?php echo $options['secondary_font']; ?>'
 	}
 
 	// Font loader
 	WebFont.load({
 		google: {
-			families: [data.header_font, data.secondary_font]
+			families: data.headerFont === data.secondaryFont ? [data.headerFont] : [data.headerFont, data.secondaryFont]
 		}
 	});
 </script>

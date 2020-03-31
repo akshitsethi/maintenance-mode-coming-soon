@@ -46,7 +46,7 @@ use AkshitSethi\Plugins\MaintenanceMode\Config;
 						<?php
 
 							// Loading font sizes with the help of a loop
-							for ( $i = 11; $i < 41; $i++ ) {
+							for ( $i = 6; $i < 81; $i++ ) {
 								echo '<option value="' . $i . '"' . selected( $options['input_font_size'], $i ) . '>' . $i . esc_html__( 'px', 'classic-coming-soon-maintenance-mode' ) . '</option>';
 							}
 
@@ -63,7 +63,7 @@ use AkshitSethi\Plugins\MaintenanceMode\Config;
 						<?php
 
 							// Loading font sizes with the help of a loop
-							for ( $i = 11; $i < 41; $i++ ) {
+							for ( $i = 6; $i < 81; $i++ ) {
 								echo '<option value="' . $i . '"' . selected( $options['button_font_size'], $i ) . '>' . $i . esc_html__( 'px', 'classic-coming-soon-maintenance-mode' ) . '</option>';
 							}
 
