@@ -153,6 +153,38 @@ use AkshitSethi\Plugins\MaintenanceMode\Config;
 					<p class="as-form-help-block"><?php esc_html_e( 'Select border color for the button on mouse hover.', 'classic-coming-soon-maintenance-mode' ); ?></p>
 				</div>
 			</div>
+
+			<div class="as-double-group as-clearfix">
+				<div class="as-form-group">
+					<label for="<?php echo Config::PREFIX . 'success_background'; ?>" class="as-strong"><?php esc_html_e( 'Success Message Background Color', 'classic-coming-soon-maintenance-mode' ); ?></span></label>
+					<input type="text" name="<?php echo Config::PREFIX . 'success_background'; ?>" id="<?php echo Config::PREFIX . 'success_background'; ?>" value="<?php esc_attr_e( $options['success_background'] ); ?>" placeholder="<?php esc_html_e( 'Background color for the success message', 'classic-coming-soon-maintenance-mode' ); ?>" class="as-form-control jscolor {required:false}">
+
+					<p class="as-form-help-block"><?php esc_html_e( 'Select background color for the success message.', 'classic-coming-soon-maintenance-mode' ); ?></p>
+				</div>
+
+				<div class="as-form-group">
+					<label for="<?php echo Config::PREFIX . 'success_color'; ?>" class="as-strong"><?php esc_html_e( 'Success Message Text Color', 'classic-coming-soon-maintenance-mode' ); ?> <span class="as-red-color"></span></label>
+					<input type="text" name="<?php echo Config::PREFIX . 'success_color'; ?>" id="<?php echo Config::PREFIX . 'success_color'; ?>" value="<?php esc_attr_e( $options['success_color'] ); ?>" placeholder="<?php esc_html_e( 'Text color for the success message', 'classic-coming-soon-maintenance-mode' ); ?>" class="as-form-control jscolor {required:false}">
+
+					<p class="as-form-help-block"><?php esc_html_e( 'Select text color for the success message.', 'classic-coming-soon-maintenance-mode' ); ?></p>
+				</div>
+			</div>
+
+			<div class="as-double-group as-clearfix">
+				<div class="as-form-group">
+					<label for="<?php echo Config::PREFIX . 'error_background'; ?>" class="as-strong"><?php esc_html_e( 'Error Message Background Color', 'classic-coming-soon-maintenance-mode' ); ?></span></label>
+					<input type="text" name="<?php echo Config::PREFIX . 'error_background'; ?>" id="<?php echo Config::PREFIX . 'error_background'; ?>" value="<?php esc_attr_e( $options['error_background'] ); ?>" placeholder="<?php esc_html_e( 'Background color for the error message', 'classic-coming-soon-maintenance-mode' ); ?>" class="as-form-control jscolor {required:false}">
+
+					<p class="as-form-help-block"><?php esc_html_e( 'Select background color for the error message.', 'classic-coming-soon-maintenance-mode' ); ?></p>
+				</div>
+
+				<div class="as-form-group">
+					<label for="<?php echo Config::PREFIX . 'error_color'; ?>" class="as-strong"><?php esc_html_e( 'Error Message Text Color', 'classic-coming-soon-maintenance-mode' ); ?> <span class="as-red-color"></span></label>
+					<input type="text" name="<?php echo Config::PREFIX . 'error_color'; ?>" id="<?php echo Config::PREFIX . 'error_color'; ?>" value="<?php esc_attr_e( $options['error_color'] ); ?>" placeholder="<?php esc_html_e( 'Text color for the error message', 'classic-coming-soon-maintenance-mode' ); ?>" class="as-form-control jscolor {required:false}">
+
+					<p class="as-form-help-block"><?php esc_html_e( 'Select text color for the error message.', 'classic-coming-soon-maintenance-mode' ); ?></p>
+				</div>
+			</div>
 		</div>
 	</div>
 </div><!-- #form -->

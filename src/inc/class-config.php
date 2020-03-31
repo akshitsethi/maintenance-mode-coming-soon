@@ -738,6 +738,10 @@ class Config {
 			// Email
 			'mailchimp_api'					=> '',
 			'mailchimp_list' 				=> '',
+			'message_noemail' 			=> esc_html__( 'Please provide your email address.', 'classic-coming-soon-maintenance-mode' ),
+			'message_error' 				=> esc_html__( 'This looks like an invalid request. Please try again.', 'classic-coming-soon-maintenance-mode' ),
+			'message_wrong' 				=> esc_html__( 'Please provide a valid email address.', 'classic-coming-soon-maintenance-mode' ),
+			'message_done' 					=> esc_html__( 'Thank you! We\'ll be in touch!', 'classic-coming-soon-maintenance-mode' ),
 
 			// Design
 			'logo'									=> '',
@@ -773,6 +777,10 @@ class Config {
 			'button_border'					=> '0f0f0f',
 			'input_border_hover'		=> 'bbbbbb',
 			'button_border_hover'		=> '0a0a0a',
+			'success_background' 		=> '90c695',
+			'success_color' 				=> 'ffffff',
+			'error_background' 			=> 'e08283',
+			'error_color' 					=> 'ffffff',
 
 			// Advanced
 			'disable_settings' 			=> false,

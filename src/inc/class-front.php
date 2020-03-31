@@ -62,30 +62,21 @@ class Front {
 
 					// Checking for the search engine option
 					if ( $options['exclude_se'] ) {
-						if ( ! $this->check_referrer() ) {
-							if ( '1' == $options['show_logged_in'] ) {
-								// Checking if the user is logged in or not
-								if ( ! is_user_logged_in() ) {
-									// Render the maintenance mode template since the user is not logged in
-									$this->render_template( $options );
-								}
-							} else {
-								// Render the maintenance mode template
-								$this->render_template( $options );
-							}
-						}
-					} else {
-						if ( $options['show_logged_in'] ) {
-							// Checking if the user is logged in or not
-							if ( ! is_user_logged_in() ) {
-								// Render the maintenance mode template since the user is not logged in
-								$this->render_template( $options );
-							}
-						} else {
-							// Render the maintenance mode template.
-							$this->render_template( $options );
+						if ( $this->check_referrer() ) {
+							return;
 						}
 					}
+
+					// For logged-in users
+					if ( $options['show_logged_in'] ) {
+						// Checking if the user is logged in or not
+						if ( is_user_logged_in() ) {
+							return;
+						}
+					}
+
+					// Render the maintenance mode template
+					$this->render_template( $options );
 				}
 			}
 		}
@@ -143,7 +134,7 @@ class Front {
 	 * @param string $str User agent
 	 * @param array $crawlers List of crawlers to match against
 	 *
-	 * @return boolean 
+	 * @return boolean
 	 */
 	private function string_to_array( $str, $crawlers ) {
 		$regexp = '~(' . implode( '|', array_values( $crawlers ) ) . ')~i';
@@ -187,7 +178,7 @@ class Front {
 
 
 	/**
-	 * For replacing blank options with default options.
+	 * For replacing the blank option with the default one.
 	 *
 	 * @since 1.0.0
 	 * @param string $option The option value to check
