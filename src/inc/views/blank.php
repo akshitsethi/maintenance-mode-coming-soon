@@ -19,21 +19,7 @@
 <link rel="alternate" type="application/rss+xml" title="<?php bloginfo('name'); ?> RSS Feed" href="<?php bloginfo('rss2_url'); ?>" />
 <link rel="alternate" type="application/atom+xml" title="<?php bloginfo('name'); ?> Atom Feed" href="<?php bloginfo('atom_url'); ?>" />
 <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
-<link rel="stylesheet" type="text/css" href="<?php echo Config::$plugin_url; ?>assets/css/front.css">
-<script src="<?php echo Config::$plugin_url; ?>assets/admin/js/webfont.js"></script>
-<script type="text/javascript">
-	var data = {
-		header_font: <?php echo $options['header_font']; ?>,
-		secondary_font: <?php echo $options['secondary_font']; ?>
-	}
-
-	// Font loader
-	WebFont.load({
-		google: {
-			families: [data.header_font, data.secondary_font]
-		}
-	});
-</script>
+<link rel="stylesheet" type="text/css" href="<?php echo Config::$plugin_url; ?>assets/css/basic.css">
 <?php
 
 	// Custom CSS for the blank template

@@ -194,4 +194,291 @@ class Front {
 		return $option;
 	}
 
+
+	/**
+	 * Custom styles for the frontend. Style options are put into inline CSS and then
+	 * added to the header.
+	 *
+	 * @since 1.0.0
+	 * @return string $output Custom CSS to be injected to the header
+	 */
+	private function head_css( $options ) {
+		$output = '<style>' . "\r\n";
+
+		// Background cover
+		if ( ! empty( $options['bg_cover'] ) ) {
+			$output .= 'body{background-image:url("' . esc_url( $options['bg_cover'] ) . '");}' . "\r\n";
+		}
+
+		// Background color
+		if ( empty( $options['bg_cover'] ) && ! empty( $options['bg_color'] ) ) {
+			$output .= 'body{background-color:#' . esc_html( $options['bg_color'] ) . ';}' . "\r\n";
+		}
+
+		// Header: font, size, and color
+		if ( ! empty( $options['header_font'] ) || ! empty( $options['header_font_size'] ) || ! empty( $options['header_font_color'] ) ) {
+			$output .= '.header-text{';
+
+			// header font
+			if ( ! empty( $options['header_font'] ) ) {
+				$output .= 'font-family:"' . esc_html( $options['header_font'] ) . '", Arial, sans-serif;';
+			}
+
+			// header font size
+			if ( ! empty( $options['header_font_size'] ) ) {
+				$output .= 'font-size:' . esc_html( $options['header_font_size'] ) . 'px;';
+			}
+
+			// header font color
+			if ( ! empty( $options['header_font_color'] ) ) {
+				$output .= 'color:#' . esc_html( $options['header_font_color'] ) . ';';
+			}
+
+			$output .= '}' . "\r\n";
+		}
+
+
+		// Secondary: font, size, and color
+		if ( ! empty( $options['secondary_font'] ) || ! empty( $options['secondary_font_size'] ) || ! empty( $options['secondary_font_color'] ) ) {
+			$output .= '.secondary-text{';
+
+			// secondary font
+			if ( ! empty( $options['secondary_font'] ) ) {
+				$output .= 'font-family:"' . esc_html( $options['secondary_font'] ) . '", Arial, sans-serif;';
+			}
+
+			// secondary font size
+			if ( ! empty( $options['secondary_font_size'] ) ) {
+				$output .= 'font-size:' . esc_html( $options['secondary_font_size'] ) . 'px;';
+			}
+
+			// secondary font color
+			if ( ! empty( $options['secondary_font_color'] ) ) {
+				$output .= 'color:#' . esc_html( $options['secondary_font_color'] ) . ';';
+			}
+
+			$output .= '}' . "\r\n";
+		}
+
+
+		// Antispam: font, size, and color
+		// We apply secondary font family to antispam as well
+		if ( ! empty( $options['secondary_font'] ) || ! empty( $options['antispam_font_size'] ) || ! empty( $options['antispam_font_color'] ) ) {
+			$output .= '.anti-spam{';
+
+			// secondary font
+			if ( ! empty( $options['secondary_font'] ) ) {
+				$output .= 'font-family:"' . esc_html( $options['secondary_font'] ) . '", Arial, sans-serif;';
+			}
+
+			// antispam font size
+			if ( ! empty( $options['antispam_font_size'] ) ) {
+				$output .= 'font-size:' . esc_html( $options['antispam_font_size'] ) . 'px;';
+			}
+
+			// antispam font color
+			if ( ! empty( $options['antispam_font_color'] ) ) {
+				$output .= 'color:#' . esc_html( $options['antispam_font_color'] ) . ';';
+			}
+
+			$output .= '}' . "\r\n";
+		}
+
+
+		// Content: width, position, and alignment
+		if ( ! empty( $options['content_overlay'] ) || ! empty( $options['content_width'] ) || ! empty( $options['content_position'] ) || ! empty( $options['content_alignment'] ) ) {
+			$output .= '.content{';
+
+			// content overlay for background images
+			if ( '1' == $options['content_overlay'] ) {
+				$output .= 'background-image:url("' . Config::$plugin_url . 'assets/images/overlay.png");padding:30px;border-radius:10px;box-shadow:0 0 10px 0 rgba(0, 0, 0, 0.33);';
+			}
+
+			// content width
+			if ( ! empty( $options['content_width'] ) ) {
+				// Making sure the width is not < 100 and not > 1170
+				if ( $options['content_width'] < 100 || $options['content_width'] > 1170 ) {
+					$options['content_width'] = '1170';
+				}
+
+				$output .= 'max-width:' . esc_html( $options['content_width'] ) . 'px;';
+			}
+
+			// content position
+			if ( ! empty( $options['content_position'] ) ) {
+				if ( 'center' == $options['content_position'] ) {
+					$output .= 'margin-left:auto;margin-right:auto;';
+				} elseif ( 'right' == $options['content_position'] ) {
+					$output .= 'float:right;';
+				} else {
+					$output .= 'margin-left:0;margin-right:0;';
+				}
+			}
+
+			// content alignment
+			if ( ! empty( $options['content_alignment'] ) ) {
+				if ( 'right' == $options['content_alignment'] ) {
+					$output .= 'text-align:right;';
+				} elseif ( 'center' == $options['content_alignment'] ) {
+					$output .= 'text-align:center;';
+				} else {
+					$output .= 'text-align:left;';
+				}
+			}
+
+			$output .= '}' . "\r\n";
+
+			// Content alignment for the input field
+			if ( ! empty( $options['content_alignment'] ) ) {
+				$output .= '.content input{';
+					if ( 'right' == $options['content_alignment'] ) {
+						$output .= 'text-align:right;';
+					} elseif ( 'center' == $options['content_alignment'] ) {
+						$output .= 'text-align:center;';
+					} else {
+						$output .= 'text-align:left;';
+					}
+				$output .= '}' . "\r\n";
+			}
+
+		}
+
+
+		// If the default form & button styles need to be ignored
+		if ( '1' == $options['ignore_form_styles'] ) {
+			// Input: size, color, background, border
+			if ( ! empty( $options['input_font_size'] ) || ! empty( $options['input_font_color'] ) || ! empty( $options['input_bg'] ) || ! empty( $options['input_border'] ) ) {
+				$output .= '.content input[type="text"]{';
+
+				// input font size
+				if ( ! empty( $options['input_font_size'] ) ) {
+					$output .= 'font-size:' . esc_html( $options['input_font_size'] ) . 'px;';
+				}
+
+				// input color
+				if ( ! empty( $options['input_font_color'] ) ) {
+					$output .= 'color:#' . esc_html( $options['input_font_color'] ) . ';';
+				}
+
+				// input background
+				if ( ! empty( $options['input_bg'] ) ) {
+					$output .= 'background:#' . esc_html( $options['input_bg'] ) . ';';
+				}
+
+				// input border
+				if ( ! empty( $options['input_border'] ) ) {
+					$output .= 'border:1px solid #' . esc_html( $options['input_border'] ) . ';';
+				}
+
+				$output .= '}' . "\r\n";
+			}
+
+			// Input: background:focus, border:focus
+			if ( ! empty( $options['input_bg_hover'] ) || ! empty( $options['input_border_hover'] ) ) {
+				$output .= '.content input[type="text"]:focus{';
+
+				// input background:focus
+				if ( ! empty( $options['input_bg_hover'] ) ) {
+					$output .= 'background:#' . esc_html( $options['input_bg_hover'] ) . ';';
+				}
+
+				// input border:focus
+				if ( ! empty( $options['input_border_hover'] ) ) {
+					$output .= 'border:1px solid #' . esc_html( $options['input_border_hover'] ) . ';';
+				}
+
+				$output .= '}' . "\r\n";
+			}
+
+			// Button: size, color, background, border
+			if ( ! empty( $options['button_font_size'] ) || ! empty( $options['button_font_color'] ) || ! empty( $options['button_bg'] ) || ! empty( $options['button_border'] ) ) {
+				$output .= '.content input[type="submit"]{';
+
+				// button font size
+				if ( ! empty( $options['button_font_size'] ) ) {
+					$output .= 'font-size:' . esc_html( $options['button_font_size'] ) . 'px;';
+				}
+
+				// button color
+				if ( ! empty( $options['button_font_color'] ) ) {
+					$output .= 'color:#' . esc_html( $options['button_font_color'] ) . ';';
+				}
+
+				// button background
+				if ( ! empty( $options['button_bg'] ) ) {
+					$output .= 'background:#' . esc_html( $options['button_bg'] ) . ';';
+				}
+
+				// button border
+				if ( ! empty( $options['button_border'] ) ) {
+					$output .= 'border:1px solid #' . esc_html( $options['button_border'] ) . ';';
+				}
+
+				$output .= '}' . "\r\n";
+			}
+
+			// Button: background:focus, border:focus
+			if ( ! empty( $options['button_bg_hover'] ) || ! empty( $options['button_border_hover'] ) ) {
+				$output .= '.content input[type="submit"]:hover,';
+				$output .= '.content input[type="submit"]:focus{';
+
+				// input background:focus
+				if ( ! empty( $options['button_bg_hover'] ) ) {
+					$output .= 'background:#' . esc_html( $options['button_bg_hover'] ) . ';';
+				}
+
+				// input border:focus
+				if ( ! empty( $options['button_border_hover'] ) ) {
+					$output .= 'border:1px solid #' . esc_html( $options['button_border_hover'] ) . ';';
+				}
+
+				$output .= '}' . "\r\n";
+			}
+
+			// Message: success
+			if ( ! empty( $options['success_background'] ) || ! empty( $options['success_color'] ) ) {
+				$output .= '.signals-alert-success{';
+
+				// success background
+				if ( ! empty( $options['success_background'] ) ) {
+					$output .= 'background:#' . esc_html( $options['success_background'] ) . ';';
+				}
+
+				// success color
+				if ( ! empty( $options['success_color'] ) ) {
+					$output .= 'color:#' . esc_html( $options['success_color'] ) . ';';
+				}
+
+				$output .= '}' . "\r\n";
+			}
+
+			// Message: error
+			if ( ! empty( $options['error_background'] ) || ! empty( $options['error_color'] ) ) {
+				$output .= '.signals-alert-danger{';
+
+				// error background
+				if ( ! empty( $options['error_background'] ) ) {
+					$output .= 'background:#' . esc_html( $options['error_background'] ) . ';';
+				}
+
+				// error color
+				if ( ! empty( $options['error_color'] ) ) {
+					$output .= 'color:#' . esc_html( $options['error_color'] ) . ';';
+				}
+
+				$output .= '}' . "\r\n";
+			}
+		}
+
+
+		// Custom CSS
+		if ( ! empty( $options['custom_css'] ) ) {
+			$output .= stripslashes( strip_tags( $options['custom_css'] ) );
+		}
+
+		$output .= '</style>' . "\r\n";
+
+		return $output;
+	}
+
 }

@@ -37,7 +37,12 @@ use DrewM\MailChimp\MailChimp;
 		}
 	});
 </script>
-<!-- Include custom styles over here -->
+<?php
+
+	// Inject styling for the options in the header
+	echo $this->head_css( $options );
+
+?>
 </head>
 <body class="as-plugin">
 	<div class="as-ccsmm">
