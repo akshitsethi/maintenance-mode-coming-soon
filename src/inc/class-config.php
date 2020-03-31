@@ -778,6 +778,8 @@ class Config {
 			'button_bg'							=> '0f0f0f',
 			'input_bg_hover'				=> '',
 			'button_bg_hover'				=> '0a0a0a',
+			'input_border_width' 		=> '2',
+			'button_border_width' 	=> '2',
 			'input_border'					=> 'eeeeee',
 			'button_border'					=> '0f0f0f',
 			'input_border_hover'		=> 'bbbbbb',

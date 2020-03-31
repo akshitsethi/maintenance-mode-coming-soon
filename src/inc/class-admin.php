@@ -184,6 +184,8 @@ class Admin {
 			'button_bg'							=> sanitize_hex_color_no_hash( $_POST[Config::PREFIX . 'button_bg'] ),
 			'input_bg_hover'				=> sanitize_hex_color_no_hash( $_POST[Config::PREFIX . 'input_bg_hover'] ),
 			'button_bg_hover'				=> sanitize_hex_color_no_hash( $_POST[Config::PREFIX . 'button_bg_hover'] ),
+			'input_border_width'    => absint( $_POST[Config::PREFIX . 'input_border_width'] ),
+			'button_border_width' 	=> absint( $_POST[Config::PREFIX . 'button_border_width'] ),
 			'input_border'					=> sanitize_hex_color_no_hash( $_POST[Config::PREFIX . 'input_border'] ),
 			'button_border'					=> sanitize_hex_color_no_hash( $_POST[Config::PREFIX . 'button_border'] ),
 			'input_border_hover'		=> sanitize_hex_color_no_hash( $_POST[Config::PREFIX . 'input_border_hover'] ),
