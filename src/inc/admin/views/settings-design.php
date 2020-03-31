@@ -123,16 +123,16 @@ use AkshitSethi\Plugins\MaintenanceMode\Config;
 				</div>
 
 				<div class="as-form-group">
-					<label for="<?php echo Config::PREFIX . 'overlay_border_color'; ?>" class="as-strong"><?php esc_html_e( 'Content Overlay Border Color', 'classic-coming-soon-maintenance-mode' ); ?></label>
+					<label for="<?php echo Config::PREFIX . 'overlay_border_color'; ?>" class="as-strong"><?php esc_html_e( 'Content Border Color', 'classic-coming-soon-maintenance-mode' ); ?></label>
 					<input type="text" name="<?php echo Config::PREFIX . 'overlay_border_color'; ?>" id="<?php echo Config::PREFIX . 'overlay_border_color'; ?>" value="<?php esc_attr_e( $options['content_border'] ); ?>" placeholder="<?php esc_html_e( 'Border color for the content overlay', 'classic-coming-soon-maintenance-mode' ); ?>" class="as-form-control jscolor {required:false}">
 
-					<p class="as-form-help-block"><?php esc_html_e( 'Select border color for the content overlay.', 'classic-coming-soon-maintenance-mode' ); ?></p>
+					<p class="as-form-help-block"><?php esc_html_e( 'Select border color for the content section.', 'classic-coming-soon-maintenance-mode' ); ?></p>
 				</div>
 			</div>
 
 			<div class="as-double-group as-clearfix">
 				<div class="as-form-group">
-					<label for="<?php echo Config::PREFIX . 'overlay_border_width'; ?>" class="as-strong"><?php esc_html_e( 'Content Overlay Border Width', 'classic-coming-soon-maintenance-mode' ); ?></label>
+					<label for="<?php echo Config::PREFIX . 'overlay_border_width'; ?>" class="as-strong"><?php esc_html_e( 'Content Border Width', 'classic-coming-soon-maintenance-mode' ); ?></label>
 					<select name="<?php echo Config::PREFIX . 'overlay_border_width'; ?>" id="<?php echo Config::PREFIX . 'overlay_border_width'; ?>">
 						<?php
 
@@ -144,11 +144,11 @@ use AkshitSethi\Plugins\MaintenanceMode\Config;
 						?>
 					</select>
 
-					<p class="as-form-help-block"><?php esc_html_e( 'Border size for the content overlay.', 'classic-coming-soon-maintenance-mode' ); ?></p>
+					<p class="as-form-help-block"><?php esc_html_e( 'Border size for the content section.', 'classic-coming-soon-maintenance-mode' ); ?></p>
 				</div>
 
 				<div class="as-form-group">
-					<label for="<?php echo Config::PREFIX . 'overlay_border_radius'; ?>" class="as-strong"><?php esc_html_e( 'Content Overlay Border Radius', 'classic-coming-soon-maintenance-mode' ); ?></label>
+					<label for="<?php echo Config::PREFIX . 'overlay_border_radius'; ?>" class="as-strong"><?php esc_html_e( 'Content Border Radius', 'classic-coming-soon-maintenance-mode' ); ?></label>
 					<select name="<?php echo Config::PREFIX . 'overlay_border_radius'; ?>" id="<?php echo Config::PREFIX . 'overlay_border_radius'; ?>">
 						<?php
 
@@ -160,7 +160,7 @@ use AkshitSethi\Plugins\MaintenanceMode\Config;
 						?>
 					</select>
 
-					<p class="as-form-help-block"><?php esc_html_e( 'Border radius for the content overlay.', 'classic-coming-soon-maintenance-mode' ); ?></p>
+					<p class="as-form-help-block"><?php esc_html_e( 'Border radius for the content section.', 'classic-coming-soon-maintenance-mode' ); ?></p>
 				</div>
 			</div>
 

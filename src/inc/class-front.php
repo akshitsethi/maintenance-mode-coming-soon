@@ -222,17 +222,17 @@ class Front {
 		if ( ! empty( $options['header_font'] ) || ! empty( $options['header_font_size'] ) || ! empty( $options['header_font_color'] ) ) {
 			$output .= '.as-header-text{';
 
-			// header font
+			// Header font
 			if ( ! empty( $options['header_font'] ) ) {
 				$output .= 'font-family:"' . esc_html( $options['header_font'] ) . '", Arial, sans-serif;';
 			}
 
-			// header font size
+			// Header font size
 			if ( ! empty( $options['header_font_size'] ) ) {
 				$output .= 'font-size:' . esc_html( $options['header_font_size'] ) . 'px;';
 			}
 
-			// header font color
+			// Header font color
 			if ( ! empty( $options['header_font_color'] ) ) {
 				$output .= 'color:#' . esc_html( $options['header_font_color'] ) . ';';
 			}
@@ -245,17 +245,17 @@ class Front {
 		if ( ! empty( $options['secondary_font'] ) || ! empty( $options['secondary_font_size'] ) || ! empty( $options['secondary_font_color'] ) ) {
 			$output .= '.as-secondary-text{';
 
-			// secondary font
+			// Secondary font
 			if ( ! empty( $options['secondary_font'] ) ) {
 				$output .= 'font-family:"' . esc_html( $options['secondary_font'] ) . '", Arial, sans-serif;';
 			}
 
-			// secondary font size
+			// Secondary font size
 			if ( ! empty( $options['secondary_font_size'] ) ) {
 				$output .= 'font-size:' . esc_html( $options['secondary_font_size'] ) . 'px;';
 			}
 
-			// secondary font color
+			// Secondary font color
 			if ( ! empty( $options['secondary_font_color'] ) ) {
 				$output .= 'color:#' . esc_html( $options['secondary_font_color'] ) . ';';
 			}
@@ -269,17 +269,17 @@ class Front {
 		if ( ! empty( $options['secondary_font'] ) || ! empty( $options['antispam_font_size'] ) || ! empty( $options['antispam_font_color'] ) ) {
 			$output .= '.as-anti-spam{';
 
-			// secondary font
+			// Secondary font
 			if ( ! empty( $options['secondary_font'] ) ) {
 				$output .= 'font-family:"' . esc_html( $options['secondary_font'] ) . '", Arial, sans-serif;';
 			}
 
-			// antispam font size
+			// Antispam font size
 			if ( ! empty( $options['antispam_font_size'] ) ) {
 				$output .= 'font-size:' . esc_html( $options['antispam_font_size'] ) . 'px;';
 			}
 
-			// antispam font color
+			// Antispam font color
 			if ( ! empty( $options['antispam_font_color'] ) ) {
 				$output .= 'color:#' . esc_html( $options['antispam_font_color'] ) . ';';
 			}
@@ -289,15 +289,40 @@ class Front {
 
 
 		// Content: width, position, and alignment
-		if ( ! empty( $options['content_overlay'] ) || ! empty( $options['content_width'] ) || ! empty( $options['content_position'] ) || ! empty( $options['content_alignment'] ) ) {
+		if ( ! empty( $options['content_overlay'] ) || ( ! empty( $options['content_bg'] ) && ! empty( $options['content_bg_opacity'] ) ) || ! empty( $options['content_border'] ) || ! empty( $options['content_border_width'] ) || ! empty( $options['content_border_radius'] ) || ! empty( $options['content_width'] ) || ! empty( $options['content_position'] ) || ! empty( $options['content_alignment'] ) ) {
 			$output .= '.as-content{';
 
-			// content overlay for background images
-			if ( $options['content_overlay'] ) {
-				$output .= 'background-image:url("' . Config::$plugin_url . 'assets/images/overlay.png");padding:30px;border-radius:10px;box-shadow:0 0 10px 0 rgba(0, 0, 0, 0.33);';
+			// Content background
+			if ( ! empty( $options['content_bg'] ) ) {
+				$output .= 'background-color:#' . esc_html( $options['content_bg'] ) . ';';
 			}
 
-			// content width
+			// Content background opacity
+			if ( ! empty( $options['content_bg_opacity'] ) ) {
+				$output .= 'opacity:' . esc_html( $options['content_bg_opacity'] ) . ';';
+			}
+
+			// Content overlay
+			if ( $options['content_overlay'] ) {
+				$output .= 'padding:30px;';
+			}
+
+			// Content border
+			if ( ! empty( $options['content_border'] ) ) {
+				$output .= 'border:1px solid #' . esc_html( $options['content_border'] ) . ';';
+			}
+
+			// Content border width
+			if ( ! empty( $options['content_border_width'] ) ) {
+				$output .= 'border-width:' . esc_html( $options['content_border_width'] ) . 'px;';
+			}
+
+			// Content border radius
+			if ( ! empty( $options['content_border_radius'] ) ) {
+				$output .= 'border-radius:' . esc_html( $options['content_border_radius'] ) . 'px;';
+			}
+
+			// Content width
 			if ( ! empty( $options['content_width'] ) ) {
 				// Making sure the width is not < 100 and not > 1170
 				if ( $options['content_width'] < 100 || $options['content_width'] > 1170 ) {
@@ -307,7 +332,7 @@ class Front {
 				$output .= 'max-width:' . esc_html( $options['content_width'] ) . 'px;';
 			}
 
-			// content position
+			// Content position
 			if ( ! empty( $options['content_position'] ) ) {
 				if ( 'center' == $options['content_position'] ) {
 					$output .= 'margin-left:auto;margin-right:auto;';
@@ -318,7 +343,7 @@ class Front {
 				}
 			}
 
-			// content alignment
+			// Content alignment
 			if ( ! empty( $options['content_alignment'] ) ) {
 				if ( 'right' == $options['content_alignment'] ) {
 					$output .= 'text-align:right;';
@@ -353,27 +378,27 @@ class Front {
 			if ( ! empty( $options['input_font_size'] ) || ! empty( $options['input_font_color'] ) || ! empty( $options['input_bg'] ) || ! empty( $options['input_border'] ) || ! empty( $options['input_border_width'] ) ) {
 				$output .= '.as-content input[type="text"]{';
 
-				// input font size
+				// Input font size
 				if ( ! empty( $options['input_font_size'] ) ) {
 					$output .= 'font-size:' . esc_html( $options['input_font_size'] ) . 'px;';
 				}
 
-				// input color
+				// Input color
 				if ( ! empty( $options['input_font_color'] ) ) {
 					$output .= 'color:#' . esc_html( $options['input_font_color'] ) . ';';
 				}
 
-				// input background
+				// Input background
 				if ( ! empty( $options['input_bg'] ) ) {
 					$output .= 'background:#' . esc_html( $options['input_bg'] ) . ';';
 				}
 
-				// input border
+				// Input border
 				if ( ! empty( $options['input_border'] ) ) {
 					$output .= 'border:1px solid #' . esc_html( $options['input_border'] ) . ';';
 				}
 
-				// input border width
+				// Input border width
 				if ( ! empty( $options['input_border_width'] ) ) {
 					$output .= 'border-width:' . esc_html( $options['input_border_width'] ) . 'px;';
 				}
@@ -385,12 +410,12 @@ class Front {
 			if ( ! empty( $options['input_bg_hover'] ) || ! empty( $options['input_border_hover'] ) ) {
 				$output .= '.as-content input[type="text"]:focus{';
 
-				// input background:focus
+				// Input background:focus
 				if ( ! empty( $options['input_bg_hover'] ) ) {
 					$output .= 'background:#' . esc_html( $options['input_bg_hover'] ) . ';';
 				}
 
-				// input border:focus
+				// Input border:focus
 				if ( ! empty( $options['input_border_hover'] ) ) {
 					$output .= 'border-color:#' . esc_html( $options['input_border_hover'] ) . ';';
 				}
@@ -402,27 +427,27 @@ class Front {
 			if ( ! empty( $options['button_font_size'] ) || ! empty( $options['button_font_color'] ) || ! empty( $options['button_bg'] ) || ! empty( $options['button_border'] ) || ! empty( $options['button_border_width'] ) ) {
 				$output .= '.as-content input[type="submit"]{';
 
-				// button font size
+				// Button font size
 				if ( ! empty( $options['button_font_size'] ) ) {
 					$output .= 'font-size:' . esc_html( $options['button_font_size'] ) . 'px;';
 				}
 
-				// button color
+				// Button color
 				if ( ! empty( $options['button_font_color'] ) ) {
 					$output .= 'color:#' . esc_html( $options['button_font_color'] ) . ';';
 				}
 
-				// button background
+				// Button background
 				if ( ! empty( $options['button_bg'] ) ) {
 					$output .= 'background:#' . esc_html( $options['button_bg'] ) . ';';
 				}
 
-				// button border
+				// Button border
 				if ( ! empty( $options['button_border'] ) ) {
 					$output .= 'border:1px solid #' . esc_html( $options['button_border'] ) . ';';
 				}
 
-				// button border width
+				// Button border width
 				if ( ! empty( $options['button_border_width'] ) ) {
 					$output .= 'border-width:' . esc_html( $options['button_border_width'] ) . 'px;';
 				}
@@ -435,12 +460,12 @@ class Front {
 				$output .= '.as-content input[type="submit"]:hover,';
 				$output .= '.as-content input[type="submit"]:focus{';
 
-				// input background:focus
+				// Input background:focus
 				if ( ! empty( $options['button_bg_hover'] ) ) {
 					$output .= 'background:#' . esc_html( $options['button_bg_hover'] ) . ';';
 				}
 
-				// input border:focus
+				// Input border:focus
 				if ( ! empty( $options['button_border_hover'] ) ) {
 					$output .= 'border-color:#' . esc_html( $options['button_border_hover'] ) . ';';
 				}
@@ -452,12 +477,12 @@ class Front {
 			if ( ! empty( $options['success_background'] ) || ! empty( $options['success_color'] ) ) {
 				$output .= '.as-alert-success{';
 
-				// success background
+				// Success background
 				if ( ! empty( $options['success_background'] ) ) {
 					$output .= 'background:#' . esc_html( $options['success_background'] ) . ';';
 				}
 
-				// success color
+				// Success color
 				if ( ! empty( $options['success_color'] ) ) {
 					$output .= 'color:#' . esc_html( $options['success_color'] ) . ';';
 				}
@@ -469,12 +494,12 @@ class Front {
 			if ( ! empty( $options['error_background'] ) || ! empty( $options['error_color'] ) ) {
 				$output .= '.as-alert-danger{';
 
-				// error background
+				// Error background
 				if ( ! empty( $options['error_background'] ) ) {
 					$output .= 'background:#' . esc_html( $options['error_background'] ) . ';';
 				}
 
-				// error color
+				// Error color
 				if ( ! empty( $options['error_color'] ) ) {
 					$output .= 'color:#' . esc_html( $options['error_color'] ) . ';';
 				}
