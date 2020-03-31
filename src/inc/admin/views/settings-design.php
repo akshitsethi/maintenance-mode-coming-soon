@@ -86,11 +86,82 @@ use AkshitSethi\Plugins\MaintenanceMode\Config;
 				</div>
 			</div>
 
-			<div class="as-form-group">
-				<label for="<?php echo Config::PREFIX . 'overlay'; ?>" class="as-strong"><?php esc_html_e( 'Content Overlay', 'classic-coming-soon-maintenance-mode' ); ?></label>
-				<input type="checkbox" class="as-form-ios" name="<?php echo Config::PREFIX . 'overlay'; ?>" value="1"<?php checked( true, $options['content_overlay'] ); ?>>
+			<div class="as-double-group as-clearfix">
+				<div class="as-form-group">
+					<label for="<?php echo Config::PREFIX . 'overlay'; ?>" class="as-strong"><?php esc_html_e( 'Content Overlay', 'classic-coming-soon-maintenance-mode' ); ?></label>
+					<input type="checkbox" class="as-form-ios" name="<?php echo Config::PREFIX . 'overlay'; ?>" value="1"<?php checked( true, $options['content_overlay'] ); ?>>
 
-				<p class="as-form-help-block"><?php esc_html_e( 'If enabled, applies transparent background to the content section of the maintenance page.', 'classic-coming-soon-maintenance-mode' ); ?></p>
+					<p class="as-form-help-block"><?php esc_html_e( 'If enabled, applies transparent background to the content section of the maintenance page.', 'classic-coming-soon-maintenance-mode' ); ?></p>
+				</div>
+
+				<div class="as-form-group">
+					<label for="<?php echo Config::PREFIX . 'overlay_opacity'; ?>" class="as-strong"><?php esc_html_e( 'Content Overlay Opacity', 'classic-coming-soon-maintenance-mode' ); ?></label>
+					<select name="<?php echo Config::PREFIX . 'overlay_opacity'; ?>" id="<?php echo Config::PREFIX . 'overlay_opacity'; ?>">
+						<?php
+
+							// Loading font sizes with the help of a loop
+							for ( $i = 0.05; $i < 1; $i += 0.05 ) {
+								echo '<option value="' . $i . '"' . selected( $options['content_bg_opacity'], $i ) . '>' . str_pad( $i, 4, '0', STR_PAD_RIGHT ) . '</option>';
+							}
+
+							// Option for NO opacity
+							echo '<option value="1"' . selected( $options['content_bg_opacity'], '1' ) . '>1.00</option>';
+
+						?>
+					</select>
+
+					<p class="as-form-help-block"><?php esc_html_e( 'Background opacity for the content overlay.', 'classic-coming-soon-maintenance-mode' ); ?></p>
+				</div>
+			</div>
+
+			<div class="as-double-group as-clearfix">
+				<div class="as-form-group">
+					<label for="<?php echo Config::PREFIX . 'overlay_color'; ?>" class="as-strong"><?php esc_html_e( 'Content Overlay Background Color', 'classic-coming-soon-maintenance-mode' ); ?></label>
+					<input type="text" name="<?php echo Config::PREFIX . 'overlay_color'; ?>" id="<?php echo Config::PREFIX . 'overlay_color'; ?>" value="<?php esc_attr_e( $options['content_bg'] ); ?>" placeholder="<?php esc_html_e( 'Background color for the content overlay', 'classic-coming-soon-maintenance-mode' ); ?>" class="as-form-control jscolor {required:false}">
+
+					<p class="as-form-help-block"><?php esc_html_e( 'Select background color for the content overlay.', 'classic-coming-soon-maintenance-mode' ); ?></p>
+				</div>
+
+				<div class="as-form-group">
+					<label for="<?php echo Config::PREFIX . 'overlay_border_color'; ?>" class="as-strong"><?php esc_html_e( 'Content Overlay Border Color', 'classic-coming-soon-maintenance-mode' ); ?></label>
+					<input type="text" name="<?php echo Config::PREFIX . 'overlay_border_color'; ?>" id="<?php echo Config::PREFIX . 'overlay_border_color'; ?>" value="<?php esc_attr_e( $options['content_border'] ); ?>" placeholder="<?php esc_html_e( 'Border color for the content overlay', 'classic-coming-soon-maintenance-mode' ); ?>" class="as-form-control jscolor {required:false}">
+
+					<p class="as-form-help-block"><?php esc_html_e( 'Select border color for the content overlay.', 'classic-coming-soon-maintenance-mode' ); ?></p>
+				</div>
+			</div>
+
+			<div class="as-double-group as-clearfix">
+				<div class="as-form-group">
+					<label for="<?php echo Config::PREFIX . 'overlay_border_width'; ?>" class="as-strong"><?php esc_html_e( 'Content Overlay Border Width', 'classic-coming-soon-maintenance-mode' ); ?></label>
+					<select name="<?php echo Config::PREFIX . 'overlay_border_width'; ?>" id="<?php echo Config::PREFIX . 'overlay_border_width'; ?>">
+						<?php
+
+							// Loading font sizes with the help of a loop
+							for ( $i = 1; $i < 21; $i++ ) {
+								echo '<option value="' . $i . '"' . selected( $options['content_border_width'], $i ) . '>' . $i . esc_html__( 'px', 'classic-coming-soon-maintenance-mode' ) . '</option>';
+							}
+
+						?>
+					</select>
+
+					<p class="as-form-help-block"><?php esc_html_e( 'Border size for the content overlay.', 'classic-coming-soon-maintenance-mode' ); ?></p>
+				</div>
+
+				<div class="as-form-group">
+					<label for="<?php echo Config::PREFIX . 'overlay_border_radius'; ?>" class="as-strong"><?php esc_html_e( 'Content Overlay Border Radius', 'classic-coming-soon-maintenance-mode' ); ?></label>
+					<select name="<?php echo Config::PREFIX . 'overlay_border_radius'; ?>" id="<?php echo Config::PREFIX . 'overlay_border_radius'; ?>">
+						<?php
+
+							// Loading font sizes with the help of a loop
+							for ( $i = 0; $i < 41; $i++ ) {
+								echo '<option value="' . $i . '"' . selected( $options['content_border_radius'], $i ) . '>' . $i . esc_html__( 'px', 'classic-coming-soon-maintenance-mode' ) . '</option>';
+							}
+
+						?>
+					</select>
+
+					<p class="as-form-help-block"><?php esc_html_e( 'Border radius for the content overlay.', 'classic-coming-soon-maintenance-mode' ); ?></p>
+				</div>
 			</div>
 
 			<div class="as-double-group as-clearfix">
@@ -136,7 +207,6 @@ use AkshitSethi\Plugins\MaintenanceMode\Config;
 			<div class="as-double-group as-clearfix">
 				<div class="as-form-group">
 					<label for="<?php echo Config::PREFIX . 'header_font'; ?>" class="as-strong"><?php esc_html_e( 'Header Font', 'classic-coming-soon-maintenance-mode' ); ?></label>
-
 					<select name="<?php echo Config::PREFIX . 'header_font'; ?>" id="<?php echo Config::PREFIX . 'header_font'; ?>" class="as-google-fonts">
 						<?php
 
@@ -161,7 +231,6 @@ use AkshitSethi\Plugins\MaintenanceMode\Config;
 
 				<div class="as-form-group">
 					<label for="<?php echo Config::PREFIX . 'secondary_font'; ?>" class="as-strong"><?php esc_html_e( 'Secondary Font', 'classic-coming-soon-maintenance-mode' ); ?></label>
-
 					<select name="<?php echo Config::PREFIX . 'secondary_font'; ?>" id="<?php echo Config::PREFIX . 'secondary_font'; ?>" class="as-google-fonts">
 						<?php
 
@@ -188,7 +257,6 @@ use AkshitSethi\Plugins\MaintenanceMode\Config;
 			<div class="as-double-group as-clearfix">
 				<div class="as-form-group">
 					<label for="<?php echo Config::PREFIX . 'header_size'; ?>" class="as-strong"><?php esc_html_e( 'Header Text Size', 'classic-coming-soon-maintenance-mode' ); ?></label>
-
 					<select name="<?php echo Config::PREFIX . 'header_size'; ?>" id="<?php echo Config::PREFIX . 'header_size'; ?>">
 						<?php
 
@@ -205,7 +273,6 @@ use AkshitSethi\Plugins\MaintenanceMode\Config;
 
 				<div class="as-form-group">
 					<label for="<?php echo Config::PREFIX . 'secondary_size'; ?>" class="as-strong"><?php esc_html_e( 'Secondary Text Size', 'classic-coming-soon-maintenance-mode' ); ?></label>
-
 					<select name="<?php echo Config::PREFIX . 'secondary_size'; ?>" id="<?php echo Config::PREFIX . 'secondary_size'; ?>">
 						<?php
 
@@ -240,7 +307,6 @@ use AkshitSethi\Plugins\MaintenanceMode\Config;
 			<div class="as-double-group as-clearfix">
 				<div class="as-form-group">
 					<label for="<?php echo Config::PREFIX . 'antispam_size'; ?>" class="as-strong"><?php esc_html_e( 'Antispam Text Size', 'classic-coming-soon-maintenance-mode' ); ?></label>
-
 					<select name="<?php echo Config::PREFIX . 'antispam_size'; ?>" id="<?php echo Config::PREFIX . 'antispam_size'; ?>">
 						<?php
 
