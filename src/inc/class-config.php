@@ -16,11 +16,11 @@ class Config {
 	public static $plugin_path;
 	public static $default_options;
 
-	const PLUGIN_SLUG 	= 'classic-coming-soon-maintenance-mode';
-	const SHORT_SLUG  	= 'ccsmm';
-	const VERSION     	= '1.0.0';
-	const DB_OPTION   	= 'as_' . self::SHORT_SLUG;
-	const PREFIX      	= self::SHORT_SLUG . '_';
+	const PLUGIN_SLUG   = 'classic-coming-soon-maintenance-mode';
+	const SHORT_SLUG    = 'ccsmm';
+	const VERSION       = '1.0.0';
+	const DB_OPTION     = 'as_' . self::SHORT_SLUG;
+	const PREFIX        = self::SHORT_SLUG . '_';
 	const DEFAULT_FONTS = array(
 		'Arial',
 		'Helvetica',
@@ -28,9 +28,9 @@ class Config {
 		'Times New Roman',
 		'Tahoma',
 		'Verdana',
-		'Geneva'
+		'Geneva',
 	);
-	const GOOGLE_FONTS 	= array(
+	const GOOGLE_FONTS  = array(
 		'ABeeZee',
 		'Abel',
 		'Abril Fatface',
@@ -700,7 +700,7 @@ class Config {
 		'Yellowtail',
 		'Yeseva One',
 		'Yesteryear',
-		'Zeyada'
+		'Zeyada',
 	);
 
 
@@ -724,75 +724,75 @@ class Config {
 	public function default_options() {
 		self::$default_options = array(
 			// Basic
-			'status'								=> false,
-			'title' 								=> esc_html__( 'Maintenance Mode', 'classic-coming-soon-maintenance-mode' ),
-			'header_text' 					=> esc_html__( 'Maintenance Mode', 'classic-coming-soon-maintenance-mode' ),
-			'secondary_text' 				=> esc_html__( 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla pharetra eu felis quis lobortis. Proin vitae rutrum nisl, ut ullamcorper quam. Praesent faucibus ligula ac nisl varius dictum. Maecenas iaculis posuere orci, sed consectetur augue.', 'classic-coming-soon-maintenance-mode' ),
-			'antispam_text' 				=> esc_html__( 'And yes, we hate spam too!', 'classic-coming-soon-maintenance-mode' ),
-			'custom_login_url' 			=> '',
-			'show_logged_in' 				=> false,
-			'exclude_se'						=> true,
-			'arrange' 							=> 'logo,header,secondary,form,html',
-			'analytics' 						=> '',
+			'status'                => false,
+			'title'                 => esc_html__( 'Maintenance Mode', 'classic-coming-soon-maintenance-mode' ),
+			'header_text'           => esc_html__( 'Maintenance Mode', 'classic-coming-soon-maintenance-mode' ),
+			'secondary_text'        => esc_html__( 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla pharetra eu felis quis lobortis. Proin vitae rutrum nisl, ut ullamcorper quam. Praesent faucibus ligula ac nisl varius dictum. Maecenas iaculis posuere orci, sed consectetur augue.', 'classic-coming-soon-maintenance-mode' ),
+			'antispam_text'         => esc_html__( 'And yes, we hate spam too!', 'classic-coming-soon-maintenance-mode' ),
+			'custom_login_url'      => '',
+			'show_logged_in'        => false,
+			'exclude_se'            => true,
+			'arrange'               => 'logo,header,secondary,form,html',
+			'analytics'             => '',
 
 			// Email
-			'mailchimp_api'					=> '',
-			'mailchimp_list' 				=> '',
-			'message_noemail' 			=> esc_html__( 'Please provide your email address.', 'classic-coming-soon-maintenance-mode' ),
-			'message_error' 				=> esc_html__( 'This looks like an invalid request. Please try again.', 'classic-coming-soon-maintenance-mode' ),
-			'message_wrong' 				=> esc_html__( 'Please provide a valid email address.', 'classic-coming-soon-maintenance-mode' ),
-			'message_done' 					=> esc_html__( 'Thank you! We\'ll be in touch!', 'classic-coming-soon-maintenance-mode' ),
+			'mailchimp_api'         => '',
+			'mailchimp_list'        => '',
+			'message_noemail'       => esc_html__( 'Please provide your email address.', 'classic-coming-soon-maintenance-mode' ),
+			'message_error'         => esc_html__( 'This looks like an invalid request. Please try again.', 'classic-coming-soon-maintenance-mode' ),
+			'message_wrong'         => esc_html__( 'Please provide a valid email address.', 'classic-coming-soon-maintenance-mode' ),
+			'message_done'          => esc_html__( 'Thank you! We\'ll be in touch!', 'classic-coming-soon-maintenance-mode' ),
 
 			// Design
-			'logo'									=> '',
-			'favicon'								=> '',
-			'bg_cover' 							=> '',
-			'content_overlay' 			=> false,
-			'content_bg_opacity' 		=> '0.85',
-			'content_bg' 						=> '',
-			'content_border' 				=> 'bbbbbb',
-			'content_border_width' 	=> '2',
+			'logo'                  => '',
+			'favicon'               => '',
+			'bg_cover'              => '',
+			'content_overlay'       => false,
+			'content_bg_opacity'    => '0.85',
+			'content_bg'            => '',
+			'content_border'        => 'bbbbbb',
+			'content_border_width'  => '2',
 			'content_border_radius' => '2',
-			'content_width'					=> '440',
-			'bg_color' 							=> 'ffffff',
-			'content_position'			=> 'center',
-			'content_alignment'			=> 'left',
-			'header_font' 					=> 'Karla',
-			'secondary_font' 				=> 'Karla',
-			'header_font_size' 			=> '28',
-			'secondary_font_size' 	=> '14',
-			'header_font_color' 		=> '090909',
-			'secondary_font_color' 	=> '090909',
-			'antispam_font_size' 		=> '13',
-			'antispam_font_color' 	=> 'bbbbbb',
+			'content_width'         => '440',
+			'bg_color'              => 'ffffff',
+			'content_position'      => 'center',
+			'content_alignment'     => 'left',
+			'header_font'           => 'Karla',
+			'secondary_font'        => 'Karla',
+			'header_font_size'      => '28',
+			'secondary_font_size'   => '14',
+			'header_font_color'     => '090909',
+			'secondary_font_color'  => '090909',
+			'antispam_font_size'    => '13',
+			'antispam_font_color'   => 'bbbbbb',
 
 			// Form
-			'input_text' 						=> esc_html__( 'Enter your email address..', 'classic-coming-soon-maintenance-mode' ),
-			'button_text' 					=> esc_html__( 'Subscribe', 'classic-coming-soon-maintenance-mode' ),
-			'ignore_form_styles' 		=> false,
-			'input_font_size'				=> '13',
-			'button_font_size'			=> '12',
-			'input_font_color'			=> '090909',
-			'button_font_color'			=> 'ffffff',
-			'input_bg'							=> '',
-			'button_bg'							=> '0f0f0f',
-			'input_bg_hover'				=> '',
-			'button_bg_hover'				=> '0a0a0a',
-			'input_border_width' 		=> '2',
-			'button_border_width' 	=> '2',
-			'input_border'					=> 'eeeeee',
-			'button_border'					=> '0f0f0f',
-			'input_border_hover'		=> 'bbbbbb',
-			'button_border_hover'		=> '0a0a0a',
-			'success_background' 		=> '90c695',
-			'success_color' 				=> 'ffffff',
-			'error_background' 			=> 'e08283',
-			'error_color' 					=> 'ffffff',
+			'input_text'            => esc_html__( 'Enter your email address..', 'classic-coming-soon-maintenance-mode' ),
+			'button_text'           => esc_html__( 'Subscribe', 'classic-coming-soon-maintenance-mode' ),
+			'ignore_form_styles'    => false,
+			'input_font_size'       => '13',
+			'button_font_size'      => '12',
+			'input_font_color'      => '090909',
+			'button_font_color'     => 'ffffff',
+			'input_bg'              => '',
+			'button_bg'             => '0f0f0f',
+			'input_bg_hover'        => '',
+			'button_bg_hover'       => '0a0a0a',
+			'input_border_width'    => '2',
+			'button_border_width'   => '2',
+			'input_border'          => 'eeeeee',
+			'button_border'         => '0f0f0f',
+			'input_border_hover'    => 'bbbbbb',
+			'button_border_hover'   => '0a0a0a',
+			'success_background'    => '90c695',
+			'success_color'         => 'ffffff',
+			'error_background'      => 'e08283',
+			'error_color'           => 'ffffff',
 
 			// Advanced
-			'disable_settings' 			=> false,
-			'custom_html'						=> '',
-			'custom_css'						=> ''
+			'disable_settings'      => false,
+			'custom_html'           => '',
+			'custom_css'            => '',
 		);
 	}
 

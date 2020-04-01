@@ -91,18 +91,18 @@ use AkshitSethi\Plugins\MaintenanceMode\Config;
 								// Set arrange elements to default value
 								$arrange = Config::$default_options['arrange'];
 
-								if ( ! empty( $options['arrange'] ) ) {
-									$arrange = explode( ',', $options['arrange'] );
-								}
-							
+							if ( ! empty( $options['arrange'] ) ) {
+								$arrange = explode( ',', $options['arrange'] );
+							}
+
 								// list items
-								foreach ( $arrange as $item ) {
-									if ( 'html' == $item ) {
-										echo '<li data-id="' . esc_attr( $item ) . '">' . esc_html__( 'Custom HTML', 'classic-coming-soon-maintenance-mode' ) . '</li>';
-									} else {
-										echo '<li data-id="' . esc_attr( $item ) . '">' . ucfirst( esc_attr( $item ) ) . '</li>';
-									}
+							foreach ( $arrange as $item ) {
+								if ( 'html' == $item ) {
+									echo '<li data-id="' . esc_attr( $item ) . '">' . esc_html__( 'Custom HTML', 'classic-coming-soon-maintenance-mode' ) . '</li>';
+								} else {
+									echo '<li data-id="' . esc_attr( $item ) . '">' . ucfirst( esc_attr( $item ) ) . '</li>';
 								}
+							}
 
 							?>
 						</ul>

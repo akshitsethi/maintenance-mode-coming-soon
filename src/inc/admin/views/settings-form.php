@@ -45,9 +45,9 @@ use AkshitSethi\Plugins\MaintenanceMode\Config;
 						<?php
 
 							// Loading font sizes with the help of a loop
-							for ( $i = 6; $i < 81; $i++ ) {
-								echo '<option value="' . $i . '"' . selected( esc_attr( $options['input_font_size'] ), $i ) . '>' . $i . esc_html__( 'px', 'classic-coming-soon-maintenance-mode' ) . '</option>';
-							}
+						for ( $i = 6; $i < 81; $i++ ) {
+							echo '<option value="' . $i . '"' . selected( esc_attr( $options['input_font_size'] ), $i ) . '>' . $i . esc_html__( 'px', 'classic-coming-soon-maintenance-mode' ) . '</option>';
+						}
 
 						?>
 					</select>
@@ -61,9 +61,9 @@ use AkshitSethi\Plugins\MaintenanceMode\Config;
 						<?php
 
 							// Loading font sizes with the help of a loop
-							for ( $i = 6; $i < 81; $i++ ) {
-								echo '<option value="' . $i . '"' . selected( esc_attr( $options['button_font_size'] ), $i ) . '>' . $i . esc_html__( 'px', 'classic-coming-soon-maintenance-mode' ) . '</option>';
-							}
+						for ( $i = 6; $i < 81; $i++ ) {
+							echo '<option value="' . $i . '"' . selected( esc_attr( $options['button_font_size'] ), $i ) . '>' . $i . esc_html__( 'px', 'classic-coming-soon-maintenance-mode' ) . '</option>';
+						}
 
 						?>
 					</select>
@@ -127,9 +127,9 @@ use AkshitSethi\Plugins\MaintenanceMode\Config;
 						<?php
 
 							// Loading font sizes with the help of a loop
-							for ( $i = 1; $i < 21; $i++ ) {
-								echo '<option value="' . $i . '"' . selected( esc_attr( $options['input_border_width'] ), $i ) . '>' . $i . esc_html__( 'px', 'classic-coming-soon-maintenance-mode' ) . '</option>';
-							}
+						for ( $i = 1; $i < 21; $i++ ) {
+							echo '<option value="' . $i . '"' . selected( esc_attr( $options['input_border_width'] ), $i ) . '>' . $i . esc_html__( 'px', 'classic-coming-soon-maintenance-mode' ) . '</option>';
+						}
 
 						?>
 					</select>
@@ -143,9 +143,9 @@ use AkshitSethi\Plugins\MaintenanceMode\Config;
 						<?php
 
 							// Loading font sizes with the help of a loop
-							for ( $i = 1; $i < 21; $i++ ) {
-								echo '<option value="' . $i . '"' . selected( esc_attr( $options['button_border_width'] ), $i ) . '>' . $i . esc_html__( 'px', 'classic-coming-soon-maintenance-mode' ) . '</option>';
-							}
+						for ( $i = 1; $i < 21; $i++ ) {
+							echo '<option value="' . $i . '"' . selected( esc_attr( $options['button_border_width'] ), $i ) . '>' . $i . esc_html__( 'px', 'classic-coming-soon-maintenance-mode' ) . '</option>';
+						}
 
 						?>
 					</select>
