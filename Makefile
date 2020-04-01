@@ -1,5 +1,5 @@
-VERSION := 2.0.0
-PLUGINSLUG := widgets-bundle
+VERSION := 1.0.0
+PLUGINSLUG := classic-coming-soon-maintenance-mode
 SRCPATH := $(shell pwd)/src
 
 bin/linux/amd64/github-release:
