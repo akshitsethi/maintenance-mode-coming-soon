@@ -14,6 +14,9 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 	exit;
 }
 
+// Composer autoloder file.
+require_once __DIR__ . '/vendor/autoload.php';
+
 // Remove options and transients
 delete_option( Config::DB_OPTION );
 delete_transient( Config::PREFIX . 'email_lists' );
