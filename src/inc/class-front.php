@@ -32,13 +32,13 @@ class Front {
 	 */
 	public function init() {
 		// Plugin options from the database
-		$options 		= get_option( Config::DB_OPTION );
+		$options = get_option( Config::DB_OPTION );
 
 		// Login URL for the admin
-		$login_url 	= wp_login_url();
+		$login_url = wp_login_url();
 
 		// Checking for the server protocol status
-		$protocol 	= isset( $_SERVER['HTTPS'] ) ? 'https' : 'http' ;
+		$protocol = isset( $_SERVER['HTTPS'] ) ? 'https' : 'http';
 
 		// Server address of the current page
 		$server_url = $protocol . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
@@ -51,7 +51,7 @@ class Front {
 			if ( $options['status'] ) {
 				/**
 				 * A lot of checks are going on over here.
-				 * We are checking for admin role, crawler status, and important wordpress pages to bypass.
+				 * We are checking for admin role, crawler status, and important WordPress pages to bypass.
 				 * If the admin decides to exclude search engine from viewing the plugin, the website will be shown.
 				 */
 				if ( false === strpos( $server_url, '/wp-login.php' )
@@ -95,30 +95,30 @@ class Front {
 	private function check_referrer() {
 		// List of crawlers
 		$crawlers = array(
-			'Abacho'          => 	'AbachoBOT',
-			'Accoona'         => 	'Acoon',
-			'AcoiRobot'       => 	'AcoiRobot',
-			'Adidxbot'        => 	'adidxbot',
-			'AltaVista robot' => 	'Altavista',
-			'Altavista robot' => 	'Scooter',
-			'ASPSeek'         => 	'ASPSeek',
-			'Atomz'           => 	'Atomz',
-			'Bing'            => 	'bingbot',
-			'BingPreview'     => 	'BingPreview',
-			'CrocCrawler'     => 	'CrocCrawler',
-			'Dumbot' 					=> 	'Dumbot',
-			'eStyle Bot'     	=> 	'eStyle',
-			'FAST-WebCrawler'	=> 	'FAST-WebCrawler',
-			'GeonaBot'       	=> 	'GeonaBot',
-			'Gigabot'        	=> 	'Gigabot',
-			'Google'         	=> 	'Googlebot',
-			'ID-Search Bot'  	=> 	'IDBot',
-			'Lycos spider'   	=> 	'Lycos',
-			'MSN'            	=> 	'msnbot',
-			'MSRBOT'         	=> 	'MSRBOT',
-			'Rambler'        	=> 	'Rambler',
-			'Scrubby robot'  	=> 	'Scrubby',
-			'Yahoo'           => 	'Yahoo'
+			'Abacho'          => 'AbachoBOT',
+			'Accoona'         => 'Acoon',
+			'AcoiRobot'       => 'AcoiRobot',
+			'Adidxbot'        => 'adidxbot',
+			'AltaVista robot' => 'Altavista',
+			'Altavista robot' => 'Scooter',
+			'ASPSeek'         => 'ASPSeek',
+			'Atomz'           => 'Atomz',
+			'Bing'            => 'bingbot',
+			'BingPreview'     => 'BingPreview',
+			'CrocCrawler'     => 'CrocCrawler',
+			'Dumbot'          => 'Dumbot',
+			'eStyle Bot'      => 'eStyle',
+			'FAST-WebCrawler' => 'FAST-WebCrawler',
+			'GeonaBot'        => 'GeonaBot',
+			'Gigabot'         => 'Gigabot',
+			'Google'          => 'Googlebot',
+			'ID-Search Bot'   => 'IDBot',
+			'Lycos spider'    => 'Lycos',
+			'MSN'             => 'msnbot',
+			'MSRBOT'          => 'MSRBOT',
+			'Rambler'         => 'Rambler',
+			'Scrubby robot'   => 'Scrubby',
+			'Yahoo'           => 'Yahoo',
 		);
 
 		// Checking for the crawler over here
@@ -135,13 +135,13 @@ class Front {
 	 *
 	 * @since 1.0.0
 	 * @param string $str User agent
-	 * @param array $crawlers List of crawlers to match against
+	 * @param array  $crawlers List of crawlers to match against
 	 *
 	 * @return boolean
 	 */
 	private function string_to_array( $str, $crawlers ) {
 		$regexp = '~(' . implode( '|', array_values( $crawlers ) ) . ')~i';
-		return ( bool ) preg_match( $regexp, $str );
+		return (bool) preg_match( $regexp, $str );
 	}
 
 
@@ -240,7 +240,6 @@ class Front {
 			$output .= '}' . "\r\n";
 		}
 
-
 		// Secondary: font, size, and color
 		if ( ! empty( $options['secondary_font'] ) || ! empty( $options['secondary_font_size'] ) || ! empty( $options['secondary_font_color'] ) ) {
 			$output .= '.as-secondary-text{';
@@ -262,7 +261,6 @@ class Front {
 
 			$output .= '}' . "\r\n";
 		}
-
 
 		// Antispam: font, size, and color
 		// We apply secondary font family to antispam as well
@@ -286,7 +284,6 @@ class Front {
 
 			$output .= '}' . "\r\n";
 		}
-
 
 		// Content: width, position, and alignment
 		if ( ! empty( $options['content_overlay'] ) || ( ! empty( $options['content_bg'] ) && ! empty( $options['content_bg_opacity'] ) ) || ! empty( $options['content_border'] ) || ! empty( $options['content_border_width'] ) || ! empty( $options['content_border_radius'] ) || ! empty( $options['content_width'] ) || ! empty( $options['content_position'] ) || ! empty( $options['content_alignment'] ) ) {
@@ -359,18 +356,16 @@ class Front {
 			// Content alignment for the input field
 			if ( ! empty( $options['content_alignment'] ) ) {
 				$output .= '.as-content input{';
-					if ( 'right' == $options['content_alignment'] ) {
-						$output .= 'text-align:right;';
-					} elseif ( 'center' == $options['content_alignment'] ) {
-						$output .= 'text-align:center;';
-					} else {
-						$output .= 'text-align:left;';
-					}
+				if ( 'right' == $options['content_alignment'] ) {
+					$output .= 'text-align:right;';
+				} elseif ( 'center' == $options['content_alignment'] ) {
+					$output .= 'text-align:center;';
+				} else {
+					$output .= 'text-align:left;';
+				}
 				$output .= '}' . "\r\n";
 			}
-
 		}
-
 
 		// If the default form & button styles need to be ignored
 		if ( $options['ignore_form_styles'] ) {
@@ -507,7 +502,6 @@ class Front {
 				$output .= '}' . "\r\n";
 			}
 		}
-
 
 		// Custom CSS
 		if ( ! empty( $options['custom_css'] ) ) {

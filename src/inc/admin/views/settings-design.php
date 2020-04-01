@@ -100,9 +100,9 @@ use AkshitSethi\Plugins\MaintenanceMode\Config;
 						<?php
 
 							// Loading font sizes with the help of a loop
-							for ( $i = 0.05; $i < 1; $i += 0.05 ) {
-								echo '<option value="' . $i . '"' . selected( esc_attr( $options['content_bg_opacity'] ), $i ) . '>' . str_pad( $i, 4, '0', STR_PAD_RIGHT ) . '</option>';
-							}
+						for ( $i = 0.05; $i < 1; $i += 0.05 ) {
+							echo '<option value="' . $i . '"' . selected( esc_attr( $options['content_bg_opacity'] ), $i ) . '>' . str_pad( $i, 4, '0', STR_PAD_RIGHT ) . '</option>';
+						}
 
 							// Option for NO opacity
 							echo '<option value="1"' . selected( esc_html( $options['content_bg_opacity'] ), '1' ) . '>1.00</option>';
@@ -137,9 +137,9 @@ use AkshitSethi\Plugins\MaintenanceMode\Config;
 						<?php
 
 							// Loading font sizes with the help of a loop
-							for ( $i = 1; $i < 21; $i++ ) {
-								echo '<option value="' . $i . '"' . selected( esc_attr( $options['content_border_width'] ), $i ) . '>' . $i . esc_html__( 'px', 'classic-coming-soon-maintenance-mode' ) . '</option>';
-							}
+						for ( $i = 1; $i < 21; $i++ ) {
+							echo '<option value="' . $i . '"' . selected( esc_attr( $options['content_border_width'] ), $i ) . '>' . $i . esc_html__( 'px', 'classic-coming-soon-maintenance-mode' ) . '</option>';
+						}
 
 						?>
 					</select>
@@ -153,9 +153,9 @@ use AkshitSethi\Plugins\MaintenanceMode\Config;
 						<?php
 
 							// Loading font sizes with the help of a loop
-							for ( $i = 0; $i < 41; $i++ ) {
-								echo '<option value="' . $i . '"' . selected( esc_attr( $options['content_border_radius'] ), $i ) . '>' . $i . esc_html__( 'px', 'classic-coming-soon-maintenance-mode' ) . '</option>';
-							}
+						for ( $i = 0; $i < 41; $i++ ) {
+							echo '<option value="' . $i . '"' . selected( esc_attr( $options['content_border_radius'] ), $i ) . '>' . $i . esc_html__( 'px', 'classic-coming-soon-maintenance-mode' ) . '</option>';
+						}
 
 						?>
 					</select>
@@ -211,16 +211,16 @@ use AkshitSethi\Plugins\MaintenanceMode\Config;
 						<?php
 
 							// Default fonts
-							foreach ( Config::DEFAULT_FONTS as $font ) {
-								echo '<option value="' . $font . '"' . selected( $font, esc_attr( $options['header_font'] ) ) . '>' . $font . '</option>' . "\n";
-							}
+						foreach ( Config::DEFAULT_FONTS as $font ) {
+							echo '<option value="' . $font . '"' . selected( $font, esc_attr( $options['header_font'] ) ) . '>' . $font . '</option>' . "\n";
+						}
 
 							echo '<option disabled>-- ' . esc_html__( 'Google Fonts', 'classic-coming-soon-maintenance-mode' ) . ' --</option>' . "\n";
 
 							// Listing fonts from the array
-							foreach ( Config::GOOGLE_FONTS as $font ) {
-								echo '<option value="' . $font . '"' . selected( $font, esc_attr( $options['header_font'] ) ) . '>' . $font . '</option>' . "\n";
-							}
+						foreach ( Config::GOOGLE_FONTS as $font ) {
+							echo '<option value="' . $font . '"' . selected( $font, esc_attr( $options['header_font'] ) ) . '>' . $font . '</option>' . "\n";
+						}
 
 						?>
 					</select>
@@ -235,16 +235,16 @@ use AkshitSethi\Plugins\MaintenanceMode\Config;
 						<?php
 
 							// Default fonts
-							foreach ( Config::DEFAULT_FONTS as $font ) {
-								echo '<option value="' . $font . '"' . selected( $font, esc_attr( $options['secondary_font'] ) ) . '>' . $font . '</option>' . "\n";
-							}
+						foreach ( Config::DEFAULT_FONTS as $font ) {
+							echo '<option value="' . $font . '"' . selected( $font, esc_attr( $options['secondary_font'] ) ) . '>' . $font . '</option>' . "\n";
+						}
 
 							echo '<option disabled>-- ' . esc_html__( 'Google Fonts', 'classic-coming-soon-maintenance-mode' ) . ' --</option>' . "\n";
 
 							// Google fonts
-							foreach ( Config::GOOGLE_FONTS as $font ) {
-								echo '<option value="' . $font . '"' . selected( $font, esc_attr( $options['secondary_font'] ) ) . '>' . $font . '</option>' . "\n";
-							}
+						foreach ( Config::GOOGLE_FONTS as $font ) {
+							echo '<option value="' . $font . '"' . selected( $font, esc_attr( $options['secondary_font'] ) ) . '>' . $font . '</option>' . "\n";
+						}
 
 						?>
 					</select>
@@ -261,9 +261,9 @@ use AkshitSethi\Plugins\MaintenanceMode\Config;
 						<?php
 
 							// Loading font sizes with the help of a loop
-							for ( $i = 6; $i < 81; $i++ ) {
-								echo '<option value="' . $i . '"' . selected( esc_attr( $options['header_font_size'] ), $i ) . '>' . $i . esc_html__( 'px', 'classic-coming-soon-maintenance-mode' ) . '</option>';
-							}
+						for ( $i = 6; $i < 81; $i++ ) {
+							echo '<option value="' . $i . '"' . selected( esc_attr( $options['header_font_size'] ), $i ) . '>' . $i . esc_html__( 'px', 'classic-coming-soon-maintenance-mode' ) . '</option>';
+						}
 
 						?>
 					</select>
@@ -277,9 +277,9 @@ use AkshitSethi\Plugins\MaintenanceMode\Config;
 						<?php
 
 							// Loading font sizes with the help of a loop
-							for ( $i = 6; $i < 81; $i++ ) {
-								echo '<option value="' . $i . '"' . selected( esc_attr( $options['secondary_font_size'] ), $i ) . '>' . $i . esc_html__( 'px', 'classic-coming-soon-maintenance-mode' ) . '</option>';
-							}
+						for ( $i = 6; $i < 81; $i++ ) {
+							echo '<option value="' . $i . '"' . selected( esc_attr( $options['secondary_font_size'] ), $i ) . '>' . $i . esc_html__( 'px', 'classic-coming-soon-maintenance-mode' ) . '</option>';
+						}
 
 						?>
 					</select>
@@ -311,9 +311,9 @@ use AkshitSethi\Plugins\MaintenanceMode\Config;
 						<?php
 
 							// Loading font sizes with the help of a loop
-							for ( $i = 6; $i < 61; $i++ ) {
-								echo '<option value="' . $i . '"' . selected( esc_attr( $options['antispam_font_size'] ), $i ) . '>' . $i . esc_html__( 'px', 'classic-coming-soon-maintenance-mode' ) . '</option>';
-							}
+						for ( $i = 6; $i < 61; $i++ ) {
+							echo '<option value="' . $i . '"' . selected( esc_attr( $options['antispam_font_size'] ), $i ) . '>' . $i . esc_html__( 'px', 'classic-coming-soon-maintenance-mode' ) . '</option>';
+						}
 
 						?>
 					</select>

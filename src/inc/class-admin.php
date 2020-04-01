@@ -65,17 +65,17 @@ class Admin {
 		wp_enqueue_script( Config::SHORT_SLUG . '-admin', Config::$plugin_url . 'assets/admin/js/admin.js', array( 'jquery' ), Config::VERSION, true );
 
 		$localize = array(
-			'prefix'       		=> Config::PREFIX,
-			'save_text'    		=> esc_html__( 'Save Changes', 'classic-coming-soon-maintenance-mode' ),
-			'support_text' 		=> esc_html__( 'Ask for Support', 'classic-coming-soon-maintenance-mode' ),
-			'select_text'  		=> esc_html__( 'Select Image', 'classic-coming-soon-maintenance-mode' ),
-			'upload_text'  		=> esc_html__( 'Select or upload via WP native uploader', 'classic-coming-soon-maintenance-mode' ),
-			'remove_text'  		=> esc_html__( 'Remove', 'classic-coming-soon-maintenance-mode' ),
-			'no_api_text' 		=> esc_html__( 'Provide your MailChimp API key in the above box and click on `Save Changes` option. Your lists will appear over here.', 'classic-coming-soon-maintenance-mode' ),
-			'list_text' 			=> esc_html__( 'Select your MailChimp list in which you would like to store the subscribers data.', 'classic-coming-soon-maintenance-mode' ),
-			'refresh_text' 		=> esc_html__( 'Refresh List', 'classic-coming-soon-maintenance-mode' ),
-			'default_fonts' 	=> Config::DEFAULT_FONTS,
-			'nonce' 					=> wp_create_nonce( Config::PREFIX . 'nonce' )
+			'prefix'        => Config::PREFIX,
+			'save_text'     => esc_html__( 'Save Changes', 'classic-coming-soon-maintenance-mode' ),
+			'support_text'  => esc_html__( 'Ask for Support', 'classic-coming-soon-maintenance-mode' ),
+			'select_text'   => esc_html__( 'Select Image', 'classic-coming-soon-maintenance-mode' ),
+			'upload_text'   => esc_html__( 'Select or upload via WP native uploader', 'classic-coming-soon-maintenance-mode' ),
+			'remove_text'   => esc_html__( 'Remove', 'classic-coming-soon-maintenance-mode' ),
+			'no_api_text'   => esc_html__( 'Provide your MailChimp API key in the above box and click on `Save Changes` option. Your lists will appear over here.', 'classic-coming-soon-maintenance-mode' ),
+			'list_text'     => esc_html__( 'Select your MailChimp list in which you would like to store the subscribers data.', 'classic-coming-soon-maintenance-mode' ),
+			'refresh_text'  => esc_html__( 'Refresh List', 'classic-coming-soon-maintenance-mode' ),
+			'default_fonts' => Config::DEFAULT_FONTS,
+			'nonce'         => wp_create_nonce( Config::PREFIX . 'nonce' ),
 		);
 		wp_localize_script( Config::SHORT_SLUG . '-admin', Config::PREFIX . 'admin_l10n', $localize );
 	}
@@ -118,87 +118,87 @@ class Admin {
 		// Default response
 		$response = array(
 			'code'     => 'success',
-			'response' => esc_html__( 'Options have been updated successfully.', 'classic-coming-soon-maintenance-mode' )
+			'response' => esc_html__( 'Options have been updated successfully.', 'classic-coming-soon-maintenance-mode' ),
 		);
 
 		// Check for _nonce
 		if ( empty( $_POST['_nonce'] ) || ! wp_verify_nonce( $_POST['_nonce'], Config::PREFIX . 'nonce' ) ) {
-			$response['code'] 		= 'error';
+			$response['code']     = 'error';
 			$response['response'] = esc_html__( 'Request does not seem to be a valid one. Try again by refreshing the page.', 'classic-coming-soon-maintenance-mode' );
 		}
 
 		// Filter and sanitize options
 		$options = array(
 			// Basic
-			'status'								=> isset( $_POST[Config::PREFIX . 'status'] ) ? true : false,
-			'title' 								=> sanitize_text_field( $_POST[Config::PREFIX . 'title'] ),
-			'header_text' 					=> sanitize_textarea_field( $_POST[Config::PREFIX . 'header'] ),
-			'secondary_text' 				=> sanitize_textarea_field( $_POST[Config::PREFIX . 'secondary'] ),
-			'antispam_text' 				=> sanitize_text_field( $_POST[Config::PREFIX . 'antispam'] ),
-			'custom_login_url' 			=> sanitize_text_field( $_POST[Config::PREFIX . 'custom_login'] ),
-			'show_logged_in' 				=> isset( $_POST[Config::PREFIX . 'showlogged'] ) ? true : false,
-			'exclude_se'						=> isset( $_POST[Config::PREFIX . 'excludese'] ) ? true : false,
-			'arrange' 							=> sanitize_text_field( $_POST[Config::PREFIX . 'arrange'] ),
-			'analytics' 						=> strip_tags( $_POST[Config::PREFIX . 'analytics'] ),
+			'status'                => isset( $_POST[ Config::PREFIX . 'status' ] ) ? true : false,
+			'title'                 => sanitize_text_field( $_POST[ Config::PREFIX . 'title' ] ),
+			'header_text'           => sanitize_textarea_field( $_POST[ Config::PREFIX . 'header' ] ),
+			'secondary_text'        => sanitize_textarea_field( $_POST[ Config::PREFIX . 'secondary' ] ),
+			'antispam_text'         => sanitize_text_field( $_POST[ Config::PREFIX . 'antispam' ] ),
+			'custom_login_url'      => sanitize_text_field( $_POST[ Config::PREFIX . 'custom_login' ] ),
+			'show_logged_in'        => isset( $_POST[ Config::PREFIX . 'showlogged' ] ) ? true : false,
+			'exclude_se'            => isset( $_POST[ Config::PREFIX . 'excludese' ] ) ? true : false,
+			'arrange'               => sanitize_text_field( $_POST[ Config::PREFIX . 'arrange' ] ),
+			'analytics'             => strip_tags( $_POST[ Config::PREFIX . 'analytics' ] ),
 
 			// Email
-			'mailchimp_api'					=> sanitize_text_field( $_POST[Config::PREFIX . 'api'] ),
-			'mailchimp_list' 				=> isset( $_POST[Config::PREFIX . 'list'] ) ? sanitize_text_field( $_POST[Config::PREFIX . 'list'] ) : false,
-			'message_noemail' 			=> sanitize_text_field( $_POST[Config::PREFIX . 'message_noemail'] ),
-			'message_error' 				=> sanitize_text_field( $_POST[Config::PREFIX . 'message_error'] ),
-			'message_wrong' 				=> sanitize_text_field( $_POST[Config::PREFIX . 'message_wrong'] ),
-			'message_done' 					=> sanitize_text_field( $_POST[Config::PREFIX . 'message_done'] ),
+			'mailchimp_api'         => sanitize_text_field( $_POST[ Config::PREFIX . 'api' ] ),
+			'mailchimp_list'        => isset( $_POST[ Config::PREFIX . 'list' ] ) ? sanitize_text_field( $_POST[ Config::PREFIX . 'list' ] ) : false,
+			'message_noemail'       => sanitize_text_field( $_POST[ Config::PREFIX . 'message_noemail' ] ),
+			'message_error'         => sanitize_text_field( $_POST[ Config::PREFIX . 'message_error' ] ),
+			'message_wrong'         => sanitize_text_field( $_POST[ Config::PREFIX . 'message_wrong' ] ),
+			'message_done'          => sanitize_text_field( $_POST[ Config::PREFIX . 'message_done' ] ),
 
 			// Design
-			'logo'									=> sanitize_text_field( $_POST[Config::PREFIX . 'logo'] ),
-			'favicon'								=> sanitize_text_field( $_POST[Config::PREFIX . 'favicon'] ),
-			'bg_cover' 							=> sanitize_text_field( $_POST[Config::PREFIX . 'bg'] ),
-			'content_overlay' 			=> isset( $_POST[Config::PREFIX . 'overlay'] ) ? true : false,
-			'content_bg_opacity' 		=> sanitize_text_field( $_POST[Config::PREFIX . 'overlay_opacity'] ),
-			'content_bg' 						=> sanitize_hex_color_no_hash( $_POST[Config::PREFIX . 'overlay_color'] ),
-			'content_border' 				=> sanitize_hex_color_no_hash( $_POST[Config::PREFIX . 'overlay_border_color'] ),
-			'content_border_width' 	=> absint( $_POST[Config::PREFIX . 'overlay_border_width'] ),
-			'content_border_radius' => absint( $_POST[Config::PREFIX . 'overlay_border_radius'] ),
-			'content_width'					=> absint( $_POST[Config::PREFIX . 'width'] ),
-			'bg_color' 							=> sanitize_hex_color_no_hash( $_POST[Config::PREFIX . 'color'] ),
-			'content_position'			=> sanitize_text_field( $_POST[Config::PREFIX . 'position'] ),
-			'content_alignment'			=> sanitize_text_field( $_POST[Config::PREFIX . 'alignment'] ),
-			'header_font' 					=> sanitize_text_field( $_POST[Config::PREFIX . 'header_font'] ),
-			'secondary_font' 				=> sanitize_text_field( $_POST[Config::PREFIX . 'secondary_font'] ),
-			'header_font_size' 			=> sanitize_text_field( $_POST[Config::PREFIX . 'header_size'] ),
-			'secondary_font_size' 	=> sanitize_text_field( $_POST[Config::PREFIX . 'secondary_size'] ),
-			'header_font_color' 		=> sanitize_hex_color_no_hash( $_POST[Config::PREFIX . 'header_color'] ),
-			'secondary_font_color' 	=> sanitize_hex_color_no_hash( $_POST[Config::PREFIX . 'secondary_color'] ),
-			'antispam_font_size' 		=> sanitize_text_field( $_POST[Config::PREFIX . 'antispam_size'] ),
-			'antispam_font_color' 	=> sanitize_hex_color_no_hash( $_POST[Config::PREFIX . 'antispam_color'] ),
+			'logo'                  => sanitize_text_field( $_POST[ Config::PREFIX . 'logo' ] ),
+			'favicon'               => sanitize_text_field( $_POST[ Config::PREFIX . 'favicon' ] ),
+			'bg_cover'              => sanitize_text_field( $_POST[ Config::PREFIX . 'bg' ] ),
+			'content_overlay'       => isset( $_POST[ Config::PREFIX . 'overlay' ] ) ? true : false,
+			'content_bg_opacity'    => sanitize_text_field( $_POST[ Config::PREFIX . 'overlay_opacity' ] ),
+			'content_bg'            => sanitize_hex_color_no_hash( $_POST[ Config::PREFIX . 'overlay_color' ] ),
+			'content_border'        => sanitize_hex_color_no_hash( $_POST[ Config::PREFIX . 'overlay_border_color' ] ),
+			'content_border_width'  => absint( $_POST[ Config::PREFIX . 'overlay_border_width' ] ),
+			'content_border_radius' => absint( $_POST[ Config::PREFIX . 'overlay_border_radius' ] ),
+			'content_width'         => absint( $_POST[ Config::PREFIX . 'width' ] ),
+			'bg_color'              => sanitize_hex_color_no_hash( $_POST[ Config::PREFIX . 'color' ] ),
+			'content_position'      => sanitize_text_field( $_POST[ Config::PREFIX . 'position' ] ),
+			'content_alignment'     => sanitize_text_field( $_POST[ Config::PREFIX . 'alignment' ] ),
+			'header_font'           => sanitize_text_field( $_POST[ Config::PREFIX . 'header_font' ] ),
+			'secondary_font'        => sanitize_text_field( $_POST[ Config::PREFIX . 'secondary_font' ] ),
+			'header_font_size'      => sanitize_text_field( $_POST[ Config::PREFIX . 'header_size' ] ),
+			'secondary_font_size'   => sanitize_text_field( $_POST[ Config::PREFIX . 'secondary_size' ] ),
+			'header_font_color'     => sanitize_hex_color_no_hash( $_POST[ Config::PREFIX . 'header_color' ] ),
+			'secondary_font_color'  => sanitize_hex_color_no_hash( $_POST[ Config::PREFIX . 'secondary_color' ] ),
+			'antispam_font_size'    => sanitize_text_field( $_POST[ Config::PREFIX . 'antispam_size' ] ),
+			'antispam_font_color'   => sanitize_hex_color_no_hash( $_POST[ Config::PREFIX . 'antispam_color' ] ),
 
 			// Form
-			'input_text' 						=> sanitize_text_field( $_POST[Config::PREFIX . 'input_text'] ),
-			'button_text' 					=> sanitize_text_field( $_POST[Config::PREFIX . 'button_text'] ),
-			'ignore_form_styles' 		=> isset( $_POST[Config::PREFIX . 'ignore_styles'] ) ? true : false,
-			'input_font_size'				=> sanitize_text_field( $_POST[Config::PREFIX . 'input_size'] ),
-			'button_font_size'			=> sanitize_text_field( $_POST[Config::PREFIX . 'button_size'] ),
-			'input_font_color'			=> sanitize_hex_color_no_hash( $_POST[Config::PREFIX . 'input_color'] ),
-			'button_font_color'			=> sanitize_hex_color_no_hash( $_POST[Config::PREFIX . 'button_color'] ),
-			'input_bg'							=> sanitize_hex_color_no_hash( $_POST[Config::PREFIX . 'input_bg'] ),
-			'button_bg'							=> sanitize_hex_color_no_hash( $_POST[Config::PREFIX . 'button_bg'] ),
-			'input_bg_hover'				=> sanitize_hex_color_no_hash( $_POST[Config::PREFIX . 'input_bg_hover'] ),
-			'button_bg_hover'				=> sanitize_hex_color_no_hash( $_POST[Config::PREFIX . 'button_bg_hover'] ),
-			'input_border_width'    => absint( $_POST[Config::PREFIX . 'input_border_width'] ),
-			'button_border_width' 	=> absint( $_POST[Config::PREFIX . 'button_border_width'] ),
-			'input_border'					=> sanitize_hex_color_no_hash( $_POST[Config::PREFIX . 'input_border'] ),
-			'button_border'					=> sanitize_hex_color_no_hash( $_POST[Config::PREFIX . 'button_border'] ),
-			'input_border_hover'		=> sanitize_hex_color_no_hash( $_POST[Config::PREFIX . 'input_border_hover'] ),
-			'button_border_hover'		=> sanitize_hex_color_no_hash( $_POST[Config::PREFIX . 'button_border_hover'] ),
-			'success_background' 		=> sanitize_hex_color_no_hash( $_POST[Config::PREFIX . 'success_background'] ),
-			'success_color' 				=> sanitize_hex_color_no_hash( $_POST[Config::PREFIX . 'success_color'] ),
-			'error_background' 			=> sanitize_hex_color_no_hash( $_POST[Config::PREFIX . 'error_background'] ),
-			'error_color' 					=> sanitize_hex_color_no_hash( $_POST[Config::PREFIX . 'error_color'] ),
+			'input_text'            => sanitize_text_field( $_POST[ Config::PREFIX . 'input_text' ] ),
+			'button_text'           => sanitize_text_field( $_POST[ Config::PREFIX . 'button_text' ] ),
+			'ignore_form_styles'    => isset( $_POST[ Config::PREFIX . 'ignore_styles' ] ) ? true : false,
+			'input_font_size'       => sanitize_text_field( $_POST[ Config::PREFIX . 'input_size' ] ),
+			'button_font_size'      => sanitize_text_field( $_POST[ Config::PREFIX . 'button_size' ] ),
+			'input_font_color'      => sanitize_hex_color_no_hash( $_POST[ Config::PREFIX . 'input_color' ] ),
+			'button_font_color'     => sanitize_hex_color_no_hash( $_POST[ Config::PREFIX . 'button_color' ] ),
+			'input_bg'              => sanitize_hex_color_no_hash( $_POST[ Config::PREFIX . 'input_bg' ] ),
+			'button_bg'             => sanitize_hex_color_no_hash( $_POST[ Config::PREFIX . 'button_bg' ] ),
+			'input_bg_hover'        => sanitize_hex_color_no_hash( $_POST[ Config::PREFIX . 'input_bg_hover' ] ),
+			'button_bg_hover'       => sanitize_hex_color_no_hash( $_POST[ Config::PREFIX . 'button_bg_hover' ] ),
+			'input_border_width'    => absint( $_POST[ Config::PREFIX . 'input_border_width' ] ),
+			'button_border_width'   => absint( $_POST[ Config::PREFIX . 'button_border_width' ] ),
+			'input_border'          => sanitize_hex_color_no_hash( $_POST[ Config::PREFIX . 'input_border' ] ),
+			'button_border'         => sanitize_hex_color_no_hash( $_POST[ Config::PREFIX . 'button_border' ] ),
+			'input_border_hover'    => sanitize_hex_color_no_hash( $_POST[ Config::PREFIX . 'input_border_hover' ] ),
+			'button_border_hover'   => sanitize_hex_color_no_hash( $_POST[ Config::PREFIX . 'button_border_hover' ] ),
+			'success_background'    => sanitize_hex_color_no_hash( $_POST[ Config::PREFIX . 'success_background' ] ),
+			'success_color'         => sanitize_hex_color_no_hash( $_POST[ Config::PREFIX . 'success_color' ] ),
+			'error_background'      => sanitize_hex_color_no_hash( $_POST[ Config::PREFIX . 'error_background' ] ),
+			'error_color'           => sanitize_hex_color_no_hash( $_POST[ Config::PREFIX . 'error_color' ] ),
 
 			// Advanced
-			'disable_settings' 			=> isset( $_POST[Config::PREFIX . 'disable'] ) ? true : false,
-			'custom_html'						=> wp_kses_post( $_POST[Config::PREFIX . 'html'] ),
-			'custom_css'						=> wp_strip_all_tags( $_POST[Config::PREFIX . 'css'] )
+			'disable_settings'      => isset( $_POST[ Config::PREFIX . 'disable' ] ) ? true : false,
+			'custom_html'           => wp_kses_post( $_POST[ Config::PREFIX . 'html' ] ),
+			'custom_css'            => wp_strip_all_tags( $_POST[ Config::PREFIX . 'css' ] ),
 		);
 
 		// Query the MailChimp API and pass the fetched lists to JS if the request returns 200
@@ -211,31 +211,31 @@ class Admin {
 				$response['data'] = $cached_data;
 			} else {
 				try {
-					$mailchimp 	= new MailChimp( $options['mailchimp_api'] );
+					$mailchimp = new MailChimp( $options['mailchimp_api'] );
 
 					// Fetch lists
-					$lists 			= $mailchimp->get('lists');
+					$lists = $mailchimp->get( 'lists' );
 
 					// API call went fine?
 					if ( $mailchimp->success() ) {
 						if ( count( $lists['lists'] ) > 0 ) {
 							foreach ( $lists['lists'] as $list ) {
-								$response['data'][sanitize_text_field( $list['id'] )] = sanitize_text_field( $list['name'] );
+								$response['data'][ sanitize_text_field( $list['id'] ) ] = sanitize_text_field( $list['name'] );
 							}
 
 							// Set transient for future calls
 							// Expiry after one month
 							set_transient( Config::PREFIX . 'email_lists', $response['data'], 60 * 60 * 24 * 30 );
 						} else {
-							$response['code'] 		= 'warning';
+							$response['code']     = 'warning';
 							$response['response'] = esc_html__( 'It seems that there is no list created for this account. Why not create one on the MailChimp website and then try here.', 'classic-coming-soon-maintenance-mode' );
 						}
 					} else {
-						$response['code'] 		= 'error';
+						$response['code']     = 'error';
 						$response['response'] = $mailchimp->getLastError();
 					}
-				} catch( Exception $e ) {
-					$response['code'] 		= 'error';
+				} catch ( Exception $e ) {
+					$response['code']     = 'error';
 					$response['response'] = $e->getMessage();
 				}
 			}
@@ -305,10 +305,10 @@ class Admin {
 	 */
 	public function settings() {
 		// Plugin options
-		$options 			= get_option( Config::DB_OPTION );
+		$options = get_option( Config::DB_OPTION );
 
 		// Admin email
-		$admin_email 	= sanitize_email( get_option( 'admin_email', '' ) );
+		$admin_email = sanitize_email( get_option( 'admin_email', '' ) );
 
 		// Settings page
 		require_once Config::$plugin_path . 'inc/admin/views/settings.php';
@@ -334,12 +334,12 @@ class Admin {
 		// Default response
 		$response = array(
 			'code'     => 'success',
-			'response' => esc_html__( 'Email list has been refreshed.', 'classic-coming-soon-maintenance-mode' )
+			'response' => esc_html__( 'Email list has been refreshed.', 'classic-coming-soon-maintenance-mode' ),
 		);
 
 		// Check for _nonce
 		if ( empty( $_POST['_nonce'] ) || ! wp_verify_nonce( $_POST['_nonce'], Config::PREFIX . 'nonce' ) ) {
-			$response['code'] 		= 'error';
+			$response['code']     = 'error';
 			$response['response'] = esc_html__( 'Request does not seem to be a valid one. Try again by refreshing the page.', 'classic-coming-soon-maintenance-mode' );
 		}
 
@@ -351,31 +351,31 @@ class Admin {
 			// Query the MailChimp API and pass the fetched lists to JS if the request returns 200
 			if ( ! empty( $options['mailchimp_api'] ) ) {
 				try {
-					$mailchimp 	= new MailChimp( $options['mailchimp_api'] );
+					$mailchimp = new MailChimp( $options['mailchimp_api'] );
 
 					// Fetch lists
-					$lists 			= $mailchimp->get('lists');
+					$lists = $mailchimp->get( 'lists' );
 
 					// API call went fine?
 					if ( $mailchimp->success() ) {
 						if ( count( $lists['lists'] ) > 0 ) {
 							foreach ( $lists['lists'] as $list ) {
-								$response['data'][sanitize_text_field( $list['id'] )] = sanitize_text_field( $list['name'] );
+								$response['data'][ sanitize_text_field( $list['id'] ) ] = sanitize_text_field( $list['name'] );
 							}
 
 							// Set transient for future calls
 							// Expiry after one month
 							set_transient( Config::PREFIX . 'email_lists', $response['data'], 60 * 60 * 24 * 30 );
 						} else {
-							$response['code'] 		= 'warning';
+							$response['code']     = 'warning';
 							$response['response'] = esc_html__( 'It seems that there is no list created for this account. Why not create one on the MailChimp website and then try here.', 'classic-coming-soon-maintenance-mode' );
 						}
 					} else {
-						$response['code'] 		= 'error';
+						$response['code']     = 'error';
 						$response['response'] = $mailchimp->getLastError();
 					}
-				} catch( Exception $e ) {
-					$response['code'] 		= 'error';
+				} catch ( Exception $e ) {
+					$response['code']     = 'error';
 					$response['response'] = $e->getMessage();
 				}
 			} else {
@@ -383,7 +383,7 @@ class Admin {
 				delete_transient( Config::PREFIX . 'email_lists' );
 			}
 		} else {
-			$response['code'] 		= 'error';
+			$response['code']     = 'error';
 			$response['response'] = esc_html__( 'Unable to grab options from the database. Try reactivating the plugin.', 'classic-coming-soon-maintenance-mode' );
 		}
 

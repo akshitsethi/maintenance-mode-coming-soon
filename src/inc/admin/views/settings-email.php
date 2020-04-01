@@ -29,70 +29,70 @@ use DrewM\MailChimp\MailChimp;
 					<?php
 
 						// Fetch lists from Mailchimp if the API key is provided
-						if ( ! empty( $options['mailchimp_api'] ) ) {
-							// Try to fetch from the transient
-							$cached_data = get_transient( Config::PREFIX . 'email_lists' );
+					if ( ! empty( $options['mailchimp_api'] ) ) {
+						// Try to fetch from the transient
+						$cached_data = get_transient( Config::PREFIX . 'email_lists' );
 
-							// Transient present?
-							if ( $cached_data ) {
-								echo '<select name="' . Config::PREFIX . 'list" id="' . Config::PREFIX . 'list">';
-	
-								foreach ( $cached_data as $key => $value ) {
-									echo '<option value="' . $key . '"' . selected( $key, esc_attr( $options['mailchimp_list'] ) ) . '>' . $value . '</option>';
-								}
+						// Transient present?
+						if ( $cached_data ) {
+							echo '<select name="' . Config::PREFIX . 'list" id="' . Config::PREFIX . 'list">';
 
-								echo '</select>';
-
-								// Show the refresh button
-								$this->refresh_button();
-
-								echo '<p class="as-form-help-block">' . esc_html__( 'Select your MailChimp list in which you would like to store the subscribers data.', 'classic-coming-soon-maintenance-mode' ) . '</p>';
-							} else {
-								try {
-									// Array to set transient
-									$list_data 	= array();
-
-									// API call
-									$mailchimp 	= new MailChimp( esc_html( $options['mailchimp_api'] ) );
-	
-									// Fetch lists
-									$lists 			= $mailchimp->get('lists');
-	
-									// API call went fine?
-									if ( $mailchimp->success() ) {
-										if ( count( $lists['lists'] ) > 0 ) {
-											echo '<select name="' . Config::PREFIX . 'list" id="' . Config::PREFIX . 'list">';
-	
-											foreach ( $lists['lists'] as $list ) {
-												echo '<option value="' . $list['id'] . '"' . selected( $list['id'], esc_attr( $options['mailchimp_list'] ) ) . '>' . $list['name'] . '</option>';
-
-												// Add to array
-												$list_data[sanitize_text_field( $list['id'] )] = sanitize_text_field( $list['name'] );
-											}
-	
-											echo '</select>';
-
-											// Show the refresh button
-											$this->refresh_button();
-
-											echo '<p class="as-form-help-block">' . esc_html__( 'Select your MailChimp list in which you would like to store the subscribers data.', 'classic-coming-soon-maintenance-mode' ) . '</p>';
-
-											// Set transient for future calls
-											// Expiry after one month
-											set_transient( Config::PREFIX . 'email_lists', $list_data, 60 * 60 * 24 * 30 );
-										} else {
-											echo '<p class="as-form-help-block">' . esc_html__( 'It seems that there is no list created for this account. Why not create one on the MailChimp website and then try here.', 'classic-coming-soon-maintenance-mode' ) . '</p>';
-										}
-									} else {
-										echo '<p class="as-form-help-block">' . $mailchimp->getLastError() . '</p>';
-									}
-								} catch( Exception $e ) {
-									echo '<p class="as-form-help-block">' . $e->getMessage() . '<p>';
-								}
+							foreach ( $cached_data as $key => $value ) {
+								echo '<option value="' . $key . '"' . selected( $key, esc_attr( $options['mailchimp_list'] ) ) . '>' . $value . '</option>';
 							}
+
+							echo '</select>';
+
+							// Show the refresh button
+							$this->refresh_button();
+
+							echo '<p class="as-form-help-block">' . esc_html__( 'Select your MailChimp list in which you would like to store the subscribers data.', 'classic-coming-soon-maintenance-mode' ) . '</p>';
 						} else {
-							echo '<p class="as-form-help-block">' . esc_html__( 'Provide your MailChimp API key in the above box and click on `Save Changes` option. Your lists will appear over here.', 'classic-coming-soon-maintenance-mode' ) . '</p>';
+							try {
+								// Array to set transient
+								$list_data = array();
+
+								// API call
+								$mailchimp = new MailChimp( esc_html( $options['mailchimp_api'] ) );
+
+								// Fetch lists
+								$lists = $mailchimp->get( 'lists' );
+
+								// API call went fine?
+								if ( $mailchimp->success() ) {
+									if ( count( $lists['lists'] ) > 0 ) {
+										echo '<select name="' . Config::PREFIX . 'list" id="' . Config::PREFIX . 'list">';
+
+										foreach ( $lists['lists'] as $list ) {
+											echo '<option value="' . $list['id'] . '"' . selected( $list['id'], esc_attr( $options['mailchimp_list'] ) ) . '>' . $list['name'] . '</option>';
+
+											// Add to array
+											$list_data[ sanitize_text_field( $list['id'] ) ] = sanitize_text_field( $list['name'] );
+										}
+
+										echo '</select>';
+
+										// Show the refresh button
+										$this->refresh_button();
+
+										echo '<p class="as-form-help-block">' . esc_html__( 'Select your MailChimp list in which you would like to store the subscribers data.', 'classic-coming-soon-maintenance-mode' ) . '</p>';
+
+										// Set transient for future calls
+										// Expiry after one month
+										set_transient( Config::PREFIX . 'email_lists', $list_data, 60 * 60 * 24 * 30 );
+									} else {
+										echo '<p class="as-form-help-block">' . esc_html__( 'It seems that there is no list created for this account. Why not create one on the MailChimp website and then try here.', 'classic-coming-soon-maintenance-mode' ) . '</p>';
+									}
+								} else {
+									echo '<p class="as-form-help-block">' . $mailchimp->getLastError() . '</p>';
+								}
+							} catch ( Exception $e ) {
+								echo '<p class="as-form-help-block">' . $e->getMessage() . '<p>';
+							}
 						}
+					} else {
+						echo '<p class="as-form-help-block">' . esc_html__( 'Provide your MailChimp API key in the above box and click on `Save Changes` option. Your lists will appear over here.', 'classic-coming-soon-maintenance-mode' ) . '</p>';
+					}
 
 					?>
 				</div>
