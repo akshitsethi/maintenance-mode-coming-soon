@@ -63,5 +63,9 @@ Getting help is just a click away now. Report your issues using the support form
 
 == Changelog ==
 
+= 1.0.1 =
+- Fixed issue with uninstalling plugin
+- Correction with author meta links
+
 = 1.0 =
 First release of the plugin.
