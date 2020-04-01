@@ -18,9 +18,9 @@ use DrewM\MailChimp\MailChimp;
 		<div class="as-section-content">
 			<div class="as-form-group">
 				<label for="<?php echo Config::PREFIX . 'api'; ?>" class="as-strong"><?php esc_html_e( 'MailChimp API', 'classic-coming-soon-maintenance-mode' ); ?></label>
-				<input type="text" name="<?php echo Config::PREFIX . 'api'; ?>" id="<?php echo Config::PREFIX . 'api'; ?>" value="<?php esc_attr_e( $options['mailchimp_api'] ); ?>" placeholder="<?php esc_attr_e( 'MailChimp API', 'classic-coming-soon-maintenance-mode' ); ?>" class="as-form-control">
+				<input type="text" name="<?php echo Config::PREFIX . 'api'; ?>" id="<?php echo Config::PREFIX . 'api'; ?>" value="<?php echo esc_attr( $options['mailchimp_api'] ); ?>" placeholder="<?php esc_attr_e( 'MailChimp API', 'classic-coming-soon-maintenance-mode' ); ?>" class="as-form-control">
 
-				<p class="as-form-help-block"><?php esc_html_e( 'Provide your MailChimp API over here.', 'classic-coming-soon-maintenance-mode' ); ?> <a href="https://mailchimp.com/help/about-api-keys/" target="_blank"><?php esc_html_e( 'Click here', 'classic-coming-soon-maintenance-mode' ); ?></a> <?php esc_html_e( 'to know how to get this information. In case you don\'t want to enable subscription option, just leave this field blank.', 'classic-coming-soon-maintenance-mode' ); ?></p>
+				<p class="as-form-help-block"><?php echo sprintf( esc_html__( 'Provide your MailChimp API over here. %1$sClick here%2$s to know how to get this information. In case you don\'t want to enable subscription option, just leave this field blank.', 'classic-coming-soon-maintenance-mode' ), '<a href="https://mailchimp.com/help/about-api-keys/" target="_blank">', '</a>' ); ?></p>
 			</div>
 
 			<div class="as-form-group">
@@ -38,7 +38,7 @@ use DrewM\MailChimp\MailChimp;
 								echo '<select name="' . Config::PREFIX . 'list" id="' . Config::PREFIX . 'list">';
 	
 								foreach ( $cached_data as $key => $value ) {
-									echo '<option value="' . $key . '"' . selected( $key, $options['mailchimp_list'] ) . '>' . $value . '</option>';
+									echo '<option value="' . $key . '"' . selected( $key, esc_attr( $options['mailchimp_list'] ) ) . '>' . $value . '</option>';
 								}
 
 								echo '</select>';
@@ -53,7 +53,7 @@ use DrewM\MailChimp\MailChimp;
 									$list_data 	= array();
 
 									// API call
-									$mailchimp 	= new MailChimp( $options['mailchimp_api'] );
+									$mailchimp 	= new MailChimp( esc_html( $options['mailchimp_api'] ) );
 	
 									// Fetch lists
 									$lists 			= $mailchimp->get('lists');
@@ -64,7 +64,7 @@ use DrewM\MailChimp\MailChimp;
 											echo '<select name="' . Config::PREFIX . 'list" id="' . Config::PREFIX . 'list">';
 	
 											foreach ( $lists['lists'] as $list ) {
-												echo '<option value="' . $list['id'] . '"' . selected( $list['id'], $options['mailchimp_list'] ) . '>' . $list['name'] . '</option>';
+												echo '<option value="' . $list['id'] . '"' . selected( $list['id'], esc_attr( $options['mailchimp_list'] ) ) . '>' . $list['name'] . '</option>';
 
 												// Add to array
 												$list_data[sanitize_text_field( $list['id'] )] = sanitize_text_field( $list['name'] );
@@ -101,14 +101,14 @@ use DrewM\MailChimp\MailChimp;
 			<div class="as-double-group as-clearfix">
 				<div class="as-form-group">
 					<label for="<?php echo Config::PREFIX . 'message_noemail'; ?>" class="as-strong"><?php esc_html_e( 'Message: No Email', 'classic-coming-soon-maintenance-mode' ); ?></label>
-					<input type="text" name="<?php echo Config::PREFIX . 'message_noemail'; ?>" id="<?php echo Config::PREFIX . 'message_noemail'; ?>" value="<?php echo esc_attr_e( stripslashes( $options['message_noemail'] ) ); ?>" placeholder="<?php esc_attr_e( 'Message when email is not provided', 'classic-coming-soon-maintenance-mode' ); ?>" class="as-form-control">
+					<input type="text" name="<?php echo Config::PREFIX . 'message_noemail'; ?>" id="<?php echo Config::PREFIX . 'message_noemail'; ?>" value="<?php echo esc_attr( stripslashes( $options['message_noemail'] ) ); ?>" placeholder="<?php esc_attr_e( 'Message when email is not provided', 'classic-coming-soon-maintenance-mode' ); ?>" class="as-form-control">
 
 					<p class="as-form-help-block"><?php esc_html_e( 'Message to show if the user forgets to provide email address.', 'classic-coming-soon-maintenance-mode' ); ?></p>
 				</div>
 
 				<div class="as-form-group">
 					<label for="<?php echo Config::PREFIX . 'message_error'; ?>" class="as-strong"><?php esc_html_e( 'Message: Invalid Request', 'classic-coming-soon-maintenance-mode' ); ?></label>
-					<input type="text" name="<?php echo Config::PREFIX . 'message_error'; ?>" id="<?php echo Config::PREFIX . 'message_error'; ?>" value="<?php echo esc_attr_e( stripslashes( $options['message_error'] ) ); ?>" placeholder="<?php esc_attr_e( 'Message when user is already subscribed', 'classic-coming-soon-maintenance-mode' ); ?>" class="as-form-control">
+					<input type="text" name="<?php echo Config::PREFIX . 'message_error'; ?>" id="<?php echo Config::PREFIX . 'message_error'; ?>" value="<?php echo esc_attr( stripslashes( $options['message_error'] ) ); ?>" placeholder="<?php esc_attr_e( 'Message when user is already subscribed', 'classic-coming-soon-maintenance-mode' ); ?>" class="as-form-control">
 
 					<p class="as-form-help-block"><?php esc_html_e( 'Message to show if there is an invalid request (usually an error while processing the request).', 'classic-coming-soon-maintenance-mode' ); ?></p>
 				</div>
@@ -117,14 +117,14 @@ use DrewM\MailChimp\MailChimp;
 			<div class="as-double-group as-clearfix">
 				<div class="as-form-group">
 					<label for="<?php echo Config::PREFIX . 'message_wrong'; ?>" class="as-strong"><?php esc_html_e( 'Message: General Error', 'classic-coming-soon-maintenance-mode' ); ?></label>
-					<input type="text" name="<?php echo Config::PREFIX . 'message_wrong'; ?>" id="<?php echo Config::PREFIX . 'message_wrong'; ?>" value="<?php echo esc_attr_e( stripslashes( $options['message_wrong'] ) ); ?>" placeholder="<?php esc_attr_e( 'Message when anything goes wrong while subscribing', 'classic-coming-soon-maintenance-mode' ); ?>" class="as-form-control">
+					<input type="text" name="<?php echo Config::PREFIX . 'message_wrong'; ?>" id="<?php echo Config::PREFIX . 'message_wrong'; ?>" value="<?php echo esc_attr( stripslashes( $options['message_wrong'] ) ); ?>" placeholder="<?php esc_attr_e( 'Message when anything goes wrong while subscribing', 'classic-coming-soon-maintenance-mode' ); ?>" class="as-form-control">
 
 					<p class="as-form-help-block"><?php esc_html_e( 'Message to show if user provides an invalid email address.', 'classic-coming-soon-maintenance-mode' ); ?></p>
 				</div>
 
 				<div class="as-form-group">
 					<label for="<?php echo Config::PREFIX . 'message_done'; ?>" class="as-strong"><?php esc_html_e( 'Message: Successfully Subscribed', 'classic-coming-soon-maintenance-mode' ); ?></label>
-					<input type="text" name="<?php echo Config::PREFIX . 'message_done'; ?>" id="<?php echo Config::PREFIX . 'message_done'; ?>" value="<?php echo esc_attr_e( stripslashes( $options['message_done'] ) ); ?>" placeholder="<?php esc_attr_e( 'Success message when the user gets subscribed', 'classic-coming-soon-maintenance-mode' ); ?>" class="as-form-control">
+					<input type="text" name="<?php echo Config::PREFIX . 'message_done'; ?>" id="<?php echo Config::PREFIX . 'message_done'; ?>" value="<?php echo esc_attr( stripslashes( $options['message_done'] ) ); ?>" placeholder="<?php esc_attr_e( 'Success message when the user gets subscribed', 'classic-coming-soon-maintenance-mode' ); ?>" class="as-form-control">
 
 					<p class="as-form-help-block"><?php esc_html_e( 'Message to show when the user gets subscribed successfully.', 'classic-coming-soon-maintenance-mode' ); ?></p>
 				</div>
