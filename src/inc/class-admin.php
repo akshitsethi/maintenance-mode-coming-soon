@@ -98,7 +98,7 @@ class Admin {
 	 * @return array
 	 */
 	public function meta_links( $links, $file ) {
-		if ( strpos( $file, 'widgets-bundle.php' ) !== false ) {
+		if ( strpos( $file, 'classic-coming-soon-maintenance-mode.php' ) !== false ) {
 			$new_links = array(
 				'<a href="https://www.facebook.com/akshitsethi" target="_blank">' . esc_html__( 'Facebook', 'classic-coming-soon-maintenance-mode' ) . '</a>',
 				'<a href="https://twitter.com/akshitsethi" target="_blank">' . esc_html__( 'Twitter', 'classic-coming-soon-maintenance-mode' ) . '</a>',
