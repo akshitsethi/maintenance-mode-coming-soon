@@ -114,7 +114,7 @@ use AkshitSethi\Plugins\MaintenanceMode\Config;
 						<label for="<?php echo Config::PREFIX . 'analytics'; ?>" class="as-strong"><?php esc_html_e( 'Analytics Code', 'classic-coming-soon-maintenance-mode' ); ?></label>
 						<textarea name="<?php echo Config::PREFIX . 'analytics'; ?>" id="<?php echo Config::PREFIX . 'analytics'; ?>" rows="5" placeholder="<?php esc_attr_e( 'Analytics code for the maintenance page', 'classic-coming-soon-maintenance-mode' ); ?>"><?php echo esc_textarea( stripslashes( $options['analytics'] ) ); ?></textarea>
 
-						<p class="as-form-help-block"><?php echo sprintf( esc_html__( 'Provide analytics code for the maintenance page. Please provide code without the %1$s tag.', 'classic-coming-soon-maintenance-mode' ), '<strong>&lt;script&gt;</strong>' ); ?></p>
+						<p class="as-form-help-block"><?php echo sprintf( esc_html__( 'Provide analytics code for the maintenance page. Please provide code without the %1$s tag.', 'classic-coming-soon-maintenance-mode' ), '<i style="color: #f96773">&lt;script&gt;</i>' ); ?></p>
 					</div>
 				</div>
 			</div>
