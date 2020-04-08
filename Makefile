@@ -1,4 +1,4 @@
-VERSION := 1.0.1
+VERSION := 1.5.0
 PLUGINSLUG := maintenance-mode-coming-soon
 SRCPATH := $(shell pwd)/src
 
