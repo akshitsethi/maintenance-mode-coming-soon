@@ -45,7 +45,7 @@ use DrewM\MailChimp\MailChimp;
 ?>
 </head>
 <body class="as-plugin">
-	<div class="as-ccsmm">
+	<div class="as-mmcs">
 		<div class="as-container">
 			<div class="as-content">
 				<?php
@@ -147,7 +147,7 @@ use DrewM\MailChimp\MailChimp;
 				?>
 			</div><!-- .as-content -->
 		</div><!-- .as-container -->
-	</div><!-- .as-ccsmm -->
+	</div><!-- .as-mmcs -->
 
 <?php
 
