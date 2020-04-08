@@ -72,7 +72,7 @@ toastr.options = {
   // When switching between support and about
   function hacks($tab) {
     // Submit button
-    var $as_button = $('#' + ccsmm_admin_l10n.prefix + 'submit');
+    var $as_button = $('#' + mmcs_admin_l10n.prefix + 'submit');
 
     // About
     if ($tab == '#about') {
@@ -83,9 +83,9 @@ toastr.options = {
 
     // Support
     if ($tab == '#support') {
-      $as_button.val(ccsmm_admin_l10n.support_text);
+      $as_button.val(mmcs_admin_l10n.support_text);
     } else {
-      $as_button.val(ccsmm_admin_l10n.save_text);
+      $as_button.val(mmcs_admin_l10n.save_text);
     }
   }
 
@@ -102,7 +102,7 @@ toastr.options = {
     var $fontValue = $font.val();
 
     // Make sure that only Google fonts go throught the font loader
-    if (ccsmm_admin_l10n.default_fonts.indexOf($fontValue) === -1) {
+    if (mmcs_admin_l10n.default_fonts.indexOf($fontValue) === -1) {
       reloadFont($fontValue);
     }
 
@@ -124,9 +124,9 @@ toastr.options = {
 
     // Extend the wp.media object
     customUploader = wp.media({
-      title: ccsmm_admin_l10n.select_text,
+      title: mmcs_admin_l10n.select_text,
       button: {
-        text: ccsmm_admin_l10n.select_text
+        text: mmcs_admin_l10n.select_text
       },
       multiple: false
     });
@@ -137,7 +137,7 @@ toastr.options = {
 
       parentTarget.find('input').val(attachment.url);
       parentTarget.find('.as-preview-area').html('<img src="' + attachment.url + '">');
-      parentTarget.find('.as-upload-append').html('&nbsp;<a href="javascript:;" class="as-remove-image">' + ccsmm_admin_l10n.remove_text + '</a>');
+      parentTarget.find('.as-upload-append').html('&nbsp;<a href="javascript:;" class="as-remove-image">' + mmcs_admin_l10n.remove_text + '</a>');
 
       // Prompts to save changes
       parentTarget.find('input').addClass('changed-input');
@@ -206,15 +206,15 @@ toastr.options = {
         },
         set: function( sortable ) {
           var order = sortable.toArray();
-          $( '#' + ccsmm_admin_l10n.prefix + 'arrange' ).val( order );
+          $( '#' + mmcs_admin_l10n.prefix + 'arrange' ).val( order );
         }
       }
     } );
 
 
     // Editor
-    getEditor(ccsmm_admin_l10n.prefix + 'html_editor', ccsmm_admin_l10n.prefix + 'html', 'html');
-		getEditor(ccsmm_admin_l10n.prefix + 'css_editor', ccsmm_admin_l10n.prefix + 'css', 'css');
+    getEditor(mmcs_admin_l10n.prefix + 'html_editor', mmcs_admin_l10n.prefix + 'html', 'html');
+		getEditor(mmcs_admin_l10n.prefix + 'css_editor', mmcs_admin_l10n.prefix + 'css', 'css');
 
 
     // Sticky header
@@ -241,7 +241,7 @@ toastr.options = {
       var parentTarget = $(this).parent().parent().parent();
 
       parentTarget.find('input').val('');
-      parentTarget.find('.as-preview-area').html(ccsmm_admin_l10n.upload_text);
+      parentTarget.find('.as-preview-area').html(mmcs_admin_l10n.upload_text);
       $(this).hide();
 
       // Prompts to save changes
@@ -250,18 +250,18 @@ toastr.options = {
 
 
     // Submission
-    $(document).on('click', '#' + ccsmm_admin_l10n.prefix + 'submit', function (e) {
+    $(document).on('click', '#' + mmcs_admin_l10n.prefix + 'submit', function (e) {
       e.preventDefault();
 
-      // Main form identifier
-      var formID = $('#' + ccsmm_admin_l10n.prefix + 'form');
+      // ID
+      var id = $(this).attr('data-tab').replace('#', '');
 
       // Form data
-      var formData 	= new FormData(formID[0]);
+      var formData = new FormData($('#' + id + ' form')[0]);
 
       // Append action
-      formData.append('action', ccsmm_admin_l10n.prefix + 'options');
-      formData.append('_nonce', ccsmm_admin_l10n.nonce);
+      formData.append('action', mmcs_admin_l10n.prefix + id);
+      formData.append('_nonce', mmcs_admin_l10n.nonce);
 
       // AJAX
       $.ajax( {
@@ -272,7 +272,7 @@ toastr.options = {
         contentType: false,
         beforeSend: function() {
           formID.block({
-            message: '<div class="as-strong" style="background: #ecf0f1; padding: 10px 6px; color: #000;">Processing..</div>',
+            message: '<div class="as-strong" style="background: #ecf0f1; padding: 10px 6px; color: #000;">' + mmcs_admin_l10n.processing + '</div>',
             css: {
               border: 'none',
               backgroundColor: 'none'
@@ -298,11 +298,11 @@ toastr.options = {
         if (data.data) {
           var html;
 
-          html = '<select name="' + ccsmm_admin_l10n.prefix + 'list" id="' + ccsmm_admin_l10n.prefix + 'list">';
+          html = '<select name="' + mmcs_admin_l10n.prefix + 'list" id="' + mmcs_admin_l10n.prefix + 'list">';
 
           // Loop over the list
           for (var key in data.data) {
-            if (formData.get(ccsmm_admin_l10n.prefix + 'list') === key) {
+            if (formData.get(mmcs_admin_l10n.prefix + 'list') === key) {
               html += '<option value="' + key + '" selected="selected">' + data.data[key] + '</option>';
             } else {
               html += '<option value="' + key + '">' + data.data[key] + '</option>';
@@ -310,30 +310,30 @@ toastr.options = {
           }
 
           html += '</select>';
-          html += '&nbsp; <button type="button" id="' + ccsmm_admin_l10n.prefix + 'refresh' + '" class="as-btn as-small">' + ccsmm_admin_l10n.refresh_text + '</button>';
-          html += '<p class="as-form-help-block">' + ccsmm_admin_l10n.list_text + '</p>';
+          html += '&nbsp; <button type="button" id="' + mmcs_admin_l10n.prefix + 'refresh' + '" class="as-btn as-small">' + mmcs_admin_l10n.refresh_text + '</button>';
+          html += '<p class="as-form-help-block">' + mmcs_admin_l10n.list_text + '</p>';
 
           // Add the select box to the page
           $('.as-ajax-response').html(html);
         }
 
         // Hide the checkbox and show the default message if API key is empty
-        if (!formData.get(ccsmm_admin_l10n.prefix + 'api')) {
-          var listDiv = $('#' + ccsmm_admin_l10n.prefix + 'list');
+        if (!formData.get(mmcs_admin_l10n.prefix + 'api')) {
+          var listDiv = $('#' + mmcs_admin_l10n.prefix + 'list');
 
           if (listDiv.length > 0) {
             listDiv.hide();
           }
 
           // Show or replace the default message
-          $('.as-ajax-response').html('<p class="as-form-help-block">' + ccsmm_admin_l10n.no_api_text + '</p>');
+          $('.as-ajax-response').html('<p class="as-form-help-block">' + mmcs_admin_l10n.no_api_text + '</p>');
         }
       });
     });
 
 
     // Refresh email list
-    $(document).on('click', '#' + ccsmm_admin_l10n.prefix + 'refresh', function (e) {
+    $(document).on('click', '#' + mmcs_admin_l10n.prefix + 'refresh', function (e) {
       e.preventDefault();
 
       // Parent identifier
@@ -344,8 +344,8 @@ toastr.options = {
         type: 'POST',
         url: ajaxurl,
         data: {
-          action: ccsmm_admin_l10n.prefix + 'refresh',
-          _nonce: ccsmm_admin_l10n.nonce
+          action: mmcs_admin_l10n.prefix + 'refresh',
+          _nonce: mmcs_admin_l10n.nonce
         },
         beforeSend: function() {
           parentDiv.block({
@@ -372,7 +372,7 @@ toastr.options = {
         if (data.data) {
           var html;
 
-          html = '<select name="' + ccsmm_admin_l10n.prefix + 'list" id="' + ccsmm_admin_l10n.prefix + 'list">';
+          html = '<select name="' + mmcs_admin_l10n.prefix + 'list" id="' + mmcs_admin_l10n.prefix + 'list">';
 
           // Loop over the list
           for (var key in data.data) {
@@ -380,23 +380,23 @@ toastr.options = {
           }
 
           html += '</select>';
-          html += '&nbsp; <button type="button" id="' + ccsmm_admin_l10n.prefix + 'refresh' + '" class="as-btn as-small">' + ccsmm_admin_l10n.refresh_text + '</button>';
-          html += '<p class="as-form-help-block">' + ccsmm_admin_l10n.list_text + '</p>';
+          html += '&nbsp; <button type="button" id="' + mmcs_admin_l10n.prefix + 'refresh' + '" class="as-btn as-small">' + mmcs_admin_l10n.refresh_text + '</button>';
+          html += '<p class="as-form-help-block">' + mmcs_admin_l10n.list_text + '</p>';
 
           // Add the select box to the page
           $('.as-ajax-response').html(html);
         }
 
         // Hide the checkbox and show the default message if API key is empty
-        if (!$('#' + ccsmm_admin_l10n.prefix + 'api').val()) {
-          var listDiv = $('#' + ccsmm_admin_l10n.prefix + 'list');
+        if (!$('#' + mmcs_admin_l10n.prefix + 'api').val()) {
+          var listDiv = $('#' + mmcs_admin_l10n.prefix + 'list');
 
           if (listDiv.length > 0) {
             listDiv.hide();
           }
 
           // Show or replace the default message
-          $('.as-ajax-response').html('<p class="as-form-help-block">' + ccsmm_admin_l10n.no_api_text + '</p>');
+          $('.as-ajax-response').html('<p class="as-form-help-block">' + mmcs_admin_l10n.no_api_text + '</p>');
         }
       });
     });
@@ -405,7 +405,7 @@ toastr.options = {
     // On form change
     $('form').on('change keyup keydown', 'input, textarea, select', function (e) {
       // Get cookie state
-      var $state = Cookies.get(ccsmm_admin_l10n.prefix + 'menu');
+      var $state = Cookies.get(mmcs_admin_l10n.prefix + 'menu');
 
       if ($state) {
         if ($state != '#support') {
@@ -416,7 +416,7 @@ toastr.options = {
       }
     });
 
-    var $state = Cookies.get(ccsmm_admin_l10n.prefix + 'menu');
+    var $state = Cookies.get(mmcs_admin_l10n.prefix + 'menu');
 
     // Check menu position
     if ($state) {
@@ -424,7 +424,7 @@ toastr.options = {
       $('a[href="' + $state + '"]').addClass('active');
 
       // Add : Button (data-tab)
-      $('#' + ccsmm_admin_l10n.prefix + 'submit' ).attr('data-tab', $state);
+      $('#' + mmcs_admin_l10n.prefix + 'submit' ).attr('data-tab', $state);
 
       // Hacks for support and about tabs
       hacks($state);
@@ -436,7 +436,7 @@ toastr.options = {
       $('.as-tile:first').fadeIn();
 
       // Add options (data-tab)
-      $('#' + ccsmm_admin_l10n.prefix + 'submit').attr('data-tab', '#basic');
+      $('#' + mmcs_admin_l10n.prefix + 'submit').attr('data-tab', '#basic');
     }
 
 
@@ -445,13 +445,13 @@ toastr.options = {
       e.preventDefault();
 
       // Remove cookies
-      Cookies.remove(ccsmm_admin_l10n.prefix + 'menu', {path: '/'});
+      Cookies.remove(mmcs_admin_l10n.prefix + 'menu', {path: '/'});
 
       var $selector 		= $(this);
       var $tab      		= $selector.attr('href');
 
       if ($('.changed-input').length) {
-        toastr.error('You haven\'t saved your changes.');
+        toastr.error(mmcs_admin_l10n.save_changes);
       } else {
         // Change menu selection
         $('.as-main-menu li a').removeClass('active');
@@ -464,10 +464,10 @@ toastr.options = {
         $($tab).fadeIn();
 
         // Set cookie
-        Cookies.set(ccsmm_admin_l10n.prefix + 'menu', $tab, {path: '/'});
+        Cookies.set(mmcs_admin_l10n.prefix + 'menu', $tab, {path: '/'});
 
         // State button (add)
-        $('#' + ccsmm_admin_l10n.prefix + 'submit').attr('data-tab', $tab);
+        $('#' + mmcs_admin_l10n.prefix + 'submit').attr('data-tab', $tab);
 
         // Hacks for support and about tabs
         hacks($tab)
