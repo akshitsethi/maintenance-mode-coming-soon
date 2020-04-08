@@ -1,4 +1,4 @@
-=== Classic Coming Soon & Maintenance Mode ===
+=== Maintenance Mode & Coming Soon ===
 Contributors: akshitsethi
 Donate link: https://akshitsethi.com/
 Tags: coming soon, coming soon page, construction, landing page, launch, launch page, maintenance, maintenance mode, newsletter, offline, unavailable, under construction, wordpress coming soon, wordpress maintenance mode, wordpress under construction
@@ -13,7 +13,7 @@ Create a simple yet elegant Coming Soon, Launch Page, Under Construction, or Mai
 
 
 == Description ==
-The Classic Coming Soon & Maintenance Mode plugin allows you to quickly & easily set up a Coming Soon, Launch Page, Under Construction, or Maintenance Mode page for your website. It's Simple yet flexible and works with any WordPress theme out there. Also, lets you have full control over the frontend of the website and every element can be customized with just a few clicks.
+The Maintenance Mode & Coming Soon plugin allows you to quickly & easily set up a Coming Soon, Launch Page, Under Construction, or Maintenance Mode page for your website. It's Simple yet flexible and works with any WordPress theme out there. Also, lets you have full control over the frontend of the website and every element can be customized with just a few clicks.
 
 
 = Plugin Features =
@@ -41,7 +41,7 @@ To manually install this plugin, please follow the instructions below.
 
 1. Upload `classic-coming-soon-maintenance-mode` folder to the `/wp-content/plugins/` directory.
 2. Activate the plugin through the 'Plugins' menu in WordPress.
-3. Go to 'Classic Coming Soon & Maintenance Mode' options under the 'Settings' menu.
+3. Go to 'Maintenance Mode & Coming Soon' options under the 'Settings' menu.
 4. Configure the plugin and start enjoying it.
 
 

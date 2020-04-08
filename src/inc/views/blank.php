@@ -14,7 +14,7 @@ use DrewM\MailChimp\MailChimp;
 <meta charset="<?php bloginfo( 'charset' ); ?>">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title><?php echo stripslashes( $this->get_option( sanitize_text_field( $options['title'] ), esc_html__( 'Maintainance Mode', 'classic-coming-soon-maintenance-mode' ) ) ); ?></title>
+<title><?php echo stripslashes( $this->get_option( sanitize_text_field( $options['title'] ), esc_html__( 'Maintainance Mode', 'maintenance-mode-coming-soon' ) ) ); ?></title>
 <?php if ( isset( $options['favicon'] ) && ! empty( $options['favicon'] ) ) : ?>
 <link rel="shortcut icon" href="<?php echo esc_url_raw( sanitize_text_field( $options['favicon'] ) ); ?>" />
 <?php endif; ?>
@@ -51,14 +51,14 @@ if ( ! empty( $custom_html ) && false !== strpos( $custom_html, '{{form}}' ) ) {
 
 			if ( empty( $email ) ) {
 				$code     = 'error';
-				$response = $this->get_option( esc_html( $options['message_noemail'] ), esc_html__( 'Please provide your email address.', 'classic-coming-soon-maintenance-mode' ) );
+				$response = $this->get_option( esc_html( $options['message_noemail'] ), esc_html__( 'Please provide your email address.', 'maintenance-mode-coming-soon' ) );
 			} else {
 				$email = filter_var( strtolower( trim( $email ) ), FILTER_SANITIZE_EMAIL );
 
 				// Check value for filter_var
 				if ( ! $email ) {
 					$code     = 'error';
-					$response = $this->get_option( esc_html( stripslashes( $options['message_wrong'] ) ), esc_html__( 'Please provide a valid email address.', 'classic-coming-soon-maintenance-mode' ) );
+					$response = $this->get_option( esc_html( stripslashes( $options['message_wrong'] ) ), esc_html__( 'Please provide a valid email address.', 'maintenance-mode-coming-soon' ) );
 				} else {
 					$mailchimp = new MailChimp( esc_html( $options['mailchimp_api'] ) );
 					$connect   = $mailchimp->post(
@@ -74,7 +74,7 @@ if ( ! empty( $custom_html ) && false !== strpos( $custom_html, '{{form}}' ) ) {
 						$code = 'success';
 
 						// Show the success message
-						$response = $this->get_option( esc_html( stripslashes( $options['message_done'] ) ), esc_html__( 'Thank you! We\'ll be in touch!', 'classic-coming-soon-maintenance-mode' ) );
+						$response = $this->get_option( esc_html( stripslashes( $options['message_done'] ) ), esc_html__( 'Thank you! We\'ll be in touch!', 'maintenance-mode-coming-soon' ) );
 					} else {
 						$code     = 'error';
 						$response = $mailchimp->getLastError();
@@ -92,8 +92,8 @@ if ( ! empty( $custom_html ) && false !== strpos( $custom_html, '{{form}}' ) ) {
 		}
 
 		$subscription_form .= '<form role="form" method="post">
-        <input type="text" name="' . Config::PREFIX . 'email" placeholder="' . esc_attr( $this->get_option( esc_html( $options['input_text'] ), esc_html__( 'Enter your email address..', 'classic-coming-soon-maintenance-mode' ) ) ) . '">
-        <input type="submit" name="' . Config::PREFIX . 'submit" value="' . esc_attr( $this->get_option( esc_html( $options['button_text'] ), esc_html__( 'Subscribe', 'classic-coming-soon-maintenance-mode' ) ) ) . '">
+        <input type="text" name="' . Config::PREFIX . 'email" placeholder="' . esc_attr( $this->get_option( esc_html( $options['input_text'] ), esc_html__( 'Enter your email address..', 'maintenance-mode-coming-soon' ) ) ) . '">
+        <input type="submit" name="' . Config::PREFIX . 'submit" value="' . esc_attr( $this->get_option( esc_html( $options['button_text'] ), esc_html__( 'Subscribe', 'maintenance-mode-coming-soon' ) ) ) . '">
 			</form>';
 
 		// Antispam text
@@ -118,7 +118,7 @@ if ( isset( $options['analytics'] ) && ! empty( $options['analytics'] ) ) {
 
 ?>
 
-<!-- Classic Coming Soon & Maintenance Mode Plugin by Akshit Sethi (https://akshitsethi.com) -->
+<!-- Plugin by Akshit Sethi (https://akshitsethi.com) -->
 <!-- Twitter: @akshitsethi -->
 </body>
 </html>
