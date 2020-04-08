@@ -185,6 +185,9 @@ toastr.options = {
         set: function(sortable) {
           var order = sortable.toArray();
           $('#' + mmcs_admin_l10n.prefix + target).val(order);
+
+          // Add the changed input class
+          $('#' + mmcs_admin_l10n.prefix + target).addClass('changed-input');
         }
       }
     });
