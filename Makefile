@@ -1,5 +1,5 @@
 VERSION := 1.0.1
-PLUGINSLUG := classic-coming-soon-maintenance-mode
+PLUGINSLUG := maintenance-mode-coming-soon
 SRCPATH := $(shell pwd)/src
 
 bin/linux/amd64/github-release:

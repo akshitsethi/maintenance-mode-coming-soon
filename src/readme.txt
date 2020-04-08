@@ -39,7 +39,7 @@ The Maintenance Mode & Coming Soon plugin allows you to quickly & easily set up 
 
 To manually install this plugin, please follow the instructions below.
 
-1. Upload `classic-coming-soon-maintenance-mode` folder to the `/wp-content/plugins/` directory.
+1. Upload `maintenance-mode-coming-soon` folder to the `/wp-content/plugins/` directory.
 2. Activate the plugin through the 'Plugins' menu in WordPress.
 3. Go to 'Maintenance Mode & Coming Soon' options under the 'Settings' menu.
 4. Configure the plugin and start enjoying it.

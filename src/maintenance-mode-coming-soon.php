@@ -5,7 +5,7 @@
  * Version: 1.5.0
  * Runtime: 5.6+
  * Author: akshitsethi
- * Text Domain: classic-coming-soon-maintenance-mode
+ * Text Domain: maintenance-mode-coming-soon
  * Domain Path: i18n
  * Author URI: https://akshitsethi.com
  * License: GPLv3

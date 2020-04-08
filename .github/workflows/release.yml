@@ -32,6 +32,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: build/classic-coming-soon-maintenance-mode.zip
-          asset_name: classic-coming-soon-maintenance-mode.zip
+          asset_path: build/maintenance-mode-coming-soon.zip
+          asset_name: maintenance-mode-coming-soon.zip
           asset_content_type: application/zip
