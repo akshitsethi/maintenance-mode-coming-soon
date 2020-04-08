@@ -171,6 +171,25 @@ toastr.options = {
     }
   }
 
+  // Sortable
+  function initSortable(selector, target) {
+    var el = document.getElementById(selector);
+    var sortable = Sortable.create(el, {
+      animation: 150,
+      dataIdAttr: 'data-id',
+      store: {
+        get: function (sortable) {
+            var order = localStorage.getItem(sortable.options.group);
+            return order ? order.split('|') : [];
+        },
+        set: function(sortable) {
+          var order = sortable.toArray();
+          $('#' + mmcs_admin_l10n.prefix + target).val(order);
+        }
+      }
+    });
+  }
+
 
   // On DOM ready
   $(document).ready(function () {
@@ -195,21 +214,8 @@ toastr.options = {
 
 
     // Sorting elements
-    var el = document.getElementById( 'arrange-items' );
-    var sortable = Sortable.create( el, {
-      animation: 150,
-      dataIdAttr: 'data-id',
-      store: {
-        get: function (sortable) {
-            var order = localStorage.getItem(sortable.options.group);
-            return order ? order.split('|') : [];
-        },
-        set: function( sortable ) {
-          var order = sortable.toArray();
-          $( '#' + mmcs_admin_l10n.prefix + 'arrange' ).val( order );
-        }
-      }
-    } );
+    initSortable( 'arrange-items', 'arrange' );
+    initSortable( 'arrange-social-items', 'social_arrange' )
 
 
     // Editor
@@ -298,23 +304,44 @@ toastr.options = {
         if (data.data) {
           var html;
 
-          html = '<select name="' + mmcs_admin_l10n.prefix + 'list" id="' + mmcs_admin_l10n.prefix + 'list">';
+          // For email section
+          if (formID === 'email') {
+            html = '<select name="' + mmcs_admin_l10n.prefix + 'list" id="' + mmcs_admin_l10n.prefix + 'list">';
 
-          // Loop over the list
-          for (var key in data.data) {
-            if (formData.get(mmcs_admin_l10n.prefix + 'list') === key) {
-              html += '<option value="' + key + '" selected="selected">' + data.data[key] + '</option>';
-            } else {
-              html += '<option value="' + key + '">' + data.data[key] + '</option>';
+            // Loop over the list
+            for (var key in data.data) {
+              if (formData.get(mmcs_admin_l10n.prefix + 'list') === key) {
+                html += '<option value="' + key + '" selected="selected">' + data.data[key] + '</option>';
+              } else {
+                html += '<option value="' + key + '">' + data.data[key] + '</option>';
+              }
             }
+
+            html += '</select>';
+            html += '&nbsp; <button type="button" id="' + mmcs_admin_l10n.prefix + 'refresh' + '" class="as-btn as-small">' + mmcs_admin_l10n.refresh_text + '</button>';
+            html += '<p class="as-form-help-block">' + mmcs_admin_l10n.list_text + '</p>';
+
+            // Add the select box to the page
+            $('.as-ajax-response').html(html);
+          } else if (formID === 'social') {
+            html = '';
+
+            // Get and split the arrange value
+            var arrange = formData.get(mmcs_admin_l10n.prefix + 'social_arrange');
+
+            if (arrange.length > 0) {
+              var items = arrange.split(',');
+            }
+
+            for (var i = 0; i < items.length; i++) {
+              if (data.data[items[i]]) {
+                html += '<li><a href="' + data.data[items[i]] + '"><i class="fa fa-fw fa-' + items[i] + '"></i></a></li>';
+              }
+            }
+
+            // Add response to the preview pane
+            $('.as-arrange-social').html(html);
           }
-
-          html += '</select>';
-          html += '&nbsp; <button type="button" id="' + mmcs_admin_l10n.prefix + 'refresh' + '" class="as-btn as-small">' + mmcs_admin_l10n.refresh_text + '</button>';
-          html += '<p class="as-form-help-block">' + mmcs_admin_l10n.list_text + '</p>';
-
-          // Add the select box to the page
-          $('.as-ajax-response').html(html);
         }
 
         // Hide the checkbox and show the default message if API key is empty

@@ -29,6 +29,7 @@ class Admin {
 		add_action( 'wp_ajax_' . Config::PREFIX . 'email', array( $this, 'save_options' ) );
 		add_action( 'wp_ajax_' . Config::PREFIX . 'design', array( $this, 'save_options' ) );
 		add_action( 'wp_ajax_' . Config::PREFIX . 'form', array( $this, 'save_options' ) );
+		add_action( 'wp_ajax_' . Config::PREFIX . 'social', array( $this, 'save_options' ) );
 		add_action( 'wp_ajax_' . Config::PREFIX . 'advanced', array( $this, 'save_options' ) );
 		add_action( 'wp_ajax_' . Config::PREFIX . 'refresh', array( $this, 'refresh_list' ) );
 
@@ -265,7 +266,24 @@ class Admin {
 							'error_color'         => sanitize_hex_color_no_hash( $_POST[ Config::PREFIX . 'error_color' ] ),
 						);
 					} elseif ( 'social' === $section ) {
-						$options[ $section ] = array();
+						$options[ $section ] = array(
+							'arrange'     => sanitize_text_field( $_POST[ Config::PREFIX . 'social_arrange' ] ),
+							'link_color'  => sanitize_hex_color_no_hash( $_POST[ Config::PREFIX . 'link_color' ] ),
+							'link_hover'  => sanitize_hex_color_no_hash( $_POST[ Config::PREFIX . 'link_hover' ] ),
+							'icon_size'   => absint( $_POST[ Config::PREFIX . 'icon_size' ] ),
+							'link_target' => sanitize_text_field( $_POST[ Config::PREFIX . 'link_target' ] ),
+						);
+
+						// Process social links
+						foreach ( Config::SOCIAL as $key => $value ) {
+							$social_url                  = esc_url_raw( $_POST[ Config::PREFIX . $key ] );
+							$options[ $section ][ $key ] = $social_url;
+
+							// For sending the response
+							if ( ! empty( $social_url ) ) {
+								$response['data'][ $key ] = $social_url;
+							}
+						}
 					} elseif ( 'advanced' === $section ) {
 						$options[ $section ] = array(
 							'disable_settings' => isset( $_POST[ Config::PREFIX . 'disable' ] ) ? true : false,
