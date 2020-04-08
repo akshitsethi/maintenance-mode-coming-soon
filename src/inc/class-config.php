@@ -16,7 +16,7 @@ class Config {
 	public static $plugin_path;
 	public static $default_options;
 
-	const PLUGIN_SLUG   = 'classic-coming-soon-maintenance-mode';
+	const PLUGIN_SLUG   = 'maintenance-mode-coming-soon';
 	const SHORT_SLUG    = 'ccsmm';
 	const VERSION       = '1.0.1';
 	const DB_OPTION     = 'as_' . self::SHORT_SLUG;
@@ -717,6 +717,16 @@ class Config {
 
 
 	/**
+	 * Get plugin name.
+	 *
+	 * @since 1.0.0
+	 */
+	public static function get_plugin_name() {
+		return esc_html__( 'Maintenance Mode & Coming Soon', 'maintenance-mode-coming-soon' );
+	}
+
+
+	/**
 	 * Add default options.
 	 *
 	 * @since 1.0.0
@@ -725,10 +735,10 @@ class Config {
 		self::$default_options = array(
 			// Basic
 			'status'                => false,
-			'title'                 => esc_html__( 'Maintenance Mode', 'classic-coming-soon-maintenance-mode' ),
-			'header_text'           => esc_html__( 'Maintenance Mode', 'classic-coming-soon-maintenance-mode' ),
-			'secondary_text'        => esc_html__( 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla pharetra eu felis quis lobortis. Proin vitae rutrum nisl, ut ullamcorper quam. Praesent faucibus ligula ac nisl varius dictum. Maecenas iaculis posuere orci, sed consectetur augue.', 'classic-coming-soon-maintenance-mode' ),
-			'antispam_text'         => esc_html__( 'And yes, we hate spam too!', 'classic-coming-soon-maintenance-mode' ),
+			'title'                 => esc_html__( 'Maintenance Mode', 'maintenance-mode-coming-soon' ),
+			'header_text'           => esc_html__( 'Maintenance Mode', 'maintenance-mode-coming-soon' ),
+			'secondary_text'        => esc_html__( 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla pharetra eu felis quis lobortis. Proin vitae rutrum nisl, ut ullamcorper quam. Praesent faucibus ligula ac nisl varius dictum. Maecenas iaculis posuere orci, sed consectetur augue.', 'maintenance-mode-coming-soon' ),
+			'antispam_text'         => esc_html__( 'And yes, we hate spam too!', 'maintenance-mode-coming-soon' ),
 			'custom_login_url'      => '',
 			'show_logged_in'        => false,
 			'exclude_se'            => true,
@@ -738,10 +748,10 @@ class Config {
 			// Email
 			'mailchimp_api'         => '',
 			'mailchimp_list'        => '',
-			'message_noemail'       => esc_html__( 'Please provide your email address.', 'classic-coming-soon-maintenance-mode' ),
-			'message_error'         => esc_html__( 'This looks like an invalid request. Please try again.', 'classic-coming-soon-maintenance-mode' ),
-			'message_wrong'         => esc_html__( 'Please provide a valid email address.', 'classic-coming-soon-maintenance-mode' ),
-			'message_done'          => esc_html__( 'Thank you! We\'ll be in touch!', 'classic-coming-soon-maintenance-mode' ),
+			'message_noemail'       => esc_html__( 'Please provide your email address.', 'maintenance-mode-coming-soon' ),
+			'message_error'         => esc_html__( 'This looks like an invalid request. Please try again.', 'maintenance-mode-coming-soon' ),
+			'message_wrong'         => esc_html__( 'Please provide a valid email address.', 'maintenance-mode-coming-soon' ),
+			'message_done'          => esc_html__( 'Thank you! We\'ll be in touch!', 'maintenance-mode-coming-soon' ),
 
 			// Design
 			'logo'                  => '',
@@ -767,8 +777,8 @@ class Config {
 			'antispam_font_color'   => 'bbbbbb',
 
 			// Form
-			'input_text'            => esc_html__( 'Enter your email address..', 'classic-coming-soon-maintenance-mode' ),
-			'button_text'           => esc_html__( 'Subscribe', 'classic-coming-soon-maintenance-mode' ),
+			'input_text'            => esc_html__( 'Enter your email address..', 'maintenance-mode-coming-soon' ),
+			'button_text'           => esc_html__( 'Subscribe', 'maintenance-mode-coming-soon' ),
 			'ignore_form_styles'    => false,
 			'input_font_size'       => '13',
 			'button_font_size'      => '12',

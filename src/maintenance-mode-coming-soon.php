@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name: Classic Coming Soon & Maintenance Mode
- * Description: Simply awesome coming soon & maintenance mode plugin for your WordPress blog. Try it to know why there is no other plugin like this one.
- * Version: 1.0.0
+ * Plugin Name: Maintenance Mode & Coming Soon
+ * Description: Create a simple yet elegant Coming Soon, Launch Page, Under Construction, or Maintenance Mode page for your website.
+ * Version: 1.5.0
  * Runtime: 5.6+
  * Author: akshitsethi
  * Text Domain: classic-coming-soon-maintenance-mode
