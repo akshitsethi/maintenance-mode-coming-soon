@@ -23,6 +23,7 @@ require_once 'header.php';
 			<li><a href="#email"><?php esc_html_e( 'Email', 'maintenance-mode-coming-soon' ); ?></a></li>
 			<li><a href="#design"><?php esc_html_e( 'Design', 'maintenance-mode-coming-soon' ); ?></a></li>
 			<li><a href="#form"><?php esc_html_e( 'Form', 'maintenance-mode-coming-soon' ); ?></a></li>
+			<li><a href="#social"><?php esc_html_e( 'Social', 'maintenance-mode-coming-soon' ); ?></a></li>
 			<li><a href="#advanced"><?php esc_html_e( 'Advanced', 'maintenance-mode-coming-soon' ); ?></a></li>
 			<li><a href="#support"><?php esc_html_e( 'Support', 'maintenance-mode-coming-soon' ); ?></a></li>
 			<li><a href="#about"><?php esc_html_e( 'About', 'maintenance-mode-coming-soon' ); ?></a></li>
@@ -37,6 +38,7 @@ require_once 'header.php';
 			require_once 'settings-email.php';
 			require_once 'settings-design.php';
 			require_once 'settings-form.php';
+			require_once 'settings-social.php';
 			require_once 'settings-advanced.php';
 			require_once 'settings-support.php';
 			require_once 'settings-about.php';

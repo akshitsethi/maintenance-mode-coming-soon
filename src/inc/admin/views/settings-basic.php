@@ -10,7 +10,7 @@ use AkshitSethi\Plugins\MaintenanceMode\Config;
 ?>
 
 <div class="as-tile" id="basic">
-	<form method="post" class="as-options-form">
+	<form method="post" class="as-basic-form">
 		<div class="as-tile-body">
 			<h2 class="as-tile-title"><?php esc_html_e( 'BASIC', 'maintenance-mode-coming-soon' ); ?></h2>
 			<p><?php esc_html_e( 'Configure the core settings. Make sure you configure these options carefully as they are important for the working of the plugin.', 'maintenance-mode-coming-soon' ); ?></p>
