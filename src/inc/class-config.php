@@ -18,7 +18,7 @@ class Config {
 
 	const PLUGIN_SLUG   = 'maintenance-mode-coming-soon';
 	const SHORT_SLUG    = 'mmcs';
-	const VERSION       = '1.0.1';
+	const VERSION       = '1.5.0';
 	const DB_OPTION     = 'as_' . self::SHORT_SLUG;
 	const PREFIX        = self::SHORT_SLUG . '_';
 	const DEFAULT_FONTS = array(
