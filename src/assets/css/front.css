@@ -291,7 +291,7 @@ a:active,
 a:focus {
   outline: thin dotted;
 }
-.as-ccsmm {
+.as-mmcs {
   margin: 5rem auto;
 }
 .as-content {
@@ -323,7 +323,7 @@ a:focus {
   color: #bbbbbb;
 }
 @media (max-width: 767px) {
-  .as-ccsmm {
+  .as-mmcs {
     margin: 1.250rem auto;
   }
 }

@@ -254,13 +254,13 @@ toastr.options = {
       e.preventDefault();
 
       // ID
-      var id = $(this).attr('data-tab').replace('#', '');
+      var formID = $(this).attr('data-tab').replace('#', '');
 
       // Form data
-      var formData = new FormData($('#' + id + ' form')[0]);
+      var formData = new FormData($('#' + formID + ' form')[0]);
 
       // Append action
-      formData.append('action', mmcs_admin_l10n.prefix + id);
+      formData.append('action', mmcs_admin_l10n.prefix + formID);
       formData.append('_nonce', mmcs_admin_l10n.nonce);
 
       // AJAX
@@ -271,7 +271,7 @@ toastr.options = {
         processData: false,
         contentType: false,
         beforeSend: function() {
-          formID.block({
+          $('#' + formID).block({
             message: '<div class="as-strong" style="background: #ecf0f1; padding: 10px 6px; color: #000;">' + mmcs_admin_l10n.processing + '</div>',
             css: {
               border: 'none',
@@ -286,7 +286,7 @@ toastr.options = {
         }
       }).done(function(data) {
         // Unblock
-        formID.unblock();
+        $('#' + formID).unblock();
 
         // Notification
         toastr[data.code](data.response);
