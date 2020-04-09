@@ -833,10 +833,10 @@ class Config {
 				'header_font'           => 'Karla',
 				'secondary_font'        => 'Karla',
 				'header_font_size'      => '28',
-				'secondary_font_size'   => '14',
+				'secondary_font_size'   => '18',
 				'header_font_color'     => '090909',
 				'secondary_font_color'  => '090909',
-				'antispam_font_size'    => '13',
+				'antispam_font_size'    => '14',
 				'antispam_font_color'   => 'bbbbbb',
 			),
 			'form'     => array(
