@@ -88,6 +88,24 @@ use AkshitSethi\Plugins\MaintenanceMode\Config;
 				</div>
 
 				<div class="as-double-group as-clearfix">
+					<div class="as-double-group as-clearfix">
+						<div class="as-form-group">
+							<label for="<?php echo Config::PREFIX . 'content_margin'; ?>" class="as-strong"><?php esc_html_e( 'Content Margin', 'maintenance-mode-coming-soon' ); ?> <span class="px">PX</span></label>
+							<input type="number" name="<?php echo Config::PREFIX . 'content_margin'; ?>" id="<?php echo Config::PREFIX . 'content_margin'; ?>" value="<?php echo esc_attr( $options['design']['content_margin'] ); ?>" placeholder="<?php esc_html_e( 'Margin for the content section', 'maintenance-mode-coming-soon' ); ?>" class="as-form-control">
+
+							<p class="as-form-help-block"><?php esc_html_e( 'Set margin for the content section.', 'maintenance-mode-coming-soon' ); ?></p>
+						</div>
+
+						<div class="as-form-group">
+							<label for="<?php echo Config::PREFIX . 'content_padding'; ?>" class="as-strong"><?php esc_html_e( 'Content Padding', 'maintenance-mode-coming-soon' ); ?> <span class="px">PX</span></label>
+							<input type="number" name="<?php echo Config::PREFIX . 'content_padding'; ?>" id="<?php echo Config::PREFIX . 'content_padding'; ?>" value="<?php echo esc_attr( $options['design']['content_padding'] ); ?>" placeholder="<?php esc_html_e( 'Padding for the content section', 'maintenance-mode-coming-soon' ); ?>" class="as-form-control">
+
+							<p class="as-form-help-block"><?php esc_html_e( 'Set padding for the content section. Any value between 15px to 45px seems good.', 'maintenance-mode-coming-soon' ); ?></p>
+						</div>
+					</div>
+				</div>
+
+				<div class="as-double-group as-clearfix">
 					<div class="as-form-group">
 						<label for="<?php echo Config::PREFIX . 'overlay'; ?>" class="as-strong"><?php esc_html_e( 'Content Overlay', 'maintenance-mode-coming-soon' ); ?></label>
 						<input type="checkbox" class="as-form-ios" name="<?php echo Config::PREFIX . 'overlay'; ?>" value="1"<?php checked( true, esc_attr( $options['design']['content_overlay'] ) ); ?>>
@@ -167,8 +185,8 @@ use AkshitSethi\Plugins\MaintenanceMode\Config;
 
 				<div class="as-double-group as-clearfix">
 					<div class="as-form-group">
-						<label for="<?php echo Config::PREFIX . 'width'; ?>" class="as-strong"><?php esc_html_e( 'Content Width (in px)', 'maintenance-mode-coming-soon' ); ?></label>
-						<input type="text" name="<?php echo Config::PREFIX . 'width'; ?>" id="<?php echo Config::PREFIX . 'width'; ?>" value="<?php echo esc_attr( $options['design']['content_width'] ); ?>" placeholder="<?php esc_html_e( 'Set content width for the page', 'maintenance-mode-coming-soon' ); ?>" class="as-form-control">
+						<label for="<?php echo Config::PREFIX . 'width'; ?>" class="as-strong"><?php esc_html_e( 'Content Width', 'maintenance-mode-coming-soon' ); ?> <span class="px">PX</span></label>
+						<input type="number" name="<?php echo Config::PREFIX . 'width'; ?>" id="<?php echo Config::PREFIX . 'width'; ?>" value="<?php echo esc_attr( $options['design']['content_width'] ); ?>" placeholder="<?php esc_html_e( 'Set content width for the page', 'maintenance-mode-coming-soon' ); ?>" class="as-form-control">
 
 						<p class="as-form-help-block"><?php esc_html_e( 'Set maximum width of the content (in pixels) for the maintenance page. Provide only numeric value. Example: Entering 400 will set the width of the content to 400px. Defaults to 440px.', 'maintenance-mode-coming-soon' ); ?></p>
 					</div>

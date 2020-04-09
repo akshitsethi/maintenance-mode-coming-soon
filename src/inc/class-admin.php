@@ -222,6 +222,8 @@ class Admin {
 							'logo'                  => sanitize_text_field( $_POST[ Config::PREFIX . 'logo' ] ),
 							'favicon'               => sanitize_text_field( $_POST[ Config::PREFIX . 'favicon' ] ),
 							'bg_cover'              => sanitize_text_field( $_POST[ Config::PREFIX . 'bg' ] ),
+							'content_margin'        => absint( $_POST[ Config::PREFIX . 'content_margin' ] ),
+							'content_padding'       => absint( $_POST[ Config::PREFIX . 'content_padding' ] ),
 							'content_overlay'       => isset( $_POST[ Config::PREFIX . 'overlay' ] ) ? true : false,
 							'content_bg_opacity'    => sanitize_text_field( $_POST[ Config::PREFIX . 'overlay_opacity' ] ),
 							'content_bg'            => sanitize_hex_color_no_hash( $_POST[ Config::PREFIX . 'overlay_color' ] ),
