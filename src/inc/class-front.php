@@ -218,6 +218,11 @@ class Front {
 			$output .= 'body{background-color:#' . esc_html( $options['design']['bg_color'] ) . ';}' . "\r\n";
 		}
 
+		// Content margin
+		if ( ! empty( $options['design']['content_margin'] ) ) {
+			$output .= '.as-mmcs{margin:' . esc_html( $options['design']['content_margin'] ) . 'px auto;}' . "\r\n";
+		}
+
 		// Header: font, size, and color
 		if ( ! empty( $options['design']['header_font'] ) || ! empty( $options['design']['header_font_size'] ) || ! empty( $options['design']['header_font_color'] ) ) {
 			$output .= '.as-header-text{';
@@ -286,7 +291,7 @@ class Front {
 		}
 
 		// Content: width, position, and alignment
-		if ( ! empty( $options['design']['content_overlay'] ) || ( ! empty( $options['design']['content_bg'] ) && ! empty( $options['design']['content_bg_opacity'] ) ) || ! empty( $options['design']['content_border'] ) || ! empty( $options['design']['content_border_width'] ) || ! empty( $options['design']['content_border_radius'] ) || ! empty( $options['design']['content_width'] ) || ! empty( $options['design']['content_position'] ) || ! empty( $options['design']['content_alignment'] ) ) {
+		if ( ! empty( $options['design']['content_padding'] ) || ! empty( $options['design']['content_overlay'] ) || ( ! empty( $options['design']['content_bg'] ) && ! empty( $options['design']['content_bg_opacity'] ) ) || ! empty( $options['design']['content_border'] ) || ! empty( $options['design']['content_border_width'] ) || ! empty( $options['design']['content_border_radius'] ) || ! empty( $options['design']['content_width'] ) || ! empty( $options['design']['content_position'] ) || ! empty( $options['design']['content_alignment'] ) ) {
 			$output .= '.as-content{';
 
 			// Content background
@@ -302,6 +307,11 @@ class Front {
 			// Content overlay
 			if ( $options['design']['content_overlay'] ) {
 				$output .= 'padding:30px;';
+			}
+
+			// Content padding
+			if ( ! empty( $options['design']['content_padding'] ) ) {
+				$output .= 'padding:' . esc_html( $options['design']['content_padding'] ) . 'px;';
 			}
 
 			// Content border
@@ -505,7 +515,7 @@ class Front {
 
 		// Social
 		if ( ! empty( $options['social']['link_color'] ) || ! empty( $options['social']['link_hover'] ) || ! empty( $options['social']['icon_size'] ) ) {
-			$output .= '.social-links a{';
+			$output .= '.as-social-links a{';
 
 			// Font color
 			if ( ! empty( $options['social']['link_color'] ) ) {
@@ -521,7 +531,7 @@ class Front {
 
 			// Link hover
 			if ( ! empty( $options['social']['link_hover'] ) ) {
-				$output .= '.social-links a:hover{color:#' . esc_html( $options['social']['link_hover'] ) . ';}';
+				$output .= '.as-social-links a:hover{color:#' . esc_html( $options['social']['link_hover'] ) . ';}';
 			}
 		}
 
