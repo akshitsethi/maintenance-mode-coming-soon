@@ -178,7 +178,7 @@ class Admin {
 						);
 
 						// Query the MailChimp API and pass the fetched lists to JS if the request returns 200
-						if ( ! empty( $options['mailchimp_api'] ) ) {
+						if ( ! empty( $options['email']['mailchimp_api'] ) ) {
 							// Try to fetch from the transient
 							$cached_data = get_transient( Config::PREFIX . 'email_lists' );
 
@@ -187,7 +187,7 @@ class Admin {
 								$response['data'] = $cached_data;
 							} else {
 								try {
-									$mailchimp = new MailChimp( $options['mailchimp_api'] );
+									$mailchimp = new MailChimp( $options['email']['mailchimp_api'] );
 
 									// Fetch lists
 									$lists = $mailchimp->get( 'lists' );
@@ -404,9 +404,9 @@ class Admin {
 		// Options exist?
 		if ( $options ) {
 			// Query the MailChimp API and pass the fetched lists to JS if the request returns 200
-			if ( ! empty( $options['mailchimp_api'] ) ) {
+			if ( ! empty( $options['email']['mailchimp_api'] ) ) {
 				try {
-					$mailchimp = new MailChimp( $options['mailchimp_api'] );
+					$mailchimp = new MailChimp( $options['email']['mailchimp_api'] );
 
 					// Fetch lists
 					$lists = $mailchimp->get( 'lists' );

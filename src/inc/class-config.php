@@ -864,7 +864,7 @@ class Config {
 				'arrange'        => '',
 				'link_color'     => '0b0b0b',
 				'link_hover'     => '0b0b0b',
-				'icon_size'      => '16',
+				'icon_size'      => '18',
 				'link_target'    => '_blank',
 				'500px'          => '',
 				'amazon'         => '',

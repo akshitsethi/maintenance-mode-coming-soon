@@ -44,11 +44,11 @@ class Front {
 		$server_url = $protocol . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 
 		// Custom login URL (if provided)
-		$options['custom_login_url'] = empty( $options['custom_login_url'] ) ? null : esc_url( $options['custom_login_url'] );
+		$options['basic']['custom_login_url'] = empty( $options['basic']['custom_login_url'] ) ? null : esc_url( $options['basic']['custom_login_url'] );
 
 		// Not for the backend
 		if ( ! is_admin() ) {
-			if ( $options['status'] ) {
+			if ( $options['basic']['status'] ) {
 				/**
 				 * A lot of checks are going on over here.
 				 * We are checking for admin role, crawler status, and important WordPress pages to bypass.
@@ -61,17 +61,17 @@ class Front {
 					&& false === strpos( $server_url, '/plugins/' )
 					&& false === strpos( $server_url, '/xmlrpc.php' )
 					&& false === strpos( $server_url, $login_url )
-					&& false === strpos( $server_url, $options['custom_login_url'] ) ) {
+					&& false === strpos( $server_url, $options['basic']['custom_login_url'] ) ) {
 
 					// Checking for the search engine option
-					if ( $options['exclude_se'] ) {
+					if ( $options['basic']['exclude_se'] ) {
 						if ( $this->check_referrer() ) {
 							return;
 						}
 					}
 
 					// For logged-in users
-					if ( $options['show_logged_in'] ) {
+					if ( $options['basic']['show_logged_in'] ) {
 						// Checking if the user is logged in or not
 						if ( is_user_logged_in() ) {
 							return;
@@ -169,7 +169,7 @@ class Front {
 		ob_start();
 
 		// Template file
-		if ( $options['disable_settings'] ) {
+		if ( $options['advanced']['disable_settings'] ) {
 			require_once Config::$plugin_path . 'inc/views/blank.php';
 		} else {
 			require_once Config::$plugin_path . 'inc/views/html.php';
@@ -209,54 +209,54 @@ class Front {
 		$output = '<style>' . "\r\n";
 
 		// Background cover
-		if ( ! empty( $options['bg_cover'] ) ) {
-			$output .= 'body{background-image:url("' . esc_url( $options['bg_cover'] ) . '");}' . "\r\n";
+		if ( ! empty( $options['design']['bg_cover'] ) ) {
+			$output .= 'body{background-image:url("' . esc_url( $options['design']['bg_cover'] ) . '");}' . "\r\n";
 		}
 
 		// Background color
-		if ( empty( $options['bg_cover'] ) && ! empty( $options['bg_color'] ) ) {
-			$output .= 'body{background-color:#' . esc_html( $options['bg_color'] ) . ';}' . "\r\n";
+		if ( empty( $options['design']['bg_cover'] ) && ! empty( $options['design']['bg_color'] ) ) {
+			$output .= 'body{background-color:#' . esc_html( $options['design']['bg_color'] ) . ';}' . "\r\n";
 		}
 
 		// Header: font, size, and color
-		if ( ! empty( $options['header_font'] ) || ! empty( $options['header_font_size'] ) || ! empty( $options['header_font_color'] ) ) {
+		if ( ! empty( $options['design']['header_font'] ) || ! empty( $options['design']['header_font_size'] ) || ! empty( $options['design']['header_font_color'] ) ) {
 			$output .= '.as-header-text{';
 
 			// Header font
-			if ( ! empty( $options['header_font'] ) ) {
-				$output .= 'font-family:"' . esc_html( $options['header_font'] ) . '", Arial, sans-serif;';
+			if ( ! empty( $options['design']['header_font'] ) ) {
+				$output .= 'font-family:"' . esc_html( $options['design']['header_font'] ) . '", Arial, sans-serif;';
 			}
 
 			// Header font size
 			if ( ! empty( $options['header_font_size'] ) ) {
-				$output .= 'font-size:' . esc_html( $options['header_font_size'] ) . 'px;';
+				$output .= 'font-size:' . esc_html( $options['design']['header_font_size'] ) . 'px;';
 			}
 
 			// Header font color
 			if ( ! empty( $options['header_font_color'] ) ) {
-				$output .= 'color:#' . esc_html( $options['header_font_color'] ) . ';';
+				$output .= 'color:#' . esc_html( $options['design']['header_font_color'] ) . ';';
 			}
 
 			$output .= '}' . "\r\n";
 		}
 
 		// Secondary: font, size, and color
-		if ( ! empty( $options['secondary_font'] ) || ! empty( $options['secondary_font_size'] ) || ! empty( $options['secondary_font_color'] ) ) {
+		if ( ! empty( $options['design']['secondary_font'] ) || ! empty( $options['design']['secondary_font_size'] ) || ! empty( $options['design']['secondary_font_color'] ) ) {
 			$output .= '.as-secondary-text{';
 
 			// Secondary font
-			if ( ! empty( $options['secondary_font'] ) ) {
-				$output .= 'font-family:"' . esc_html( $options['secondary_font'] ) . '", Arial, sans-serif;';
+			if ( ! empty( $options['design']['secondary_font'] ) ) {
+				$output .= 'font-family:"' . esc_html( $options['design']['secondary_font'] ) . '", Arial, sans-serif;';
 			}
 
 			// Secondary font size
-			if ( ! empty( $options['secondary_font_size'] ) ) {
-				$output .= 'font-size:' . esc_html( $options['secondary_font_size'] ) . 'px;';
+			if ( ! empty( $options['design']['secondary_font_size'] ) ) {
+				$output .= 'font-size:' . esc_html( $options['design']['secondary_font_size'] ) . 'px;';
 			}
 
 			// Secondary font color
-			if ( ! empty( $options['secondary_font_color'] ) ) {
-				$output .= 'color:#' . esc_html( $options['secondary_font_color'] ) . ';';
+			if ( ! empty( $options['design']['secondary_font_color'] ) ) {
+				$output .= 'color:#' . esc_html( $options['design']['secondary_font_color'] ) . ';';
 			}
 
 			$output .= '}' . "\r\n";
@@ -264,76 +264,76 @@ class Front {
 
 		// Antispam: font, size, and color
 		// We apply secondary font family to antispam as well
-		if ( ! empty( $options['secondary_font'] ) || ! empty( $options['antispam_font_size'] ) || ! empty( $options['antispam_font_color'] ) ) {
+		if ( ! empty( $options['design']['secondary_font'] ) || ! empty( $options['design']['antispam_font_size'] ) || ! empty( $options['design']['antispam_font_color'] ) ) {
 			$output .= '.as-anti-spam{';
 
 			// Secondary font
-			if ( ! empty( $options['secondary_font'] ) ) {
-				$output .= 'font-family:"' . esc_html( $options['secondary_font'] ) . '", Arial, sans-serif;';
+			if ( ! empty( $options['design']['secondary_font'] ) ) {
+				$output .= 'font-family:"' . esc_html( $options['design']['secondary_font'] ) . '", Arial, sans-serif;';
 			}
 
 			// Antispam font size
-			if ( ! empty( $options['antispam_font_size'] ) ) {
-				$output .= 'font-size:' . esc_html( $options['antispam_font_size'] ) . 'px;';
+			if ( ! empty( $options['design']['antispam_font_size'] ) ) {
+				$output .= 'font-size:' . esc_html( $options['design']['antispam_font_size'] ) . 'px;';
 			}
 
 			// Antispam font color
-			if ( ! empty( $options['antispam_font_color'] ) ) {
-				$output .= 'color:#' . esc_html( $options['antispam_font_color'] ) . ';';
+			if ( ! empty( $options['design']['antispam_font_color'] ) ) {
+				$output .= 'color:#' . esc_html( $options['design']['antispam_font_color'] ) . ';';
 			}
 
 			$output .= '}' . "\r\n";
 		}
 
 		// Content: width, position, and alignment
-		if ( ! empty( $options['content_overlay'] ) || ( ! empty( $options['content_bg'] ) && ! empty( $options['content_bg_opacity'] ) ) || ! empty( $options['content_border'] ) || ! empty( $options['content_border_width'] ) || ! empty( $options['content_border_radius'] ) || ! empty( $options['content_width'] ) || ! empty( $options['content_position'] ) || ! empty( $options['content_alignment'] ) ) {
+		if ( ! empty( $options['design']['content_overlay'] ) || ( ! empty( $options['design']['content_bg'] ) && ! empty( $options['design']['content_bg_opacity'] ) ) || ! empty( $options['design']['content_border'] ) || ! empty( $options['design']['content_border_width'] ) || ! empty( $options['design']['content_border_radius'] ) || ! empty( $options['design']['content_width'] ) || ! empty( $options['design']['content_position'] ) || ! empty( $options['design']['content_alignment'] ) ) {
 			$output .= '.as-content{';
 
 			// Content background
-			if ( ! empty( $options['content_bg'] ) ) {
-				$output .= 'background-color:#' . esc_html( $options['content_bg'] ) . ';';
+			if ( ! empty( $options['design']['content_bg'] ) ) {
+				$output .= 'background-color:#' . esc_html( $options['design']['content_bg'] ) . ';';
 			}
 
 			// Content background opacity
-			if ( ! empty( $options['content_bg_opacity'] ) ) {
-				$output .= 'opacity:' . esc_html( $options['content_bg_opacity'] ) . ';';
+			if ( ! empty( $options['design']['content_bg_opacity'] ) ) {
+				$output .= 'opacity:' . esc_html( $options['design']['content_bg_opacity'] ) . ';';
 			}
 
 			// Content overlay
-			if ( $options['content_overlay'] ) {
+			if ( $options['design']['content_overlay'] ) {
 				$output .= 'padding:30px;';
 			}
 
 			// Content border
-			if ( ! empty( $options['content_border'] ) ) {
-				$output .= 'border:1px solid #' . esc_html( $options['content_border'] ) . ';';
+			if ( ! empty( $options['design']['content_border'] ) ) {
+				$output .= 'border:1px solid #' . esc_html( $options['design']['content_border'] ) . ';';
 			}
 
 			// Content border width
-			if ( ! empty( $options['content_border_width'] ) ) {
-				$output .= 'border-width:' . esc_html( $options['content_border_width'] ) . 'px;';
+			if ( ! empty( $options['design']['content_border_width'] ) ) {
+				$output .= 'border-width:' . esc_html( $options['design']['content_border_width'] ) . 'px;';
 			}
 
 			// Content border radius
-			if ( ! empty( $options['content_border_radius'] ) ) {
-				$output .= 'border-radius:' . esc_html( $options['content_border_radius'] ) . 'px;';
+			if ( ! empty( $options['design']['content_border_radius'] ) ) {
+				$output .= 'border-radius:' . esc_html( $options['design']['content_border_radius'] ) . 'px;';
 			}
 
 			// Content width
-			if ( ! empty( $options['content_width'] ) ) {
+			if ( ! empty( $options['design']['content_width'] ) ) {
 				// Making sure the width is not < 100 and not > 1170
-				if ( $options['content_width'] < 100 || $options['content_width'] > 1170 ) {
-					$options['content_width'] = '1170';
+				if ( $options['design']['content_width'] < 100 || $options['design']['content_width'] > 1170 ) {
+					$options['design']['content_width'] = '1170';
 				}
 
-				$output .= 'max-width:' . esc_html( $options['content_width'] ) . 'px;';
+				$output .= 'max-width:' . esc_html( $options['design']['content_width'] ) . 'px;';
 			}
 
 			// Content position
-			if ( ! empty( $options['content_position'] ) ) {
-				if ( 'center' == $options['content_position'] ) {
+			if ( ! empty( $options['design']['content_position'] ) ) {
+				if ( 'center' == $options['design']['content_position'] ) {
 					$output .= 'margin-left:auto;margin-right:auto;';
-				} elseif ( 'right' == $options['content_position'] ) {
+				} elseif ( 'right' == $options['design']['content_position'] ) {
 					$output .= 'float:right;';
 				} else {
 					$output .= 'margin-left:0;margin-right:0;';
@@ -341,10 +341,10 @@ class Front {
 			}
 
 			// Content alignment
-			if ( ! empty( $options['content_alignment'] ) ) {
-				if ( 'right' == $options['content_alignment'] ) {
+			if ( ! empty( $options['design']['content_alignment'] ) ) {
+				if ( 'right' == $options['design']['content_alignment'] ) {
 					$output .= 'text-align:right;';
-				} elseif ( 'center' == $options['content_alignment'] ) {
+				} elseif ( 'center' == $options['design']['content_alignment'] ) {
 					$output .= 'text-align:center;';
 				} else {
 					$output .= 'text-align:left;';
@@ -354,11 +354,11 @@ class Front {
 			$output .= '}' . "\r\n";
 
 			// Content alignment for the input field
-			if ( ! empty( $options['content_alignment'] ) ) {
+			if ( ! empty( $options['design']['content_alignment'] ) ) {
 				$output .= '.as-content input{';
-				if ( 'right' == $options['content_alignment'] ) {
+				if ( 'right' == $options['design']['content_alignment'] ) {
 					$output .= 'text-align:right;';
-				} elseif ( 'center' == $options['content_alignment'] ) {
+				} elseif ( 'center' == $options['design']['content_alignment'] ) {
 					$output .= 'text-align:center;';
 				} else {
 					$output .= 'text-align:left;';
@@ -368,138 +368,160 @@ class Front {
 		}
 
 		// If the default form & button styles need to be ignored
-		if ( $options['ignore_form_styles'] ) {
+		if ( $options['form']['ignore_form_styles'] ) {
 			// Input: size, color, background, border
-			if ( ! empty( $options['input_font_size'] ) || ! empty( $options['input_font_color'] ) || ! empty( $options['input_bg'] ) || ! empty( $options['input_border'] ) || ! empty( $options['input_border_width'] ) ) {
+			if ( ! empty( $options['form']['input_font_size'] ) || ! empty( $options['form']['input_font_color'] ) || ! empty( $options['form']['input_bg'] ) || ! empty( $options['form']['input_border'] ) || ! empty( $options['form']['input_border_width'] ) ) {
 				$output .= '.as-content input[type="text"]{';
 
 				// Input font size
-				if ( ! empty( $options['input_font_size'] ) ) {
-					$output .= 'font-size:' . esc_html( $options['input_font_size'] ) . 'px;';
+				if ( ! empty( $options['form']['input_font_size'] ) ) {
+					$output .= 'font-size:' . esc_html( $options['form']['input_font_size'] ) . 'px;';
 				}
 
 				// Input color
-				if ( ! empty( $options['input_font_color'] ) ) {
-					$output .= 'color:#' . esc_html( $options['input_font_color'] ) . ';';
+				if ( ! empty( $options['form']['input_font_color'] ) ) {
+					$output .= 'color:#' . esc_html( $options['form']['input_font_color'] ) . ';';
 				}
 
 				// Input background
-				if ( ! empty( $options['input_bg'] ) ) {
-					$output .= 'background:#' . esc_html( $options['input_bg'] ) . ';';
+				if ( ! empty( $options['form']['input_bg'] ) ) {
+					$output .= 'background:#' . esc_html( $options['form']['input_bg'] ) . ';';
 				}
 
 				// Input border
-				if ( ! empty( $options['input_border'] ) ) {
-					$output .= 'border:1px solid #' . esc_html( $options['input_border'] ) . ';';
+				if ( ! empty( $options['form']['input_border'] ) ) {
+					$output .= 'border:1px solid #' . esc_html( $options['form']['input_border'] ) . ';';
 				}
 
 				// Input border width
-				if ( ! empty( $options['input_border_width'] ) ) {
-					$output .= 'border-width:' . esc_html( $options['input_border_width'] ) . 'px;';
+				if ( ! empty( $options['form']['input_border_width'] ) ) {
+					$output .= 'border-width:' . esc_html( $options['form']['input_border_width'] ) . 'px;';
 				}
 
 				$output .= '}' . "\r\n";
 			}
 
 			// Input: background:focus, border:focus
-			if ( ! empty( $options['input_bg_hover'] ) || ! empty( $options['input_border_hover'] ) ) {
+			if ( ! empty( $options['form']['input_bg_hover'] ) || ! empty( $options['form']['input_border_hover'] ) ) {
 				$output .= '.as-content input[type="text"]:focus{';
 
 				// Input background:focus
-				if ( ! empty( $options['input_bg_hover'] ) ) {
-					$output .= 'background:#' . esc_html( $options['input_bg_hover'] ) . ';';
+				if ( ! empty( $options['form']['input_bg_hover'] ) ) {
+					$output .= 'background:#' . esc_html( $options['form']['input_bg_hover'] ) . ';';
 				}
 
 				// Input border:focus
-				if ( ! empty( $options['input_border_hover'] ) ) {
-					$output .= 'border-color:#' . esc_html( $options['input_border_hover'] ) . ';';
+				if ( ! empty( $options['form']['input_border_hover'] ) ) {
+					$output .= 'border-color:#' . esc_html( $options['form']['input_border_hover'] ) . ';';
 				}
 
 				$output .= '}' . "\r\n";
 			}
 
 			// Button: size, color, background, border
-			if ( ! empty( $options['button_font_size'] ) || ! empty( $options['button_font_color'] ) || ! empty( $options['button_bg'] ) || ! empty( $options['button_border'] ) || ! empty( $options['button_border_width'] ) ) {
+			if ( ! empty( $options['form']['button_font_size'] ) || ! empty( $options['form']['button_font_color'] ) || ! empty( $options['form']['button_bg'] ) || ! empty( $options['form']['button_border'] ) || ! empty( $options['form']['button_border_width'] ) ) {
 				$output .= '.as-content input[type="submit"]{';
 
 				// Button font size
-				if ( ! empty( $options['button_font_size'] ) ) {
-					$output .= 'font-size:' . esc_html( $options['button_font_size'] ) . 'px;';
+				if ( ! empty( $options['form']['button_font_size'] ) ) {
+					$output .= 'font-size:' . esc_html( $options['form']['button_font_size'] ) . 'px;';
 				}
 
 				// Button color
-				if ( ! empty( $options['button_font_color'] ) ) {
-					$output .= 'color:#' . esc_html( $options['button_font_color'] ) . ';';
+				if ( ! empty( $options['form']['button_font_color'] ) ) {
+					$output .= 'color:#' . esc_html( $options['form']['button_font_color'] ) . ';';
 				}
 
 				// Button background
-				if ( ! empty( $options['button_bg'] ) ) {
-					$output .= 'background:#' . esc_html( $options['button_bg'] ) . ';';
+				if ( ! empty( $options['form']['button_bg'] ) ) {
+					$output .= 'background:#' . esc_html( $options['form']['button_bg'] ) . ';';
 				}
 
 				// Button border
-				if ( ! empty( $options['button_border'] ) ) {
-					$output .= 'border:1px solid #' . esc_html( $options['button_border'] ) . ';';
+				if ( ! empty( $options['form']['button_border'] ) ) {
+					$output .= 'border:1px solid #' . esc_html( $options['form']['button_border'] ) . ';';
 				}
 
 				// Button border width
-				if ( ! empty( $options['button_border_width'] ) ) {
-					$output .= 'border-width:' . esc_html( $options['button_border_width'] ) . 'px;';
+				if ( ! empty( $options['form']['button_border_width'] ) ) {
+					$output .= 'border-width:' . esc_html( $options['form']['button_border_width'] ) . 'px;';
 				}
 
 				$output .= '}' . "\r\n";
 			}
 
 			// Button: background:focus, border:focus
-			if ( ! empty( $options['button_bg_hover'] ) || ! empty( $options['button_border_hover'] ) ) {
+			if ( ! empty( $options['form']['button_bg_hover'] ) || ! empty( $options['form']['button_border_hover'] ) ) {
 				$output .= '.as-content input[type="submit"]:hover,';
 				$output .= '.as-content input[type="submit"]:focus{';
 
 				// Input background:focus
-				if ( ! empty( $options['button_bg_hover'] ) ) {
-					$output .= 'background:#' . esc_html( $options['button_bg_hover'] ) . ';';
+				if ( ! empty( $options['form']['button_bg_hover'] ) ) {
+					$output .= 'background:#' . esc_html( $options['form']['button_bg_hover'] ) . ';';
 				}
 
 				// Input border:focus
-				if ( ! empty( $options['button_border_hover'] ) ) {
-					$output .= 'border-color:#' . esc_html( $options['button_border_hover'] ) . ';';
+				if ( ! empty( $options['form']['button_border_hover'] ) ) {
+					$output .= 'border-color:#' . esc_html( $options['form']['button_border_hover'] ) . ';';
 				}
 
 				$output .= '}' . "\r\n";
 			}
 
 			// Message: success
-			if ( ! empty( $options['success_background'] ) || ! empty( $options['success_color'] ) ) {
+			if ( ! empty( $options['form']['success_background'] ) || ! empty( $options['form']['success_color'] ) ) {
 				$output .= '.as-alert-success{';
 
 				// Success background
-				if ( ! empty( $options['success_background'] ) ) {
-					$output .= 'background:#' . esc_html( $options['success_background'] ) . ';';
+				if ( ! empty( $options['form']['success_background'] ) ) {
+					$output .= 'background:#' . esc_html( $options['form']['success_background'] ) . ';';
 				}
 
 				// Success color
-				if ( ! empty( $options['success_color'] ) ) {
-					$output .= 'color:#' . esc_html( $options['success_color'] ) . ';';
+				if ( ! empty( $options['form']['success_color'] ) ) {
+					$output .= 'color:#' . esc_html( $options['form']['success_color'] ) . ';';
 				}
 
 				$output .= '}' . "\r\n";
 			}
 
 			// Message: error
-			if ( ! empty( $options['error_background'] ) || ! empty( $options['error_color'] ) ) {
+			if ( ! empty( $options['form']['error_background'] ) || ! empty( $options['form']['error_color'] ) ) {
 				$output .= '.as-alert-danger{';
 
 				// Error background
-				if ( ! empty( $options['error_background'] ) ) {
-					$output .= 'background:#' . esc_html( $options['error_background'] ) . ';';
+				if ( ! empty( $options['form']['error_background'] ) ) {
+					$output .= 'background:#' . esc_html( $options['form']['error_background'] ) . ';';
 				}
 
 				// Error color
-				if ( ! empty( $options['error_color'] ) ) {
-					$output .= 'color:#' . esc_html( $options['error_color'] ) . ';';
+				if ( ! empty( $options['form']['error_color'] ) ) {
+					$output .= 'color:#' . esc_html( $options['form']['error_color'] ) . ';';
 				}
 
 				$output .= '}' . "\r\n";
+			}
+		}
+
+		// Social
+		if ( ! empty( $options['social']['link_color'] ) || ! empty( $options['social']['link_hover'] ) || ! empty( $options['social']['icon_size'] ) ) {
+			$output .= '.social-links a{';
+
+			// Font color
+			if ( ! empty( $options['social']['link_color'] ) ) {
+				$output .= 'color:#' . esc_html( $options['social']['link_color'] ) . ';';
+			}
+
+			// Font size
+			if ( ! empty( $options['social']['icon_size'] ) ) {
+				$output .= 'font-size:' . esc_html( $options['social']['icon_size'] ) . 'px;';
+			}
+
+			$output .= '}';
+
+			// Link hover
+			if ( ! empty( $options['social']['link_hover'] ) ) {
+				$output .= '.social-links a:hover{color:#' . esc_html( $options['social']['link_hover'] ) . ';}';
 			}
 		}
 
