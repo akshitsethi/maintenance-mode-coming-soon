@@ -140,14 +140,14 @@ use DrewM\MailChimp\MailChimp;
 					// Loop over social networks
 					foreach ( $social_arrange as $social_item ) {
 						if ( ! empty( $options['social'][ $social_item ] ) ) {
-							$social_code .= '<a href="' . esc_url( $options['social'][ $social_item ] ) . '"><i class="fa fa-fw fa-' . esc_attr( $social_item ) . '"></i></a>' . "\r\n";
+							$social_code .= '<a href="' . esc_url( $options['social'][ $social_item ] ) . '" target="' . $this->get_option( esc_attr( $options['social']['link_target'] ), '_blank' ) . '"><i class="fa fa-fw fa-' . esc_attr( $social_item ) . '"></i></a>' . "\r\n";
 						}
 					}
 				} else {
 					foreach ( $options['social'] as $key => $value ) {
-						if ( ! in_array( $key, array( 'arrange', 'link_color', 'link_hover', 'icon_size', 'link_target' ) ) ) {
+						if ( ! in_array( $key, array( 'arrange', 'link_color', 'link_hover', 'icon_size' ) ) ) {
 							if ( ! empty( $value ) ) {
-								$social_code .= '<a href="' . esc_url( $value ) . '"><i class="fa fa-fw fa-' . esc_attr( $key ) . '"></i></a>' . "\r\n";
+								$social_code .= '<a href="' . esc_url( $value ) . '" target="' . $this->get_option( esc_attr( $options['social']['link_target'] ), '_blank' ) . '"><i class="fa fa-fw fa-' . esc_attr( $key ) . '"></i></a>' . "\r\n";
 							}
 						}
 					}
@@ -155,7 +155,7 @@ use DrewM\MailChimp\MailChimp;
 
 				// Exists : $social_code
 				if ( ! empty( $social_code ) ) {
-					$arrange['social'] = '<div class="social-links">' . $social_code . '</div><!-- .social-links -->' . "\r\n";
+					$arrange['social'] = '<div class="as-social-links">' . $social_code . '</div><!-- .as-social-links -->' . "\r\n";
 				} else {
 					$arrange['social'] = '';
 				}

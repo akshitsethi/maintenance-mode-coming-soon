@@ -117,7 +117,7 @@ use DrewM\MailChimp\MailChimp;
 
 				<div class="as-double-group as-clearfix">
 					<div class="as-form-group">
-						<label for="<?php echo Config::PREFIX . 'message_wrong'; ?>" class="as-strong"><?php esc_html_e( 'Message: General Error', 'maintenance-mode-coming-soon' ); ?></label>
+						<label for="<?php echo Config::PREFIX . 'message_wrong'; ?>" class="as-strong"><?php esc_html_e( 'Message: Invalid Email', 'maintenance-mode-coming-soon' ); ?></label>
 						<input type="text" name="<?php echo Config::PREFIX . 'message_wrong'; ?>" id="<?php echo Config::PREFIX . 'message_wrong'; ?>" value="<?php echo esc_attr( stripslashes( $options['email']['message_wrong'] ) ); ?>" placeholder="<?php esc_attr_e( 'Message when anything goes wrong while subscribing', 'maintenance-mode-coming-soon' ); ?>" class="as-form-control">
 
 						<p class="as-form-help-block"><?php esc_html_e( 'Message to show if user provides an invalid email address.', 'maintenance-mode-coming-soon' ); ?></p>

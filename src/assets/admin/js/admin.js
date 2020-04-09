@@ -379,7 +379,7 @@ toastr.options = {
         },
         beforeSend: function() {
           parentDiv.block({
-            message: '<div class="as-strong" style="background: #ecf0f1; padding: 10px 6px; color: #000;">Processing..</div>',
+            message: '<div class="as-strong" style="background: #ecf0f1; padding: 10px 6px; color: #000;">' + mmcs_admin_l10n.processing + '</div>',
             css: {
               border: 'none',
               backgroundColor: 'none'

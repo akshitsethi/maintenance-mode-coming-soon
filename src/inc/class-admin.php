@@ -390,58 +390,58 @@ class Admin {
 	public function refresh_list() {
 		// Default response
 		$response = array(
-			'code'     => 'success',
-			'response' => esc_html__( 'Email list has been refreshed.', 'maintenance-mode-coming-soon' ),
+			'code'     => 'error',
+			'response' => esc_html__( 'There was an error processing the request. Please try again later.', 'maintenance-mode-coming-soon' ),
 		);
 
 		// Check for _nonce
 		if ( empty( $_POST['_nonce'] ) || ! wp_verify_nonce( $_POST['_nonce'], Config::PREFIX . 'nonce' ) ) {
-			$response['code']     = 'error';
 			$response['response'] = esc_html__( 'Request does not seem to be a valid one. Try again by refreshing the page.', 'maintenance-mode-coming-soon' );
-		}
+		} else {
+			// Get options
+			$options = get_option( Config::DB_OPTION );
 
-		// Get options
-		$options = get_option( Config::DB_OPTION );
+			// Options exist?
+			if ( $options ) {
+				// Query the MailChimp API and pass the fetched lists to JS if the request returns 200
+				if ( ! empty( $options['email']['mailchimp_api'] ) ) {
+					try {
+						$mailchimp = new MailChimp( $options['email']['mailchimp_api'] );
 
-		// Options exist?
-		if ( $options ) {
-			// Query the MailChimp API and pass the fetched lists to JS if the request returns 200
-			if ( ! empty( $options['email']['mailchimp_api'] ) ) {
-				try {
-					$mailchimp = new MailChimp( $options['email']['mailchimp_api'] );
+						// Fetch lists
+						$lists = $mailchimp->get( 'lists' );
 
-					// Fetch lists
-					$lists = $mailchimp->get( 'lists' );
+						// API call went fine?
+						if ( $mailchimp->success() ) {
+							if ( count( $lists['lists'] ) > 0 ) {
+								foreach ( $lists['lists'] as $list ) {
+									$response['data'][ sanitize_text_field( $list['id'] ) ] = sanitize_text_field( $list['name'] );
+								}
 
-					// API call went fine?
-					if ( $mailchimp->success() ) {
-						if ( count( $lists['lists'] ) > 0 ) {
-							foreach ( $lists['lists'] as $list ) {
-								$response['data'][ sanitize_text_field( $list['id'] ) ] = sanitize_text_field( $list['name'] );
+								// Set transient for future calls
+								// Expiry after one month
+								set_transient( Config::PREFIX . 'email_lists', $response['data'], 60 * 60 * 24 * 30 );
+
+								// Success response
+								$response['code']     = 'success';
+								$response['response'] = esc_html__( 'Email list has been refreshed.', 'maintenance-mode-coming-soon' );
+							} else {
+								$response['code']     = 'warning';
+								$response['response'] = esc_html__( 'It seems that there is no list created for this account. Why not create one on the MailChimp website and then try here.', 'maintenance-mode-coming-soon' );
 							}
-
-							// Set transient for future calls
-							// Expiry after one month
-							set_transient( Config::PREFIX . 'email_lists', $response['data'], 60 * 60 * 24 * 30 );
 						} else {
-							$response['code']     = 'warning';
-							$response['response'] = esc_html__( 'It seems that there is no list created for this account. Why not create one on the MailChimp website and then try here.', 'maintenance-mode-coming-soon' );
+							$response['response'] = $mailchimp->getLastError();
 						}
-					} else {
-						$response['code']     = 'error';
-						$response['response'] = $mailchimp->getLastError();
+					} catch ( Exception $e ) {
+						$response['response'] = $e->getMessage();
 					}
-				} catch ( Exception $e ) {
-					$response['code']     = 'error';
-					$response['response'] = $e->getMessage();
+				} else {
+					// Delete transient (just to be sure)
+					delete_transient( Config::PREFIX . 'email_lists' );
 				}
 			} else {
-				// Delete transient (just to be sure)
-				delete_transient( Config::PREFIX . 'email_lists' );
+				$response['response'] = esc_html__( 'Unable to grab options from the database. Try reactivating the plugin.', 'maintenance-mode-coming-soon' );
 			}
-		} else {
-			$response['code']     = 'error';
-			$response['response'] = esc_html__( 'Unable to grab options from the database. Try reactivating the plugin.', 'maintenance-mode-coming-soon' );
 		}
 
 		// Headers for JSON format

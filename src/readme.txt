@@ -64,9 +64,8 @@ Getting help is just a click away now. Report your issues using the support form
 == Changelog ==
 
 = 1.5.0 =
-* Refactored code
-* Lot of bug fixes have been done
-* Added option to preview without activating the Maintenance Mode
+* Code has been completely refactored
+* Lots of bugs fixing has been done
 * Missing CSRF protection has been added
 
 = 1.0.1 =
