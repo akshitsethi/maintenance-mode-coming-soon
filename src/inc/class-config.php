@@ -818,6 +818,8 @@ class Config {
 				'logo'                  => '',
 				'favicon'               => '',
 				'bg_cover'              => '',
+				'content_margin'        => '16',
+				'content_padding'       => '24',
 				'content_overlay'       => false,
 				'content_bg_opacity'    => '0.85',
 				'content_bg'            => '',

@@ -464,6 +464,7 @@ textarea.as-form-input-lg {
 	align-items: center;
 	justify-content: center;
 }
+label span.px,
 .as-pseudo-selector {
 	font-size: 0.625rem;
 	border: 1px solid #0b0b0b;
