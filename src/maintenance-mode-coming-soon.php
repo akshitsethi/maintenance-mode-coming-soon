@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Maintenance Mode & Coming Soon
  * Description: Create a simple yet elegant Coming Soon, Launch Page, Under Construction, or Maintenance Mode page for your website.
- * Version: 1.5.0
+ * Version: 1.5.1
  * Runtime: 5.6+
  * Author: akshitsethi
  * Text Domain: maintenance-mode-coming-soon

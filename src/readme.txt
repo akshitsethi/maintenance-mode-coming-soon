@@ -5,7 +5,7 @@ Tags: coming soon, coming soon page, construction, landing page, launch, launch 
 Requires at least: 3.5.1
 Tested up to: 5.4
 Requires PHP: 5.6
-Stable tag: 1.5.0
+Stable tag: 1.5.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -62,6 +62,9 @@ Getting help is just a click away now. Report your issues using the support form
 
 
 == Changelog ==
+
+= 1.5.1 =
+* Added POT file
 
 = 1.5.0 =
 * Code has been completely refactored
