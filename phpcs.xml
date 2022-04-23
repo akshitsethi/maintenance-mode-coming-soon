@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="MMCS" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/squizlabs/PHP_CodeSniffer/master/phpcs.xsd">
+	<!-- Exclude the Composer Vendor directory. -->
+	<exclude-pattern>/vendor/*</exclude-pattern>
+
+	<!-- Exclude the Node Modules directory. -->
+	<exclude-pattern>/node_modules/*</exclude-pattern>
+
+    <!-- Exclude the Assets directory. -->
+	<exclude-pattern>/assets/*</exclude-pattern>
+
+    <!-- Exclude the views directory. -->
+	<exclude-pattern>/includes/Admin/views/*</exclude-pattern>
+    <exclude-pattern>/includes/views/*</exclude-pattern>
+
+    <!-- Exclude the i18n directory. -->
+	<exclude-pattern>/i18n/*</exclude-pattern>
+
+	<!-- Exclude minified Javascript files. -->
+    <exclude-pattern>*.min.css</exclude-pattern>
+    <exclude-pattern>*.css</exclude-pattern>
+
+	<exclude-pattern>*.min.js</exclude-pattern>
+    <exclude-pattern>*.js</exclude-pattern>
+
+    <rule ref="WordPress-Extra">
+        <exclude name="Generic.Arrays.DisallowShortArraySyntax"/>
+        <exclude name="WordPress.Files.FileName"/>
+    </rule>
+    <rule ref="WordPress-Docs"/>
+
+    <!-- Add in some extra rules from other standards. -->
+	<rule ref="Generic.CodeAnalysis.UnusedFunctionParameter"/>
+	<rule ref="Generic.Commenting.Todo"/>
+    <rule ref="Generic.Arrays.DisallowLongArraySyntax"/>
+
+	<arg name="colors"/>
+</ruleset>

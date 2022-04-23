@@ -1,28 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/7.3/phpunit.xsd"
-         bootstrap="tests/autoload.php"
-         forceCoversAnnotation="true"
-         beStrictAboutCoversAnnotation="true"
-         beStrictAboutOutputDuringTests="true"
-         beStrictAboutTodoAnnotatedTests="true"
-         verbose="true">
+    xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/7.3/phpunit.xsd"
+    bootstrap="tests/bootstrap.php"
+    forceCoversAnnotation="true"
+    beStrictAboutCoversAnnotation="false"
+    beStrictAboutOutputDuringTests="true"
+    beStrictAboutTodoAnnotatedTests="true"
+    verbose="true">
     <testsuites>
         <testsuite name="default">
             <directory suffix="Test.php">tests</directory>
         </testsuite>
     </testsuites>
 
-    <filter>
-        <whitelist processUncoveredFilesFromWhitelist="true">
-            <directory suffix=".php">src/classes</directory>
-        </whitelist>
-    </filter>
+    <coverage includeUncoveredFiles="true"
+        processUncoveredFiles="true"
+        ignoreDeprecatedCodeUnits="true"
+        disableCodeCoverageIgnore="false">
+        <include>
+            <directory suffix=".php">includes</directory>
+        </include>
+
+        <exclude>
+            <directory suffix=".php">includes/Admin/views</directory>
+            <directory suffix=".php">includes/views</directory>
+        </exclude>
+
+        <report>
+            <clover outputFile="clover.xml" />
+        </report>
+    </coverage>
+
     <php>
         <ini name="display_errors" value="On" />
         <ini name="display_startup_errors" value="On" />
     </php>
-    <logging>
-        <log type="coverage-clover" target="clover.xml"/>
-    </logging>
 </phpunit>

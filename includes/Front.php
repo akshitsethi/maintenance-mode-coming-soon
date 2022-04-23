@@ -21,7 +21,7 @@ class Front {
 	 * Class constructor.
 	 */
 	public function __construct() {
-		add_action( 'init', array( $this, 'init' ) );
+		add_action( 'init', [ $this, 'init' ] );
 	}
 
 
@@ -94,7 +94,7 @@ class Front {
 	 */
 	private function check_referrer() {
 		// List of crawlers
-		$crawlers = array(
+		$crawlers = [
 			'Abacho'          => 'AbachoBOT',
 			'Accoona'         => 'Acoon',
 			'AcoiRobot'       => 'AcoiRobot',
@@ -119,7 +119,7 @@ class Front {
 			'Rambler'         => 'Rambler',
 			'Scrubby robot'   => 'Scrubby',
 			'Yahoo'           => 'Yahoo',
-		);
+		];
 
 		// Checking for the crawler over here
 		if ( $this->string_to_array( $_SERVER['HTTP_USER_AGENT'], $crawlers ) ) {

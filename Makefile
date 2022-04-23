@@ -1,53 +1,49 @@
-VERSION := 1.5.1
-PLUGINSLUG := maintenance-mode-coming-soon
-SRCPATH := $(shell pwd)/src
+VERSION := 2.0
+SLUG := maintenance-mode-coming-soon
+PATH := $(shell pwd)
 
-bin/linux/amd64/github-release:
-	wget https://github.com/aktau/github-release/releases/download/v0.7.2/linux-amd64-github-release.tar.bz2
-	tar -xvf linux-amd64-github-release.tar.bz2
-	chmod +x bin/linux/amd64/github-release
-	rm linux-amd64-github-release.tar.bz2
+install:
+	composer install
+	composer dump-autoload -o
 
-ensure: vendor
-vendor: src/vendor
-	composer install --dev
-	composer dump-autoload -a
+clover.xml: install test
 
-clover.xml: vendor test
+update_version:
+	sed -i "s/@##VERSION##@/${VERSION}/" $(SLUG).php
+	sed -i "s/@##VERSION##@/${VERSION}/" includes/Config.php
+	sed -i "s/@##VERSION##@/${VERSION}/" i18n/$(SLUG).pot
 
-unit: test
+remove_version:
+	sed -i "s/${VERSION}/@##VERSION##@/" $(SLUG).php
+	sed -i "s/${VERSION}/@##VERSION##@/" includes/Config.php
+	sed -i "s/${VERSION}/@##VERSION##@/" i18n/$(SLUG).pot
 
-test: vendor
+test:
 	bin/phpunit --coverage-html=./reports
 
-src/vendor:
-	cd src && composer install
-	cd src && composer dump-autoload -a
-
-build: ensure
+build: install update_version
 	mkdir -p build
-	rm -rf src/vendor
-	cd src && composer install --no-dev
-	cd src && composer dump-autoload -a
-	cp -ar $(SRCPATH) $(PLUGINSLUG)
-	zip -r $(PLUGINSLUG).zip $(PLUGINSLUG)
-	rm -rf $(PLUGINSLUG)
-	mv $(PLUGINSLUG).zip build/
+	rm -rf vendor
+	composer install --no-dev
+	composer dump-autoload -o
+	make copy
+	zip -r $(SLUG).zip $(SLUG)
+	rm -rf $(SLUG)
+	mv $(SLUG).zip build/
+	make remove_version
 
-dist: ensure
+copy:
+	mkdir $(SLUG)
+	cp -ar assets includes i18n vendor $(SLUG)/
+	cp $(SLUG).php uninstall.php readme.txt license.txt $(SLUG)/
+
+dist: install update_version
 	mkdir -p dist
-	rm -rf src/vendor
-	cd src && composer install --no-dev
-	cd src && composer dump-autoload -a
-	cp -r $(SRCPATH)/. dist/
-
-publish: build bin/linux/amd64/github-release
-	bin/linux/amd64/github-release upload \
-		--user akshitsethi \
-		--repo $(PLUGINSLUG) \
-		--tag "v$(VERSION)" \
-		--name $(PLUGINSLUG)-$(VERSION).zip \
-		--file build/$(PLUGINSLUG).zip
+	rm -rf vendor
+	composer install --no-dev
+	composer dump-autoload -o
+	cp -r $(PATH)/. dist/
+	make remove_version
 
 release:
 	git stash
@@ -58,21 +54,20 @@ release:
 	git push origin v$(VERSION)
 	git pull -r
 
-fmt: ensure
-	bin/phpcbf --standard=WordPress src --ignore=src/vendor,src/assets
+lint:
+	bin/phpcs .
 
-lint: ensure
-	bin/phpcs --standard=WordPress src --ignore=src/vendor,src/assets
+fmt:
+	bin/phpcbf .
 
-psr: src/vendor
-	composer dump-autoload -a
-	cd src && composer dump-autoload -a
+psr:
+	composer dump-autoload -o
 
-i18n: src/vendor
-	wp i18n make-pot src src/i18n/$(PLUGINSLUG).pot
+pot:
+	wp i18n make-pot . i18n/$(SLUG).pot --slug=$(SLUG) --skip-js --exclude=vendor
 
-cover: vendor
+cover:
 	bin/coverage-check clover.xml 100
 
 clean:
-	rm -rf vendor/ src/vendor/
+	rm -rf vendor/

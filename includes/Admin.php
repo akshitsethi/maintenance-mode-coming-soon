@@ -7,15 +7,12 @@
 
 namespace AkshitSethi\Plugins\MaintenanceMode;
 
-use Exception;
 use AkshitSethi\Plugins\MaintenanceMode\Config;
-use DrewM\MailChimp\MailChimp;
 
 /**
  * Admin options for the plugin.
  *
- * @package    AkshitSethi\Plugins\MaintenanceMode
- * @since      2.0.0
+ * @package AkshitSethi\Plugins\MaintenanceMode
  */
 class Admin {
 
@@ -23,17 +20,17 @@ class Admin {
 	 * Class constructor.
 	 */
 	public function __construct() {
-		add_action( 'admin_menu', array( $this, 'add_menu' ) );
-		add_action( 'wp_ajax_' . Config::PREFIX . 'support', array( $this, 'support_ticket' ) );
-		add_action( 'wp_ajax_' . Config::PREFIX . 'basic', array( $this, 'save_options' ) );
-		add_action( 'wp_ajax_' . Config::PREFIX . 'email', array( $this, 'save_options' ) );
-		add_action( 'wp_ajax_' . Config::PREFIX . 'design', array( $this, 'save_options' ) );
-		add_action( 'wp_ajax_' . Config::PREFIX . 'form', array( $this, 'save_options' ) );
-		add_action( 'wp_ajax_' . Config::PREFIX . 'social', array( $this, 'save_options' ) );
-		add_action( 'wp_ajax_' . Config::PREFIX . 'advanced', array( $this, 'save_options' ) );
-		add_action( 'wp_ajax_' . Config::PREFIX . 'refresh', array( $this, 'refresh_list' ) );
+		add_action( 'admin_menu', [ $this, 'add_menu' ] );
 
-		add_filter( 'plugin_row_meta', array( $this, 'meta_links' ), 10, 2 );
+		add_action( 'wp_ajax_' . Config::PREFIX . 'basic', [ $this, 'save_options' ] );
+		add_action( 'wp_ajax_' . Config::PREFIX . 'email', [ $this, 'save_options' ] );
+		add_action( 'wp_ajax_' . Config::PREFIX . 'design', [ $this, 'save_options' ] );
+		add_action( 'wp_ajax_' . Config::PREFIX . 'form', [ $this, 'save_options' ] );
+		add_action( 'wp_ajax_' . Config::PREFIX . 'social', [ $this, 'save_options' ] );
+		add_action( 'wp_ajax_' . Config::PREFIX . 'advanced', [ $this, 'save_options' ] );
+		add_action( 'wp_ajax_' . Config::PREFIX . 'refresh', [ $this, 'refresh_list' ] );
+
+		add_filter( 'plugin_row_meta', [ $this, 'meta_links' ], 10, 2 );
 	}
 
 
@@ -47,11 +44,11 @@ class Admin {
 				Config::get_plugin_name(),
 				'manage_options',
 				Config::PREFIX . 'options',
-				array( $this, 'settings' )
+				[ $this, 'settings' ]
 			);
 
 			// Loading JS conditionally
-			add_action( 'load-' . $menu, array( $this, 'load_scripts' ) );
+			add_action( 'load-' . $menu, [ $this, 'load_scripts' ] );
 		}
 	}
 
@@ -67,9 +64,9 @@ class Admin {
 		wp_enqueue_script( Config::SHORT_SLUG . '-webfont', Config::$plugin_url . 'assets/admin/js/webfont.js', false, Config::VERSION, true );
 		wp_enqueue_script( Config::SHORT_SLUG . '-colorpicker', Config::$plugin_url . 'assets/admin/js/jscolor.js', false, Config::VERSION, true );
 		wp_enqueue_script( Config::SHORT_SLUG . '-editor', Config::$plugin_url . 'assets/admin/js/ace-editor/ace.js', false, Config::VERSION, true );
-		wp_enqueue_script( Config::SHORT_SLUG . '-admin', Config::$plugin_url . 'assets/admin/js/admin.js', array( 'jquery' ), Config::VERSION, true );
+		wp_enqueue_script( Config::SHORT_SLUG . '-admin', Config::$plugin_url . 'assets/admin/js/admin.js', [ 'jquery' ], Config::VERSION, true );
 
-		$localize = array(
+		$localize = [
 			'prefix'        => Config::PREFIX,
 			'save_text'     => esc_html__( 'Save Changes', 'maintenance-mode-coming-soon' ),
 			'support_text'  => esc_html__( 'Ask for Support', 'maintenance-mode-coming-soon' ),
@@ -83,7 +80,7 @@ class Admin {
 			'processing'    => esc_html__( 'Processing..', 'maintenance-mode-coming-soon' ),
 			'default_fonts' => Config::DEFAULT_FONTS,
 			'nonce'         => wp_create_nonce( Config::PREFIX . 'nonce' ),
-		);
+		];
 		wp_localize_script( Config::SHORT_SLUG . '-admin', Config::PREFIX . 'admin_l10n', $localize );
 	}
 
@@ -92,7 +89,7 @@ class Admin {
 	 * Adds action to load scripts via the scripts hook for admin.
 	 */
 	public function load_scripts() {
-		add_action( 'admin_enqueue_scripts', array( $this, 'admin_scripts' ) );
+		add_action( 'admin_enqueue_scripts', [ $this, 'admin_scripts' ] );
 	}
 
 
@@ -106,10 +103,10 @@ class Admin {
 	 */
 	public function meta_links( $links, $file ) {
 		if ( strpos( $file, 'maintenance-mode-coming-soon.php' ) !== false ) {
-			$new_links = array(
+			$new_links = [
 				'<a href="https://www.facebook.com/akshitsethi" target="_blank">' . esc_html__( 'Facebook', 'maintenance-mode-coming-soon' ) . '</a>',
 				'<a href="https://twitter.com/akshitsethi" target="_blank">' . esc_html__( 'Twitter', 'maintenance-mode-coming-soon' ) . '</a>',
-			);
+			];
 
 			$links = array_merge( $links, $new_links );
 		}
@@ -127,21 +124,21 @@ class Admin {
 
 		// If the options do not exist
 		if ( ! $options ) {
-			$options = array(
-				'basic'    => array(),
-				'email'    => array(),
-				'design'   => array(),
-				'form'     => array(),
-				'social'   => array(),
-				'advanced' => array(),
-			);
+			$options = [
+				'basic'    => [],
+				'email'    => [],
+				'design'   => [],
+				'form'     => [],
+				'social'   => [],
+				'advanced' => [],
+			];
 		}
 
 		// Default response
-		$response = array(
+		$response = [
 			'code'     => 'error',
 			'response' => esc_html__( 'There was an error processing the request. Please try again later.', 'maintenance-mode-coming-soon' ),
-		);
+		];
 
 		// Check for _nonce
 		if ( empty( $_POST['_nonce'] ) || ! wp_verify_nonce( $_POST['_nonce'], Config::PREFIX . 'nonce' ) ) {
@@ -152,10 +149,10 @@ class Admin {
 
 			// Ensure $section is not empty
 			if ( ! empty( $section ) ) {
-				if ( in_array( $section, array( 'basic', 'email', 'design', 'form', 'social', 'advanced' ) ) ) {
+				if ( in_array( $section, [ 'basic', 'email', 'design', 'form', 'social', 'advanced' ] ) ) {
 					// Filter and sanitize options
 					if ( 'basic' === $section ) {
-						$options[ $section ] = array(
+						$options[ $section ] = [
 							'status'           => isset( $_POST[ Config::PREFIX . 'status' ] ) ? true : false,
 							'title'            => sanitize_text_field( $_POST[ Config::PREFIX . 'title' ] ),
 							'header_text'      => sanitize_textarea_field( $_POST[ Config::PREFIX . 'header' ] ),
@@ -166,16 +163,16 @@ class Admin {
 							'exclude_se'       => isset( $_POST[ Config::PREFIX . 'excludese' ] ) ? true : false,
 							'arrange'          => sanitize_text_field( $_POST[ Config::PREFIX . 'arrange' ] ),
 							'analytics'        => strip_tags( $_POST[ Config::PREFIX . 'analytics' ] ),
-						);
+						];
 					} elseif ( 'email' === $section ) {
-						$options[ $section ] = array(
+						$options[ $section ] = [
 							'mailchimp_api'   => sanitize_text_field( $_POST[ Config::PREFIX . 'api' ] ),
 							'mailchimp_list'  => isset( $_POST[ Config::PREFIX . 'list' ] ) ? sanitize_text_field( $_POST[ Config::PREFIX . 'list' ] ) : false,
 							'message_noemail' => sanitize_text_field( $_POST[ Config::PREFIX . 'message_noemail' ] ),
 							'message_error'   => sanitize_text_field( $_POST[ Config::PREFIX . 'message_error' ] ),
 							'message_wrong'   => sanitize_text_field( $_POST[ Config::PREFIX . 'message_wrong' ] ),
 							'message_done'    => sanitize_text_field( $_POST[ Config::PREFIX . 'message_done' ] ),
-						);
+						];
 
 						// Query the MailChimp API and pass the fetched lists to JS if the request returns 200
 						if ( ! empty( $options['email']['mailchimp_api'] ) ) {
@@ -218,7 +215,7 @@ class Admin {
 							delete_transient( Config::PREFIX . 'email_lists' );
 						}
 					} elseif ( 'design' === $section ) {
-						$options[ $section ] = array(
+						$options[ $section ] = [
 							'logo'                  => sanitize_text_field( $_POST[ Config::PREFIX . 'logo' ] ),
 							'favicon'               => sanitize_text_field( $_POST[ Config::PREFIX . 'favicon' ] ),
 							'bg_cover'              => sanitize_text_field( $_POST[ Config::PREFIX . 'bg' ] ),
@@ -242,9 +239,9 @@ class Admin {
 							'secondary_font_color'  => sanitize_hex_color_no_hash( $_POST[ Config::PREFIX . 'secondary_color' ] ),
 							'antispam_font_size'    => sanitize_text_field( $_POST[ Config::PREFIX . 'antispam_size' ] ),
 							'antispam_font_color'   => sanitize_hex_color_no_hash( $_POST[ Config::PREFIX . 'antispam_color' ] ),
-						);
+						];
 					} elseif ( 'form' === $section ) {
-						$options[ $section ] = array(
+						$options[ $section ] = [
 							'input_text'          => sanitize_text_field( $_POST[ Config::PREFIX . 'input_text' ] ),
 							'button_text'         => sanitize_text_field( $_POST[ Config::PREFIX . 'button_text' ] ),
 							'ignore_form_styles'  => isset( $_POST[ Config::PREFIX . 'ignore_styles' ] ) ? true : false,
@@ -266,15 +263,15 @@ class Admin {
 							'success_color'       => sanitize_hex_color_no_hash( $_POST[ Config::PREFIX . 'success_color' ] ),
 							'error_background'    => sanitize_hex_color_no_hash( $_POST[ Config::PREFIX . 'error_background' ] ),
 							'error_color'         => sanitize_hex_color_no_hash( $_POST[ Config::PREFIX . 'error_color' ] ),
-						);
+						];
 					} elseif ( 'social' === $section ) {
-						$options[ $section ] = array(
+						$options[ $section ] = [
 							'arrange'     => sanitize_text_field( $_POST[ Config::PREFIX . 'social_arrange' ] ),
 							'link_color'  => sanitize_hex_color_no_hash( $_POST[ Config::PREFIX . 'link_color' ] ),
 							'link_hover'  => sanitize_hex_color_no_hash( $_POST[ Config::PREFIX . 'link_hover' ] ),
 							'icon_size'   => absint( $_POST[ Config::PREFIX . 'icon_size' ] ),
 							'link_target' => sanitize_text_field( $_POST[ Config::PREFIX . 'link_target' ] ),
-						);
+						];
 
 						// Process social links
 						foreach ( Config::SOCIAL as $key => $value ) {
@@ -287,11 +284,11 @@ class Admin {
 							}
 						}
 					} elseif ( 'advanced' === $section ) {
-						$options[ $section ] = array(
+						$options[ $section ] = [
 							'disable_settings' => isset( $_POST[ Config::PREFIX . 'disable' ] ) ? true : false,
 							'custom_html'      => wp_kses_post( $_POST[ Config::PREFIX . 'html' ] ),
 							'custom_css'       => wp_strip_all_tags( $_POST[ Config::PREFIX . 'css' ] ),
-						);
+						];
 					}
 
 					// Update options
@@ -311,51 +308,6 @@ class Admin {
 		// Exit for AJAX functions
 		exit;
 	}
-
-
-	/**
-	 * Creates support ticket via the options panel.
-	 */
-	public function support_ticket() {
-		// Storing response in an array
-		$response = array(
-			'code'     => 'error',
-			'response' => esc_html__( 'Please fill in both the fields to create your support ticket.', 'maintenance-mode-coming-soon' ),
-		);
-
-		// Filter and sanitize
-		if ( ! empty( $_POST[ Config::PREFIX . 'support_email' ] ) && ! empty( $_POST[ Config::PREFIX . 'support_issue' ] ) ) {
-			$admin_email = sanitize_text_field( $_POST[ Config::PREFIX . 'support_email' ] );
-			$issue       = htmlentities( $_POST[ Config::PREFIX . 'support_issue' ] );
-			$subject     = '[' . Config::get_plugin_name() . ' v' . Config::VERSION . '] by ' . $admin_email;
-			$body        = "Email: $admin_email \r\nIssue: $issue";
-			$headers     = 'From: ' . $admin_email . "\r\n" . 'Reply-To: ' . $admin_email;
-
-			// Send email
-			if ( wp_mail( '19bbdec26d2d11ea94e7033192a1a3c3@tickets.tawk.to', $subject, $body, $headers ) ) {
-				// Success
-				$response = array(
-					'code'     => 'success',
-					'response' => esc_html__( 'I have received your support ticket and will get back to you shortly!', 'maintenance-mode-coming-soon' ),
-				);
-			} else {
-				// Failure
-				$response = array(
-					'code'     => 'error',
-					'response' => esc_html__( 'There was an error creating the support ticket. You can try again later or send me an email directly at akshitsethi@gmail.com', 'maintenance-mode-coming-soon' ),
-				);
-			}
-		}
-
-		// Headers for JSON format
-		header( 'Content-Type: application/json' );
-		echo json_encode( $response );
-
-		// Exit
-		// For AJAX functions
-		exit();
-	}
-
 
 	/**
 	 * Displays settings page for the plugin.
@@ -389,10 +341,10 @@ class Admin {
 	 */
 	public function refresh_list() {
 		// Default response
-		$response = array(
+		$response = [
 			'code'     => 'error',
 			'response' => esc_html__( 'There was an error processing the request. Please try again later.', 'maintenance-mode-coming-soon' ),
-		);
+		];
 
 		// Check for _nonce
 		if ( empty( $_POST['_nonce'] ) || ! wp_verify_nonce( $_POST['_nonce'], Config::PREFIX . 'nonce' ) ) {
