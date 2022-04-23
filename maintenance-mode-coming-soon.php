@@ -2,8 +2,8 @@
 /**
  * Plugin Name: Maintenance Mode & Coming Soon
  * Description: Create a simple yet elegant Coming Soon, Launch Page, Under Construction, or Maintenance Mode page for your website.
- * Version: 1.5.1
- * Runtime: 5.6+
+ * Version: @##VERSION##@
+ * Runtime: 7.2+
  * Author: akshitsethi
  * Text Domain: maintenance-mode-coming-soon
  * Domain Path: i18n
@@ -33,8 +33,8 @@ class MaintenanceMode {
 	 * Class Constructor.
 	 */
 	public function __construct() {
-		add_action( 'plugins_loaded', array( $this, 'init' ) );
-		add_action( 'plugins_loaded', array( $this, 'load_textdomain' ) );
+		add_action( 'plugins_loaded', [ $this, 'init' ] );
+		add_action( 'plugins_loaded', [ $this, 'load_textdomain' ] );
 	}
 
 
@@ -96,5 +96,5 @@ $maintenance_mode = new MaintenanceMode();
 /**
  * Hooks for plugin activation & deactivation.
  */
-register_activation_hook( __FILE__, array( $maintenance_mode, 'activate' ) );
-register_deactivation_hook( __FILE__, array( $maintenance_mode, 'deactivate' ) );
+register_activation_hook( __FILE__, [ $maintenance_mode, 'activate' ] );
+register_deactivation_hook( __FILE__, [ $maintenance_mode, 'deactivate' ] );
